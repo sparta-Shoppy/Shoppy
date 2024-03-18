@@ -1,3 +1,11 @@
+'use client';
+import Login from '@/components/home/Login';
+
 export default function HomePage() {
-  return <div>HomePage</div>;
+  return (
+    <div>
+      <Login />
+      HomePage
+    </div>
+  );
 }
