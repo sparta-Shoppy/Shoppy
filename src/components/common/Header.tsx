@@ -2,13 +2,21 @@
 
 import { app } from '@/api/fiebaseApi';
 import { onUserStateChange } from '@/api/login';
-import { useAppDispatch } from '@/hooks/useRedux';
-import { getAuth, signOut } from 'firebase/auth';
-import { useEffect } from 'react';
-import Join from '../main/Join';
+import { Auth, getAuth, signOut } from 'firebase/auth';
+import { useEffect, useState } from 'react';
 import Login from '../main/Login';
+import Join from '../main/Join';
+import Link from 'next/link';
+
+interface HeaderTextProps {
+  text: string;
+}
 
 const Header = () => {
+  // 전역으로 로그인 정보를 관리
+  const [userState, setUserState] = useState<Auth>();
+  const [isAdmin, setIsAdmin] = useState(false); // isAdmin 상태 추가
+
   const auth = getAuth(app);
 
   useEffect(() => {
@@ -16,8 +24,20 @@ const Header = () => {
     onUserStateChange(auth, (user: any) => {
       //전역 관리
       //필요한 페이지에서 불러온다.
+      setUserState(user);
+      console.log('됩니다.');
+    });
+  }, []);
 
-      console.log(user);
+  useEffect(() => {
+    onUserStateChange(auth, (user: any) => {
+      if (user) {
+        setUserState(user);
+        setIsAdmin(user.isAdmins ?? false);
+      } else {
+        setUserState(undefined);
+        setIsAdmin(false);
+      }
     });
   }, []);
 
@@ -29,15 +49,26 @@ const Header = () => {
     signOut(auth);
   };
 
+  console.log(isAdmin);
+
   return (
     <>
-      <div className="flex m-auto w-11/12  justify-between">
-        <div className="">
-          <img src="assets/logo.png" alt="logo" className="w-3/6 mt-2" />
-        </div>
+      <div className="flex items-center m-auto w-11/12  justify-between">
+        <Link href={'/'}>
+          <img src="assets/logo.png" alt="logo" className="mt-2 w-24" />
+        </Link>
         {/*로그인된 상태*/}
         {auth.currentUser ? (
-          <button onClick={onLogOutClickEventHandler}>로그아웃</button>
+          <div className="flex flex-row">
+            <button onClick={onLogOutClickEventHandler} className="text-xl">
+              로그아웃
+            </button>
+            {isAdmin && (
+              <Link href={'/admin'}>
+                <h1 className="ml-4 text-xl">관리자창</h1>
+              </Link>
+            )}
+          </div>
         ) : (
           //  비로그인 상태
           <div className="w-72 flex justify-evenly items-center text-l">

@@ -3,6 +3,7 @@
 import { app } from '@/api/fiebaseApi';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FormEvent, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const auth = getAuth(app);
@@ -21,10 +22,9 @@ const Login = () => {
     if (validation({ email, password })) {
       try {
         await signInWithEmailAndPassword(auth, email, password);
-
-        alert('로그인에 성공했습니다');
+        toast.success('로그인에 성공하였습니다.');
       } catch (error: any) {
-        alert('해당 로그인 정보가 없습니다.');
+        toast.error(error.code);
       }
     }
   };
