@@ -43,3 +43,19 @@ body {
 .admin__label-field {
   @apply text-xl  mt-10;
 }
+
+.admin__button-field {
+  @apply pb-10;
+}
+
+.main__tabs-field {
+  @apply flex gap-3 items-center cursor-pointer hover:text-zinc-500;
+}
+
+.main__slideButton-field {
+  @apply flex gap-3 items-center cursor-pointer hover:text-zinc-500;
+}
+
+.main__slideImgWrapper-field {
+  @apply absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2;
+}

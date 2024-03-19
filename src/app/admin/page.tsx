@@ -198,7 +198,7 @@ export default function Admin() {
           placeholder="중량/용량을 입력해주세요"
           className="admin__input-field"
         />
-        <button type="submit" disabled={isSubmitting}>
+        <button type="submit" disabled={isSubmitting} className="admin__button-field">
           등록
         </button>
       </form>

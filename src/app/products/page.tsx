@@ -1,6 +1,7 @@
 'use client';
 import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
+import SearchProduct from '@/components/common/SearchProduct';
 import { ProductType } from '@/types/product-type';
 import { collection, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
@@ -36,25 +37,34 @@ export default function ProductPage() {
   return (
     <div>
       <Header />
-      {products.map((item, idx) => {
-        return (
-          <div key={idx} className="flex">
-            <div className="w-1/5 h-96 cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300 pb-5">
-              <img src={item.image} alt="가공식품" className="w-full h-4/5 object-cover rounded-md" />
-              <div className="flex justify-between p-3">
-                <div>
-                  <p>{item.price}</p>
-                  <p>{item.title}</p>
-                </div>
-                <div className="flex justify-end gap-2 items-center pl-5">
-                  <SlHeart className="text-2xl hover:text-rose-500 cursor-pointer" />
-                  <LiaCartArrowDownSolid className="text-4xl hover:text-stone-300 cursor-pointer" />
+      <SearchProduct />
+      <div className="m-auto w-full flex flex-wrap justify-center">
+        {products.map((item) => (
+          <div key={item.productId} className="w-1/3 pt-5 h-full flex justify-center">
+            <div className="w-3/5 h-full flex flex-wrap justify-evenly">
+              <img
+                src={item.image}
+                alt="상품이미지"
+                className="w-4/5 h-80 object-cover rounded-md hover:scale-95  duration-300 cursor-pointer"
+              />
+              <button className="w-4/5 mt-3 bg-slate-100 flex justify-center items-center text-black py-2 px-4 hover:bg-white rounded-md">
+                <span className="text-xl">담기</span> <LiaCartArrowDownSolid className="ml-2 text-3xl" />
+              </button>
+              <div className="pt-2 w-4/5">
+                <p className="text-lg font-semibold">{item.title}</p>
+                <div className="flex justify-between items-center mt-2">
+                  <div>
+                    <p className="text-lg font-semibold">{item.price} 원</p>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <SlHeart className="text-3xl hover:text-rose-500 cursor-pointer" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        );
-      })}
+        ))}
+      </div>
     </div>
   );
 }
