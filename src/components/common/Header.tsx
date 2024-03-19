@@ -35,6 +35,7 @@ const Header = () => {
     <>
       <div className="flex m-auto w-11/12  justify-between">
         <div className="">
+          {/* <img src="../../../assets/logo.png" alt="logo" className="w-3/6 mt-2" /> */}
           <img src="assets/logo.png" alt="logo" className="w-3/6 mt-2" />
         </div>
         {/*로그인된 상태*/}

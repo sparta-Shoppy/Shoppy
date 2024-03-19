@@ -1,13 +1,12 @@
 'use client';
 import { db, storage } from '@/api/fiebaseApi';
-import Header from '@/components/common/Header';
 import { ProductType } from '@/types/product-type';
 import { collection, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
 import { SlHeart } from 'react-icons/sl';
 
-export default function ProductPage() {
+function Products() {
   const [products, setProducts] = useState<ProductType[]>([]);
 
   useEffect(() => {
@@ -16,8 +15,7 @@ export default function ProductPage() {
         const querySnapshot = await getDocs(collection(db, 'product'));
         const fetchedProducts: any = [];
         querySnapshot.forEach((doc) => {
-          const products = doc.data().newProduct;
-          console.log('products', products);
+          const products = doc.data();
           fetchedProducts.push({ ...products, id: doc.id, products });
         });
         console.log('fetchedProducts', fetchedProducts);
@@ -35,7 +33,6 @@ export default function ProductPage() {
 
   return (
     <div>
-      <Header />
       {products.map((item, idx) => {
         return (
           <div
@@ -59,3 +56,5 @@ export default function ProductPage() {
     </div>
   );
 }
+
+export default Products;
