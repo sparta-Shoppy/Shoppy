@@ -53,14 +53,10 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex m-auto w-11/12  justify-between">
-        <div className="">
-          {/* <img src="../../../assets/logo.png" alt="logo" className="w-3/6 mt-2" /> */}
-          <img src="assets/logo.png" alt="logo" className="w-3/6 mt-2" />
-        </div>
       <div className="flex items-center m-auto w-11/12  justify-between">
         <Link href={'/'}>
           <img src="assets/logo.png" alt="logo" className="mt-2 w-24" />
+          {/* <img src="../../../assets/logo.png" alt="logo" className="mt-2 w-24" /> */}
         </Link>
         {/*로그인된 상태*/}
         {auth.currentUser ? (
