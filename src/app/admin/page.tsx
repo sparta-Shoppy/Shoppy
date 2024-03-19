@@ -1,5 +1,4 @@
 'use client';
-
 import { db, storage } from '@/api/fiebaseApi';
 import { CATEGORIES, DELIVERYS } from '@/types/product-type';
 import { addDoc, collection } from 'firebase/firestore';
