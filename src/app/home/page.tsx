@@ -1,8 +1,8 @@
 'use client';
 
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import Header from '@/components/common/Header';
+import Link from 'next/link';
+import { useState } from 'react';
 import { GiFruitBowl, GiHamburger } from 'react-icons/gi';
 import { IoFishOutline } from 'react-icons/io5';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
@@ -11,18 +11,6 @@ import { TbMeat } from 'react-icons/tb';
 
 export default function HomePage() {
   const [selectedTab, setSelectedTab] = useState('신상품');
-  // const [isMounted, setIsMounted] = useState(false);
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   setIsMounted(true);
-  // });
-
-  const pagePathHandler = () => {
-    // if (isMounted) {
-    router.push('/products');
-    // }
-  };
 
   return (
     <div className="h-screen">
@@ -31,9 +19,10 @@ export default function HomePage() {
         <input type="text" placeholder="검색어를 입력하세요" className="flex w-3/12 p-1 w-3/10 border rounded-md" />
         <button className="hover:text-zinc-400 font-bold">검색</button>
       </div>
-      <div className="carousel w-full h-80">
+
+      <div className="carousel w-full h-80  overflow-hidden relative">
         <div id="slide1" className="carousel-item relative w-full">
-          <img src="assets/main1.PNG" className="w-full" />
+          <img src="assets/main1.PNG" className="w-full object-cover" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a href="#slide4" className="btn btn-circle">
               ❮
@@ -44,7 +33,7 @@ export default function HomePage() {
           </div>
         </div>
         <div id="slide2" className="carousel-item relative w-full">
-          <img src="assets/main2.PNG" className="w-full" />
+          <img src="assets/main2.PNG" className="w-full object-cover" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a href="#slide1" className="btn btn-circle">
               ❮
@@ -55,7 +44,7 @@ export default function HomePage() {
           </div>
         </div>
         <div id="slide3" className="carousel-item relative w-full">
-          <img src="assets/main3.PNG" className="w-full" />
+          <img src="assets/main3.PNG" className="w-full object-cover" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a href="#slide2" className="btn btn-circle">
               ❮
@@ -66,7 +55,7 @@ export default function HomePage() {
           </div>
         </div>
         <div id="slide4" className="carousel-item relative w-full">
-          <img src="assets/main4.PNG" className="w-full" />
+          <img src="assets/main4.PNG" className="w-full object-cover" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a href="#slide3" className="btn btn-circle">
               ❮
@@ -77,19 +66,20 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
       <div className="flex justify-evenly w-4/5 p-10 m-auto text-xl font-bold">
-        <div onClick={pagePathHandler} className="flex  gap-3 items-center cursor-pointer hover:text-zinc-500">
+        <Link href={'/products'} className="flex  gap-3 items-center cursor-pointer hover:text-zinc-500">
           <GiFruitBowl /> 과일/채소
-        </div>
-        <div className="flex items-center gap-3 cursor-pointer hover:text-zinc-500">
+        </Link>
+        <Link href={'/products'} className="flex items-center gap-3 cursor-pointer hover:text-zinc-500">
           <TbMeat /> 고기
-        </div>
-        <div className="flex gap-3 items-center cursor-pointer hover:text-zinc-500">
+        </Link>
+        <Link href={'/products'} className="flex gap-3 items-center cursor-pointer hover:text-zinc-500">
           <GiHamburger /> 가공식품
-        </div>
-        <div className="flex gap-3 items-center cursor-pointer hover:text-zinc-500">
+        </Link>
+        <Link href={'/products'} className="flex gap-3 items-center cursor-pointer hover:text-zinc-500">
           <IoFishOutline /> 해산물
-        </div>
+        </Link>
       </div>
       <div className="w-4/5 flex justify-end font-bold mb-5">
         <span
