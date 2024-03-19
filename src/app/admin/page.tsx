@@ -10,22 +10,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { AiOutlineFileImage } from 'react-icons/ai';
 import { FaImages } from 'react-icons/fa';
+import Header from '@/components/common/Header';
 
 export default function Admin() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  // const handleFileUpload = (e: any) => {
-  //   const {
-  //     target: { files }
-  //   } = e;
-
-  //   const file = files?.[0];
-  //   const previewURL = file ? URL.createObjectURL(file) : '';
-
-  //   setImageUrl(previewURL);
-  // };
-  // console.log('보여줘봐라', imageUrl);
 
   const handleFileUpload = (e: any) => {
     const {
@@ -95,7 +84,8 @@ export default function Admin() {
 
   return (
     <div className="flex flex-col items-center">
-      <h1 className="items-center text-4xl font-bold"> 제품 등록하기 </h1>
+      <Header />
+      {/* <h1 className="items-center text-4xl font-bold"> 제품 등록하기 </h1> */}
       <form onSubmit={handleSubmit} className="flex flex-col m-auto w-1/3 ">
         <div className=" flex flex-colitems-center h-auto mt-10">
           {imageUrl ? (

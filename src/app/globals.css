@@ -16,10 +16,18 @@
   }
 }
 
+@font-face {
+  font-family: 'MBC1961GulimM';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/MBC1961GulimM.woff2') format('woff2');
+  font-weight: thin;
+  font-style: thin;
+}
+
 body {
   /* color: black; */
 
   background-color: white;
+  font-family: 'MBC1961GulimM', sans-serif;
 
   @layer utilities {
     .text-balance {
@@ -33,5 +41,5 @@ body {
 }
 
 .admin__label-field {
-  @apply text-xl font-semibold mt-10;
+  @apply text-xl  mt-10;
 }
