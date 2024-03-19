@@ -20,6 +20,12 @@ body {
   color: black;
 
   background-color: white;
+
+  @layer utilities {
+    .text-balance {
+      text-wrap: balance;
+    }
+  }
 }
 
 .admin__input-field {
