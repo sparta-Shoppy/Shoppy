@@ -3,6 +3,7 @@
 import { app } from '@/api/fiebaseApi';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { FormEvent, useState } from 'react';
+import { toast } from 'react-toastify';
 
 type join = {
   email: string;
@@ -29,7 +30,7 @@ const Join = () => {
     if (validation({ email, password, nickname })) {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
-        alert('회원가입에 성공했습니다.');
+        toast.success('회원가입에 성공했습니다.');
       } catch (error: any) {
         alert('중복된 아이디 입니다.');
       }

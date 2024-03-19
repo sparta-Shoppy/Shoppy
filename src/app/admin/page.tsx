@@ -1,4 +1,5 @@
 'use client';
+
 import { db, storage } from '@/api/fiebaseApi';
 import { CATEGORIES, DELIVERYS } from '@/types/product-type';
 import { addDoc, collection } from 'firebase/firestore';
@@ -9,22 +10,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { AiOutlineFileImage } from 'react-icons/ai';
 import { FaImages } from 'react-icons/fa';
+import Header from '@/components/common/Header';
 
 export default function Admin() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  // const handleFileUpload = (e: any) => {
-  //   const {
-  //     target: { files }
-  //   } = e;
-
-  //   const file = files?.[0];
-  //   const previewURL = file ? URL.createObjectURL(file) : '';
-
-  //   setImageUrl(previewURL);
-  // };
-  // console.log('보여줘봐라', imageUrl);
 
   const handleFileUpload = (e: any) => {
     const {
@@ -94,7 +84,8 @@ export default function Admin() {
 
   return (
     <div className="flex flex-col items-center">
-      <h1 className="items-center text-4xl font-bold"> 제품 등록하기 </h1>
+      <Header />
+      {/* <h1 className="items-center text-4xl font-bold"> 제품 등록하기 </h1> */}
       <form onSubmit={handleSubmit} className="flex flex-col m-auto w-1/3 ">
         <div className=" flex flex-colitems-center h-auto mt-10">
           {imageUrl ? (
@@ -105,7 +96,7 @@ export default function Admin() {
         </div>
         <div className="flex flex-row justify-between mx-10 my-5 mt-3">
           <label htmlFor="file">
-            <FaImages className=" size-10  w-full " />
+            <FaImages className=" size-10  w-full cursor-pointer " />
             <input
               type="file" //
               accept="image/*"
@@ -116,16 +107,16 @@ export default function Admin() {
               className="hidden"
             />
           </label>
-
           <button>등록</button>
         </div>
+
         <label htmlFor="category" className="admin__label-field">
           카테고리
         </label>
         <select
           name="category" //
           id="category"
-          className="mb-6 h-10"
+          className="mb-6 h-10 cursor-pointer"
           required
         >
           <option className="admin__input-field">카테고리를 선택해주세요</option>
