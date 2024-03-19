@@ -1,4 +1,5 @@
 'use client';
+
 import { db, storage } from '@/api/fiebaseApi';
 import { CATEGORIES, DELIVERYS } from '@/types/product-type';
 import { addDoc, collection } from 'firebase/firestore';
@@ -105,7 +106,7 @@ export default function Admin() {
         </div>
         <div className="flex flex-row justify-between mx-10 my-5 mt-3">
           <label htmlFor="file">
-            <FaImages className=" size-10  w-full " />
+            <FaImages className=" size-10  w-full cursor-pointer " />
             <input
               type="file" //
               accept="image/*"
@@ -116,16 +117,16 @@ export default function Admin() {
               className="hidden"
             />
           </label>
-
           <button>등록</button>
         </div>
+
         <label htmlFor="category" className="admin__label-field">
           카테고리
         </label>
         <select
           name="category" //
           id="category"
-          className="mb-6 h-10"
+          className="mb-6 h-10 cursor-pointer"
           required
         >
           <option className="admin__input-field">카테고리를 선택해주세요</option>

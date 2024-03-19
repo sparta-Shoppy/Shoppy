@@ -33,5 +33,5 @@ body {
 }
 
 .admin__label-field {
-  @apply text-xl font-semibold;
+  @apply text-xl font-semibold mt-10;
 }
