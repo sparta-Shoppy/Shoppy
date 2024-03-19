@@ -1,3 +1,5 @@
+'use client';
+
 import { GiFruitBowl, GiHamburger } from 'react-icons/gi';
 import { IoFishOutline } from 'react-icons/io5';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
@@ -81,13 +83,13 @@ export default function HomePage() {
           <IoFishOutline /> 해산물
         </p>
       </div>
-      <div className="flex justify-end mr-80 font-bold mb-10">
+      <div className="flex justify-end mr-80 font-bold mb-5">
         {' '}
         <span className="hover:text-cyan-400 mr-2 cursor-pointer">신상품</span> ||{' '}
         <span className="hover:text-pink-300 mx-2 cursor-pointer">베스트</span>
       </div>
-      <div className="flex justify-center w-4/5 m-auto gap-20 ">
-        <div className="w-3/12 h-96">
+      <div className="flex justify-center w-4/5 m-auto gap-20">
+        <div className="w-3/12 h-96 cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300">
           <img src="/assets/fast-food1.PNG" alt="갈비탕" className="w-full h-4/5 object-cover rounded-md" />
           <div className="flex justify-between p-3">
             <div>
@@ -100,7 +102,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="w-3/12 h-96">
+        <div className="w-3/12 h-96 cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300">
           <img src="/assets/fast-food2.PNG" alt="김치 치즈 주먹밥" className="w-full h-4/5 object-cover rounded-md" />
           <div className="flex justify-between p-3">
             <div>
@@ -113,7 +115,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="w-3/12 h-96">
+        <div className="w-3/12 h-96 cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300">
           <img src="/assets/fast-food3.PNG" alt="파스타" className="w-full h-4/5 object-cover rounded-md" />
           <div className="flex justify-between p-3">
             <div>
@@ -122,7 +124,7 @@ export default function HomePage() {
             </div>
             <div className="flex justify-end gap-2 items-center">
               <SlHeart className="text-2xl hover:text-rose-500 cursor-pointer" />
-              <LiaCartArrowDownSolid className="text-4xl hover:text-stone-300cursor-pointer" />
+              <LiaCartArrowDownSolid className="text-4xl hover:text-stone-300 cursor-pointer" />
             </div>
           </div>
         </div>
