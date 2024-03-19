@@ -1,7 +1,7 @@
 'use client';
 
 import { db, storage } from '@/api/fiebaseApi';
-import { CATEGORIES, CategoryType } from '@/types/product-type';
+import { CATEGORIES, CategoryType, DELIVERYS } from '@/types/product-type';
 import { addDoc, collection } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import { useState } from 'react';
@@ -21,6 +21,7 @@ export default function Admin() {
   const [seller, setSeller] = useState<string>('');
   const [price, setPrice] = useState<number | undefined>();
   const [weight, setWeight] = useState<string>('');
+  const [info, setInfo] = useState<string>('');
 
   const handleFileUpload = (e: any) => {
     const {
@@ -61,6 +62,7 @@ export default function Admin() {
         image,
         category,
         title,
+        info,
         delivery,
         seller,
         price,
@@ -72,6 +74,7 @@ export default function Admin() {
       setImageUrl(null);
       setCategory('');
       setTitle('');
+      setInfo('');
       setDelivery('');
       setSeller('');
       setPrice(0);
@@ -95,6 +98,10 @@ export default function Admin() {
 
     if (name === 'title') {
       setTitle(value);
+    }
+
+    if (name === 'info') {
+      setInfo(value);
     }
 
     if (name === 'delivery') {
@@ -139,7 +146,7 @@ export default function Admin() {
             />
           </label>
 
-          <button className="btn btn-outline">등록</button>
+          <button>등록</button>
         </div>
         <label htmlFor="category" className="admin__label-field">
           카테고리
@@ -173,18 +180,37 @@ export default function Admin() {
           // placeholder="제품명을 입력해주세요"
           className="admin__input-field"
         />
-        <label htmlFor="delivery" className="admin__label-field mb-2">
-          배송일자
+        <label htmlFor="info" className="admin__label-field">
+          상품 설명
         </label>
         <input
-          type="date" //
-          name="delivery"
-          id="delivery"
-          value={delivery}
+          type="text" //
+          name="info"
+          id="info"
+          value={info}
           onChange={onChange}
           required
+          // placeholder="제품명을 입력해주세요"
           className="admin__input-field"
         />
+        <label htmlFor="category" className="admin__label-field">
+          배송일정
+        </label>
+        <select
+          name="category" //
+          id="category"
+          value={delivery}
+          onChange={onChange}
+          className="mb-6 h-10"
+          required
+        >
+          <option className="admin__input-field">배송일정을 선택해주세요</option>
+          {DELIVERYS?.map((delivery) => (
+            <option value={delivery} key={delivery}>
+              {delivery}
+            </option>
+          ))}
+        </select>
         <label htmlFor="seller" className="admin__label-field mb-2">
           판매자
         </label>
