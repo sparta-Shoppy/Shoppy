@@ -3,6 +3,7 @@
 import { FirebaseApp, getApp, initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
 import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 //지역변수로 사용하기
 export let app: FirebaseApp;
@@ -26,6 +27,8 @@ try {
 export const database = getDatabase(app);
 
 const firebaseApp = initializeApp(firebaseConfig);
+
+export const storage = getStorage(app);
 
 export const db = getFirestore(app);
 

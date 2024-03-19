@@ -8,11 +8,8 @@ import { FormEvent, useEffect, useState } from 'react';
 // 이후 home.tsx에서 두개의 토글을 생성하여
 // 각각 로그인 버튼 및 회원가입 버튼 클릭 시 모달창 띄우기 위해 분리하였다.
 
-//사용자 로그인 창 관리자 로그인창 동일
-// 관리자일 경우 로그아웃 버튼 옆 톱니바퀴 이모티콘? 버튼 생성
+// 관리자일 경우 로그아웃 버튼 옆 관리자 버튼 생성
 
-// dasiy 플러그인 삭제
-// yarn add react-toastify 설치
 interface User {
   uid: string;
 }
@@ -30,7 +27,7 @@ const Login = () => {
     onUserStateChange((user: any) => {
       setUserState(user);
     });
-  }, [userState]);
+  }, []);
 
   //로그인 상태 변경 시마다 호출
   function onUserStateChange(call: any) {
@@ -38,6 +35,10 @@ const Login = () => {
     onAuthStateChanged(auth, async (user) => {
       //로그인된 유저가 관리자인지 사용자인지를 확인 or 비로그인 상태인지를 확인
       const updatedUser = user ? await admins(user) : null;
+      if (updatedUser) {
+        const userString = JSON.stringify(updatedUser);
+        window.localStorage.setItem('user', userString);
+      }
       call(updatedUser);
     });
   }
@@ -75,11 +76,17 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="w-full">
       {auth.currentUser ? (
         // 로그인 되었을 경우
-
-        <button onClick={() => signOut(auth)}>로그아웃</button>
+        <button
+          onClick={() => {
+            window.localStorage.removeItem('user');
+            signOut(auth);
+          }}
+        >
+          로그아웃
+        </button>
       ) : (
         //비로그인일 경우
         <form onSubmit={onLoginSubmitEventHandler}>
@@ -89,7 +96,7 @@ const Login = () => {
           회원가입
         </form>
       )}
-    </>
+    </div>
   );
 };
 
