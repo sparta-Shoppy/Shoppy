@@ -1,6 +1,7 @@
 'use client';
 
 import Header from '@/components/common/Header';
+import SearchProduct from '@/components/common/SearchProduct';
 import Link from 'next/link';
 import { useState } from 'react';
 import { GiFruitBowl, GiHamburger } from 'react-icons/gi';
@@ -15,52 +16,72 @@ export default function HomePage() {
   return (
     <div className="h-screen">
       <Header />
-      <div className="w-full flex justify-center gap-5 mb-5">
-        <input type="text" placeholder="검색어를 입력하세요" className="flex w-3/12 p-1 w-3/10 border rounded-md" />
-        <button className="hover:text-zinc-400 font-bold">검색</button>
-      </div>
-
+      <SearchProduct />
       <div className="carousel w-full h-80  overflow-hidden relative">
         <div id="slide1" className="carousel-item relative w-full">
-          <img src="assets/main1.PNG" className="w-full object-cover" />
+          <img src="assets/main1.PNG" className="w-full h-80" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide4" className="btn btn-circle">
+            <a
+              href="#slide4"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❮
             </a>
-            <a href="#slide2" className="btn btn-circle">
+            <a
+              href="#slide2"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❯
             </a>
           </div>
         </div>
         <div id="slide2" className="carousel-item relative w-full">
-          <img src="assets/main2.PNG" className="w-full object-cover" />
+          <img src="assets/main2.PNG" className="w-full h-80" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide1" className="btn btn-circle">
+            <a
+              href="#slide1"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❮
             </a>
-            <a href="#slide3" className="btn btn-circle">
+            <a
+              href="#slide3"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❯
             </a>
           </div>
         </div>
         <div id="slide3" className="carousel-item relative w-full">
-          <img src="assets/main3.PNG" className="w-full object-cover" />
+          <img src="assets/main3.PNG" className="w-full h-80" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide2" className="btn btn-circle">
+            <a
+              href="#slide2"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❮
             </a>
-            <a href="#slide4" className="btn btn-circle">
+            <a
+              href="#slide4"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❯
             </a>
           </div>
         </div>
         <div id="slide4" className="carousel-item relative w-full">
-          <img src="assets/main4.PNG" className="w-full object-cover" />
+          <img src="assets/main4.PNG" className="w-full h-80" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide3" className="btn btn-circle">
+            <a
+              href="#slide3"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❮
             </a>
-            <a href="#slide1" className="btn btn-circle">
+            <a
+              href="#slide1"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❯
             </a>
           </div>
