@@ -1,5 +1,3 @@
-'use client';
-
 import { GiFruitBowl, GiHamburger } from 'react-icons/gi';
 import { IoFishOutline } from 'react-icons/io5';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
@@ -19,7 +17,7 @@ export default function HomePage() {
         </div>
       </div>
       <div className="w-full flex justify-center gap-5 mb-5">
-        <input type="text" placeholder="검색" className="flex w-3/12 p-1 w-3/10 border rounded-md" />
+        <input type="text" placeholder="검색어를 입력하세요" className="flex w-3/12 p-1 w-3/10 border rounded-md" />
         <button className="hover:text-slate-300 font-bold">검색</button>
       </div>
       <div className="carousel w-full h-80">
