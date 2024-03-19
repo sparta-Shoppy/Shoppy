@@ -16,6 +16,15 @@ export interface NewReviewType {
   productId: string;
 }
 
+export interface NewAskType {
+  askId: string;
+  writerId: string;
+  content: string;
+  createdAt: string;
+  productId: string;
+  secret: boolean;
+}
+
 export type CategoryType = '과일/채소' | '고기' | '가공식품' | '해산물';
 export const CATEGORIES: CategoryType[] = ['과일/채소', '고기', '가공식품', '해산물'];
 
