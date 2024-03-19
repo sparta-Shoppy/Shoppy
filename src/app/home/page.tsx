@@ -12,13 +12,13 @@ export default function HomePage() {
           <img src="assets/logo.png" alt="logo" className="w-3/6 mt-2" />
         </div>
         <div className="w-72 flex justify-evenly items-center text-l">
-          <p className="cursor-pointer hover:text-slate-300 font-bold">회원가입</p>
-          <p className="cursor-pointer hover:text-slate-300 font-bold">로그인</p>
+          <p className="cursor-pointer hover:text-slate-600 font-bold">회원가입</p>
+          <p className="cursor-pointer hover:text-slate-600 font-bold">로그인</p>
         </div>
       </div>
       <div className="w-full flex justify-center gap-5 mb-5">
         <input type="text" placeholder="검색어를 입력하세요" className="flex w-3/12 p-1 w-3/10 border rounded-md" />
-        <button className="hover:text-slate-300 font-bold">검색</button>
+        <button className="hover:text-slate-600 font-bold">검색</button>
       </div>
       <div className="carousel w-full h-80">
         <div id="slide1" className="carousel-item relative w-full">
@@ -68,31 +68,30 @@ export default function HomePage() {
       </div>
 
       <div className="flex justify-evenly w-4/5 p-10 m-auto text-xl font-bold">
-        <p className="flex  gap-3 items-center cursor-pointer hover:text-lime-500">
+        <p className="flex  gap-3 items-center cursor-pointer hover:text-slate-600">
           <GiFruitBowl /> 과일/채소
         </p>
-        <p className="flex items-center gap-3 cursor-pointer hover:text-rose-700">
+        <p className="flex items-center gap-3 cursor-pointer hover:text-slate-600">
           <TbMeat /> 고기
         </p>
-        <p className="flex gap-3 items-center cursor-pointer hover:text-purple-700">
+        <p className="flex gap-3 items-center cursor-pointer hover:text-slate-600">
           <GiHamburger /> 가공식품
         </p>
-        <p className="flex gap-3 items-center cursor-pointer hover:text-teal-600">
+        <p className="flex gap-3 items-center cursor-pointer hover:text-slate-600">
           <IoFishOutline /> 해산물
         </p>
       </div>
-      <div className="flex justify-end mr-80 font-bold mb-5">
-        {' '}
+      <div className="w-4/5 flex justify-end font-bold mb-5">
         <span className="hover:text-cyan-400 mr-2 cursor-pointer">신상품</span> ||{' '}
         <span className="hover:text-pink-300 mx-2 cursor-pointer">베스트</span>
       </div>
       <div className="flex justify-center w-4/5 m-auto gap-20">
-        <div className="w-3/12 h-96 cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300">
+        <div className="w-1/5 h-96 cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300 pb-5">
           <img src="/assets/fast-food1.PNG" alt="갈비탕" className="w-full h-4/5 object-cover rounded-md" />
           <div className="flex justify-between p-3">
             <div>
-              <p>18,980원</p>
-              <p>외갓집 진심 갈비탕(냉동)</p>
+              <p>3,520원</p>
+              <p>[저스트] 크림치즈 베이글 샌드</p>
             </div>
             <div className="flex justify-end gap-2 items-center">
               <SlHeart className="text-2xl hover:text-rose-500 cursor-pointer" />
@@ -100,12 +99,12 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="w-3/12 h-96 cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300">
+        <div className="w-1/5 h-96 cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300 pb-5">
           <img src="/assets/fast-food2.PNG" alt="김치 치즈 주먹밥" className="w-full h-4/5 object-cover rounded-md" />
           <div className="flex justify-between p-3">
             <div>
-              <p>12,500원</p>
-              <p>한우물 김치치즈 구운주먹밥(냉동)</p>
+              <p>12,883원</p>
+              <p>[베키아에누보] 함박스테이크 정식</p>
             </div>
             <div className="flex justify-end gap-2 items-center">
               <SlHeart className="text-2xl hover:text-rose-500 cursor-pointer" />
@@ -113,12 +112,12 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="w-3/12 h-96 cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300">
+        <div className="w-1/5 h-96 cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300 pb-5">
           <img src="/assets/fast-food3.PNG" alt="파스타" className="w-full h-4/5 object-cover rounded-md" />
           <div className="flex justify-between p-3">
             <div>
-              <p>13,110원</p>
-              <p>쉐프엠 베이컨까르보나라 파스타</p>
+              <p>9,877원</p>
+              <p>[프레시지] 부채살 하와이안 찹스테이크</p>
             </div>
             <div className="flex justify-end gap-2 items-center">
               <SlHeart className="text-2xl hover:text-rose-500 cursor-pointer" />
@@ -128,7 +127,7 @@ export default function HomePage() {
         </div>
       </div>
       <div className="flex justify-center">
-        <button className="my-8 w-28 p-1 border rounded-md bg-slate-200 hover:bg-white">MORE</button>
+        <button className="w-28 p-1 border rounded-md bg-slate-200 hover:bg-white">MORE</button>
       </div>
     </div>
   );
