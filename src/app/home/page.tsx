@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { GiFruitBowl, GiHamburger } from 'react-icons/gi';
 import { IoFishOutline } from 'react-icons/io5';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
@@ -9,6 +10,18 @@ import { TbMeat } from 'react-icons/tb';
 
 export default function HomePage() {
   const [selectedTab, setSelectedTab] = useState('신상품');
+  // const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   setIsMounted(true);
+  // });
+
+  const pagePathHandler = () => {
+    // if (isMounted) {
+    router.push('/products');
+    // }
+  };
 
   return (
     <div className="h-screen">
@@ -72,7 +85,7 @@ export default function HomePage() {
         </div>
       </div>
       <div className="flex justify-evenly w-4/5 p-10 m-auto text-xl font-bold">
-        <div onClick={() => {}} className="flex  gap-3 items-center cursor-pointer hover:text-zinc-500">
+        <div onClick={pagePathHandler} className="flex  gap-3 items-center cursor-pointer hover:text-zinc-500">
           <GiFruitBowl /> 과일/채소
         </div>
         <div className="flex items-center gap-3 cursor-pointer hover:text-zinc-500">
@@ -85,8 +98,6 @@ export default function HomePage() {
           <IoFishOutline /> 해산물
         </div>
       </div>
-      {/* 온클릭을 사용해서 데이터베이스를 불러와야하는데 쿼리 조건을 어떻게하나 클릭 > 쿼리 조건을 어떻게 줄것인가 */}
-
       <div className="w-4/5 flex justify-end font-bold mb-5">
         <span
           className={`cursor-pointer mr-2 ${
