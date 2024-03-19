@@ -2,7 +2,7 @@
 
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore';
 import { db } from '../api/fiebaseApi';
 import { NewReviewType } from '@/types/product-type';
 import { toast } from 'react-toastify';
@@ -45,8 +45,12 @@ function Review() {
   // 후기 작성글 불러오기
   useEffect(() => {
     const fetchCommentData = async () => {
-      const q = query(collection(db, 'review'), where('productId', '==', params.id));
-      const querySnapshot = await getDocs(q);
+      const reviewDB = query(
+        collection(db, 'review'),
+        where('productId', '==', params.id),
+        orderBy('createdAt', 'desc')
+      );
+      const querySnapshot = await getDocs(reviewDB);
 
       const initialData: any = [];
 
@@ -138,7 +142,6 @@ function Review() {
             setContent(e.target.value);
           }}
           placeholder="내용을 입력해 주세요"
-          minLength={3}
           maxLength={20}
           required
           className="admin__input-field"
@@ -165,7 +168,6 @@ function Review() {
                   <input
                     type="text"
                     required
-                    minLength={3}
                     maxLength={20}
                     value={changeContent}
                     onChange={reviewChangeInput}
