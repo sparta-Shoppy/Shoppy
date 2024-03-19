@@ -8,6 +8,13 @@ export interface ProductType {
   price: number;
   weight: number;
 }
+export interface NewReviewType {
+  reviewId: string;
+  writerId: string;
+  content: string;
+  createdAt: string;
+  productId: string;
+}
 
 export type CategoryType = '과일/채소' | '고기' | '가공식품' | '해산물';
 export const CATEGORIES: CategoryType[] = ['과일/채소', '고기', '가공식품', '해산물'];
