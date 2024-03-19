@@ -17,17 +17,15 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: black;
+
+  background-color: white;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.admin__input-field {
+  @apply outline-none h-10 border-b border-black mb-14 text-lg;
+}
+
+.admin__label-field {
+  @apply text-xl font-semibold;
 }
