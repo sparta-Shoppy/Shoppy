@@ -1,6 +1,7 @@
 'use Client';
 
 import { app } from '@/api/fiebaseApi';
+import { useAppDispatch } from '@/hooks/useRedux';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -23,6 +24,8 @@ const Login = () => {
       try {
         await signInWithEmailAndPassword(auth, email, password);
         toast.success('로그인에 성공하였습니다.');
+
+        console.log(auth);
       } catch (error: any) {
         toast.error(error.code);
       }

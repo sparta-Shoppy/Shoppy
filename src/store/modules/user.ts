@@ -3,17 +3,16 @@ import { RootState } from '../config/configStore';
 
 //인터페이스 정의
 interface UserState {
-  value: {};
+  value: object | null;
 }
 
 //초기 상태 값
 
 const initialState: UserState = {
-  value: {}
+  value: null
 };
 
 //slice 설정
-
 export const UserSlice = createSlice({
   name: 'user',
   initialState,

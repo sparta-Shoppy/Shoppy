@@ -1,55 +1,44 @@
 'use client';
-
 import { app } from '@/api/fiebaseApi';
-import { onUserStateChange } from '@/api/login';
-import { Auth, getAuth, signOut } from 'firebase/auth';
-import { useEffect, useState } from 'react';
-import Login from '../main/Login';
-import Join from '../main/Join';
-import Link from 'next/link';
+import { getAuth, signOut } from 'firebase/auth';
 
-interface HeaderTextProps {
-  text: string;
-}
+import Join from '../main/Join';
+import Login from '../main/Login';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+import { delCookie } from '@/api/cookies';
+import { onUserStateChange } from '@/api/login';
+
+import { useAppDispatch } from '@/hooks/useRedux';
+import { userAction } from '@/store/modules/user';
 
 const Header = () => {
-  // 전역으로 로그인 정보를 관리
-  const [userState, setUserState] = useState<Auth>();
-  const [isAdmin, setIsAdmin] = useState(false); // isAdmin 상태 추가
-
   const auth = getAuth(app);
-
-  useEffect(() => {
-    //user(로그인 및 로그아웃)의 상태 변화 시에 작동
-    onUserStateChange(auth, (user: any) => {
-      //전역 관리
-      //필요한 페이지에서 불러온다.
-      setUserState(user);
-      console.log('됩니다.');
-    });
-  }, []);
+  const [isState, setIsState] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const router = useRouter();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     onUserStateChange(auth, (user: any) => {
       if (user) {
-        setUserState(user);
         setIsAdmin(user.isAdmins ?? false);
+        dispatch(userAction(user.uid));
       } else {
-        setUserState(undefined);
-        setIsAdmin(false);
+        setIsAdmin(false); //1) false로 준 이유?
       }
     });
   }, []);
 
-  //로그아웃 버튼 기능
+  //로그아웃 기능
   const onLogOutClickEventHandler = () => {
-    //로컬 스토리지 데이터 삭제
-    window.localStorage.removeItem('user');
-    //현재 접속된 user 로그아웃
     signOut(auth);
+    router.replace('/');
+    delCookie('user');
+    delCookie('admin');
   };
-
-  console.log(isAdmin);
 
   return (
     <>
@@ -63,6 +52,7 @@ const Header = () => {
             <button onClick={onLogOutClickEventHandler} className="text-xl">
               로그아웃
             </button>
+            {/* 관리자 상태 */}
             {isAdmin && (
               <Link href={'/admin'}>
                 <h1 className="ml-4 text-xl">관리자창</h1>
