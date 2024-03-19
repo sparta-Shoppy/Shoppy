@@ -8,10 +8,6 @@ import Login from '../main/Login';
 import Join from '../main/Join';
 import Link from 'next/link';
 
-interface HeaderTextProps {
-  text: string;
-}
-
 const Header = () => {
   // 전역으로 로그인 정보를 관리
   const [userState, setUserState] = useState<Auth>();
