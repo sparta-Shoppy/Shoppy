@@ -5,13 +5,14 @@ import { useParams } from 'next/navigation';
 import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { db } from '../api/fiebaseApi';
 import { NewReviewType } from '@/types/product-type';
+import { toast } from 'react-toastify';
 
 function Review() {
   const [content, setContent] = useState<string>('');
-  const [review, setReview] = useState<NewReviewType[]>();
-  const [changeNow, setChangeNow] = useState<boolean>(false);
   const [changeContent, setChangeContent] = useState<string>('');
   const [nowId, setNowId] = useState<string>('');
+  const [changeNow, setChangeNow] = useState<boolean>(false);
+  const [review, setReview] = useState<NewReviewType[]>();
 
   const params = useParams();
   const loginNow = '현재아이디';
@@ -32,9 +33,13 @@ function Review() {
       }),
       productId: params.id
     };
-    await addDoc(collection(db, 'review'), newReview);
-    alert('후기 등록 완료!');
-    setContent('');
+    try {
+      await addDoc(collection(db, 'review'), newReview);
+      toast.success('후기 등록 완료!');
+      setContent('');
+    } catch (error) {
+      toast.error('후기 등록 실패');
+    }
   };
 
   // 후기 작성글 불러오기
@@ -59,20 +64,26 @@ function Review() {
   const reviewDelete = async (reviewId: string) => {
     const real = window.confirm('삭제하시겠습니까?');
     if (real) {
-      const reviewRef = doc(db, 'review', reviewId);
-      await deleteDoc(reviewRef);
-      setReview((prev) => {
-        return prev?.filter((element) => element.reviewId !== reviewId);
-      });
+      try {
+        const reviewRef = doc(db, 'review', reviewId);
+        await deleteDoc(reviewRef);
+        setReview((prev) => {
+          return prev?.filter((element) => element.reviewId !== reviewId);
+        });
+        toast.success('삭제가 되었습니다.');
+      } catch (error) {
+        toast.error('삭제 실패!');
+      }
     } else {
       return;
     }
   };
 
   // 수정완료 불러오기
-  const reviewChangeBtn = (reviewId: string) => {
+  const reviewChangeBtn = (prev: NewReviewType) => {
     setChangeNow(true);
-    setNowId(reviewId);
+    setNowId(prev.reviewId);
+    setChangeContent(prev.content);
   };
 
   // 수정취소
@@ -91,30 +102,34 @@ function Review() {
   const reviewChange = async (prev: NewReviewType) => {
     const reviewRef = doc(db, 'review', prev.reviewId);
     if (changeContent === prev.content) {
-      alert('수정된게 없어요!');
+      toast.warning('수정된 게 없어요!');
       return;
     } else {
       const real = window.confirm('수정하시겠습니까?');
       if (real) {
-        await updateDoc(reviewRef, { ...prev, content: changeContent });
-        setChangeContent('');
-        setChangeNow(false);
-        setReview((item) => {
-          return item?.map((element) => {
-            if (element.reviewId === prev.reviewId) {
-              return { ...element, content: changeContent };
-            } else {
-              return element;
-            }
+        try {
+          await updateDoc(reviewRef, { ...prev, content: changeContent });
+          setChangeContent('');
+          setChangeNow(false);
+          setReview((item) => {
+            return item?.map((element) => {
+              if (element.reviewId === prev.reviewId) {
+                return { ...element, content: changeContent };
+              } else {
+                return element;
+              }
+            });
           });
-        });
-        alert('수정완료!');
+          toast.success('수정 완료!');
+        } catch (error) {
+          toast.error('수정 실패!');
+        }
       }
     }
   };
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <form onSubmit={reviewSubmit}>
         <input
           type="text"
@@ -126,9 +141,13 @@ function Review() {
           minLength={3}
           maxLength={20}
           required
-          className="input input-bordered w-full max-w-xs"
+          className="admin__input-field"
         />
-        <button type="submit" className="btn">
+
+        <button
+          type="submit"
+          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+        >
           등록
         </button>
       </form>
@@ -136,50 +155,63 @@ function Review() {
       <div>
         {review?.map((prev) => {
           return (
-            <div key={prev.reviewId}>
+            <div className="m-4" key={prev.reviewId}>
               <div>
                 <span className="text-xl font-bold mr-2">{prev.writerId}</span>
                 <span className="text-sm text-gray-400">{prev.createdAt}</span>
               </div>
-              {changeNow && nowId === prev.reviewId ? (
-                <input
-                  type="text"
-                  required
-                  minLength={3}
-                  maxLength={20}
-                  value={changeContent}
-                  onChange={reviewChangeInput}
-                  className="input input-bordered input-sm w-full max-w-xs"
-                />
-              ) : (
-                <div className="text-3xl">{prev.content}</div>
-              )}
-
-              {loginNow === prev.writerId ? (
-                <div className="flex gap-2">
-                  {changeNow && nowId === prev.reviewId ? (
-                    <>
-                      <button className="btn" onClick={() => reviewChange(prev)}>
-                        수정완료
-                      </button>
-                      <button className="btn" onClick={reviewChangeCancel}>
-                        취소
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <button className="btn" onClick={() => reviewChangeBtn(prev.reviewId)}>
-                        수정
-                      </button>
-                      <button className="btn" onClick={() => reviewDelete(prev.reviewId)}>
-                        삭제
-                      </button>
-                    </>
-                  )}
-                </div>
-              ) : (
-                <></>
-              )}
+              <div className="flex justify-between items-center p-2">
+                {changeNow && nowId === prev.reviewId ? (
+                  <input
+                    type="text"
+                    required
+                    minLength={3}
+                    maxLength={20}
+                    value={changeContent}
+                    onChange={reviewChangeInput}
+                    className="admin__input-field"
+                  />
+                ) : (
+                  <div className="text-3xl">{prev.content}</div>
+                )}
+                {loginNow === prev.writerId ? (
+                  <div className="flex gap-2">
+                    {changeNow && nowId === prev.reviewId ? (
+                      <>
+                        <button
+                          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                          onClick={() => reviewChange(prev)}
+                        >
+                          수정완료
+                        </button>
+                        <button
+                          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                          onClick={reviewChangeCancel}
+                        >
+                          취소
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                          onClick={() => reviewChangeBtn(prev)}
+                        >
+                          수정
+                        </button>
+                        <button
+                          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                          onClick={() => reviewDelete(prev.reviewId)}
+                        >
+                          삭제
+                        </button>
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
           );
         })}

@@ -1,7 +1,10 @@
-import Review from "@/components/Review";
+import Review from '@/components/Review';
 
 export default function ProductDetailPage() {
-  return <div>ProductDetailPage
-    <Review />
-  </div>;
+  return (
+    <div>
+      ProductDetailPage
+      <Review />
+    </div>
+  );
 }
