@@ -12,13 +12,13 @@ export default function HomePage() {
           <img src="assets/logo.png" alt="logo" className="w-3/6 mt-2" />
         </div>
         <div className="w-72 flex justify-evenly items-center text-l">
-          <p className="cursor-pointer hover:text-zinc-500 font-bold">회원가입</p>
-          <p className="cursor-pointer hover:text-zinc-500 font-bold">로그인</p>
+          <p className="cursor-pointer hover:text-zinc-400 font-bold">회원가입</p>
+          <p className="cursor-pointer hover:text-zinc-400 font-bold">로그인</p>
         </div>
       </div>
       <div className="w-full flex justify-center gap-5 mb-5">
         <input type="text" placeholder="검색어를 입력하세요" className="flex w-3/12 p-1 w-3/10 border rounded-md" />
-        <button className="hover:text-zinc-500 font-bold">검색</button>
+        <button className="hover:text-zinc-400 font-bold">검색</button>
       </div>
       <div className="carousel w-full h-80">
         <div id="slide1" className="carousel-item relative w-full">
