@@ -8,5 +8,4 @@ function SearchProduct() {
     </div>
   );
 }
-
 export default SearchProduct;
