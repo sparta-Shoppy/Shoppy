@@ -16,7 +16,10 @@ const Header = () => {
   useEffect(() => {
     //user(로그인 및 로그아웃)의 상태 변화 시에 작동
     onUserStateChange(auth, (user: any) => {
+      //전역 관리
+      //필요한 페이지에서 불러온다.
       setUserState(user);
+      console.log('됩니다.');
     });
   }, []);
 

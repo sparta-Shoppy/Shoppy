@@ -32,11 +32,13 @@ const Login = () => {
     <>
       {/* // true: 로그인 모달창 띄우기 */}
       {isLoginToggle ? (
-        <form onSubmit={onLoginSubmitEventHandler}>
-          아이디: <input type="email" name="email" required placeholder="아이디 입력"></input>
-          비밀번호: <input type="password" name="password" required placeholder="비밀번호 입력"></input>
-          <button type="submit"> 로그인 버튼 </button>
-        </form>
+        <div className="">
+          <form onSubmit={onLoginSubmitEventHandler}>
+            아이디: <input type="email" name="email" required placeholder="아이디 입력"></input>
+            비밀번호: <input type="password" name="password" required placeholder="비밀번호 입력"></input>
+            <button type="submit"> 로그인 버튼 </button>
+          </form>
+        </div>
       ) : (
         // false일 경우 로그인 버튼만 등장
         <button className="cursor-pointer hover:text-slate-300 font-bold" onClick={() => setIsLoginToggle(true)}>
