@@ -55,7 +55,7 @@ const Header = () => {
     <>
       <div className="flex items-center m-auto w-11/12  justify-between">
         <Link href={'/'}>
-          <img src="assets/logo.png" alt="logo" className="mt-2 w-24" />
+          <img src="../../../assets/logo.png" alt="logo" className="mt-2 w-24" />
         </Link>
         {/*로그인된 상태*/}
         {auth.currentUser ? (

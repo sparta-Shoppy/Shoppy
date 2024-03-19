@@ -6,11 +6,13 @@ import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc,
 import { db } from '../api/fiebaseApi';
 import { NewAskType } from '@/types/product-type';
 import { toast } from 'react-toastify';
+import { HiLockClosed } from 'react-icons/hi2';
 
 function Ask() {
   const [content, setContent] = useState<string>('');
   const [changeContent, setChangeContent] = useState<string>('');
   const [nowId, setNowId] = useState<string>('');
+  const [askSecret, setAskSecret] = useState<boolean>(false);
   const [changeNow, setChangeNow] = useState<boolean>(false);
   const [ask, setAsk] = useState<NewAskType[]>();
 
@@ -169,7 +171,10 @@ function Ask() {
                     className="admin__input-field"
                   />
                 ) : (
-                  <div className="text-3xl">{prev.content}</div>
+                  // <div className="text-3xl">{prev.content}</div>
+                  <>
+                    비밀글입니다. <HiLockClosed />
+                  </>
                 )}
                 {loginNow === prev.writerId ? (
                   <div className="flex gap-2">
