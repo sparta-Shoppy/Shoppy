@@ -21,6 +21,7 @@ const Login = () => {
     if (validation({ email, password })) {
       try {
         await signInWithEmailAndPassword(auth, email, password);
+
         alert('로그인에 성공했습니다');
       } catch (error: any) {
         alert('해당 로그인 정보가 없습니다.');

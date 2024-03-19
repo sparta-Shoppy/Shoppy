@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import QueryProvider from './provider';
+import { QueryProvider } from './provider';
+import { ReduxProvider } from './provider';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/ReactToastify.css';
 
@@ -22,7 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <QueryProvider>
           <ToastContainer />
-          {children}
+          <ReduxProvider>{children}</ReduxProvider>
         </QueryProvider>
       </body>
     </html>

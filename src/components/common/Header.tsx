@@ -2,15 +2,13 @@
 
 import { app } from '@/api/fiebaseApi';
 import { onUserStateChange } from '@/api/login';
-import { Auth, getAuth, signOut } from 'firebase/auth';
-import { useEffect, useState } from 'react';
-import Login from '../main/Login';
+import { useAppDispatch } from '@/hooks/useRedux';
+import { getAuth, signOut } from 'firebase/auth';
+import { useEffect } from 'react';
 import Join from '../main/Join';
+import Login from '../main/Login';
 
 const Header = () => {
-  // 전역으로 로그인 정보를 관리
-  const [userState, setUserState] = useState<Auth>();
-
   const auth = getAuth(app);
 
   useEffect(() => {
@@ -18,8 +16,8 @@ const Header = () => {
     onUserStateChange(auth, (user: any) => {
       //전역 관리
       //필요한 페이지에서 불러온다.
-      setUserState(user);
-      console.log('됩니다.');
+
+      console.log(user);
     });
   }, []);
 
