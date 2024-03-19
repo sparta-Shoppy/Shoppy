@@ -1,6 +1,6 @@
 'use client';
 import { db, storage } from '@/api/fiebaseApi';
-import { CATEGORIES, CategoryType, DELIVERYS } from '@/types/product-type';
+import { CATEGORIES, DELIVERYS } from '@/types/product-type';
 import { addDoc, collection } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import { useState } from 'react';
@@ -14,27 +14,27 @@ export default function Admin() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
-  const [category, setCategory] = useState<string>('');
-  const [title, setTitle] = useState<string>('');
-  const [delivery, setDelivery] = useState<string>('');
-  const [seller, setSeller] = useState<string>('');
-  const [price, setPrice] = useState<number | undefined>();
-  const [weight, setWeight] = useState<string>('');
-  const [info, setInfo] = useState<string>('');
+  // const handleFileUpload = (e: any) => {
+  //   const {
+  //     target: { files }
+  //   } = e;
+
+  //   const file = files?.[0];
+  //   const previewURL = file ? URL.createObjectURL(file) : '';
+
+  //   setImageUrl(previewURL);
+  // };
+  // console.log('보여줘봐라', imageUrl);
 
   const handleFileUpload = (e: any) => {
     const {
       target: { files }
     } = e;
-
     const file = files?.[0];
-
     //이미지 파일 읽기 (사용자 컴퓨터에 저장해 줄 수 있으나 나는 사용 x)
     const fileReader = new FileReader();
-
     //인코딩 된 스트링 데이터를 리턴할 수 있도록
     fileReader?.readAsDataURL(file);
-
     //loadend event 파일을 읽었는지 확인할 수 있음
     fileReader.onloadend = (e: any) => {
       // console.log(e);
@@ -43,11 +43,20 @@ export default function Admin() {
     };
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     const key = uuidv4();
     const storageRef = ref(storage, key);
+
+    const formData = new FormData(e.currentTarget);
+    const category = formData.get('category') as string;
+    const title = formData.get('title') as string;
+    const info = formData.get('info') as string;
+    const delivery = formData.get('delivery') as string;
+    const seller = formData.get('seller') as string;
+    const price = formData.get('price') as number | null;
+    const weight = formData.get('weight') as string;
 
     try {
       let image = '';
@@ -56,7 +65,7 @@ export default function Admin() {
         image = await getDownloadURL(data?.ref);
       }
 
-      await addDoc(collection(db, 'product'), {
+      const newProduct = {
         productId: uuidv4(),
         image,
         category,
@@ -67,57 +76,20 @@ export default function Admin() {
         price,
         weight,
         createdAt: new Date()?.toLocaleString()
-      });
+      };
 
+      await addDoc(collection(db, 'product'), {
+        newProduct
+      });
       toast?.success('상품이 등록되었습니다.');
-      setImageUrl(null);
-      setCategory('');
-      setTitle('');
-      setInfo('');
-      setDelivery('');
-      setSeller('');
-      setPrice(0);
-      setWeight('');
+      (e.target as HTMLFormElement).reset();
+      setImageUrl('');
     } catch (error: any) {
       console.log(error);
       toast?.error(error.code);
     }
 
     setIsSubmitting(false);
-  };
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const {
-      target: { name, value }
-    } = e;
-
-    if (name === 'category') {
-      setCategory(value as CategoryType);
-    }
-
-    if (name === 'title') {
-      setTitle(value);
-    }
-
-    if (name === 'info') {
-      setInfo(value);
-    }
-
-    if (name === 'delivery') {
-      setDelivery(value);
-    }
-
-    if (name === 'seller') {
-      setSeller(value);
-    }
-
-    if (name === 'price') {
-      setPrice(parseInt(value, 10));
-    }
-
-    if (name === 'weight') {
-      setWeight(value);
-    }
   };
 
   return (
@@ -153,8 +125,6 @@ export default function Admin() {
         <select
           name="category" //
           id="category"
-          value={category}
-          onChange={onChange}
           className="mb-6 h-10"
           required
         >
@@ -173,8 +143,6 @@ export default function Admin() {
           type="text" //
           name="title"
           id="title"
-          value={title}
-          onChange={onChange}
           required
           // placeholder="제품명을 입력해주세요"
           className="admin__input-field"
@@ -186,8 +154,6 @@ export default function Admin() {
           type="text" //
           name="info"
           id="info"
-          value={info}
-          onChange={onChange}
           required
           // placeholder="제품명을 입력해주세요"
           className="admin__input-field"
@@ -196,10 +162,8 @@ export default function Admin() {
           배송일정
         </label>
         <select
-          name="category" //
-          id="category"
-          value={delivery}
-          onChange={onChange}
+          name="delivery" //
+          id="delivery"
           className="mb-6 h-10"
           required
         >
@@ -217,8 +181,6 @@ export default function Admin() {
           type="text" //
           name="seller"
           id="seller"
-          value={seller}
-          onChange={onChange}
           required
           placeholder="판매자를 입력해주세요"
           className="admin__input-field"
@@ -230,23 +192,19 @@ export default function Admin() {
           type="number" //
           name="price"
           id="price"
-          value={price}
-          onChange={onChange}
           required
           placeholder="판매금액을 입력해주세요"
           className="admin__input-field"
         />
         <label htmlFor="weight" className="admin__label-field mb-2">
-          중량
+          중량/용량
         </label>
         <input
           type="text" //
           name="weight"
           id="weight"
-          value={weight}
-          onChange={onChange}
           required
-          placeholder="중량을 입력해주세요"
+          placeholder="중량/용량을 입력해주세요"
           className="admin__input-field"
         />
         <button type="submit" disabled={isSubmitting}>
