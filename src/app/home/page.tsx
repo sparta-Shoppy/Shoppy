@@ -1,8 +1,4 @@
-'use client';
-
 import Header from '@/components/common/Header';
-import Login from '@/components/main/Login';
-import { useState } from 'react';
 import { GiFruitBowl, GiHamburger } from 'react-icons/gi';
 import { IoFishOutline } from 'react-icons/io5';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
