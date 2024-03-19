@@ -1,8 +1,8 @@
 "use client";
 
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
-import { useParams } from 'next/navigation';
 import React, { FormEvent, useEffect, useState } from 'react'
+import { useParams } from 'next/navigation';
+import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { db } from '../api/fiebaseApi';
 
 export interface NewReviewType {
@@ -21,7 +21,7 @@ function Review() {
   const [nowId, setNowId] = useState<string>("");
 
   const params = useParams();
-const loginNow = "현재아이디";
+const loginNow = "현재아이디"
   
   
 
@@ -109,7 +109,7 @@ const loginNow = "현재아이디";
         setChangeContent("");
         setChangeNow(false);
         setReview((item) => {
-          return (item.map((element) => {
+          return (item?.map((element) => {
             if (element.reviewId === prev.reviewId) {
               return { ...element, content: changeContent};
             } else {
@@ -129,21 +129,23 @@ const loginNow = "현재아이디";
         <form onSubmit={reviewSubmit}>
           <input type='text' value={content} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setContent(e.target.value);
-          }} placeholder='내용을 입력해 주세요' minLength={3} maxLength={20} required/>
-          <button type='submit'>등록</button>
+          }} placeholder='내용을 입력해 주세요' minLength={3} maxLength={20} required
+          className="input input-bordered w-full max-w-xs"/>
+          <button type='submit' className="btn">등록</button>
         </form>
 
         <div>
-          후기
           {review?.map((prev) => {
             return(<div key={prev.reviewId}>
               <div>
-                <span>{prev.writerId}</span>
-                <span>{prev.createdAt}</span>
+                <span className='text-xl font-bold mr-2'>{prev.writerId}</span>
+                <span className='text-sm text-gray-400'>{prev.createdAt}</span>
               </div>
-              {changeNow && nowId === prev.reviewId ? <input type='text' required minLength={3} maxLength={20} value={changeContent} onChange={reviewChangeInput}/>
+              {changeNow && nowId === prev.reviewId ? <input type='text' 
+              required minLength={3} maxLength={20} value={changeContent} onChange={reviewChangeInput}
+              className="input input-bordered input-sm w-full max-w-xs"/>
               :
-              <div>{prev.content}</div>
+              <div className='text-3xl'>{prev.content}</div>
               }
               
               {loginNow === prev.writerId ? 
