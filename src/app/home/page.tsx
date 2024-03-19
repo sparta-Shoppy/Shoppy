@@ -1,5 +1,6 @@
 'use client';
 
+import Products from '@/components/Products';
 import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
 import Link from 'next/link';
