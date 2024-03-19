@@ -22,6 +22,7 @@ const Join = () => {
       try {
         const auth = getAuth(app);
         await createUserWithEmailAndPassword(auth, email, password);
+        // await const user = userCredential.user
         alert('회원가입에 성공했습니다.');
       } catch (error: any) {
         alert('중복된 아이디 입니다.');

@@ -1,12 +1,11 @@
 'use client';
-import Join from '@/components/home/Join';
-import Login from '@/components/home/Login';
+import Join from '@/components/main/Join';
+import Login from '@/components/main/Login';
 
 export default function HomePage() {
   return (
     <div>
       <Login />
-      <Join />
       HomePage
     </div>
   );
