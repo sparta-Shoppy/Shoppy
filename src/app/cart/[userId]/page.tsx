@@ -14,7 +14,7 @@ export default function CartPage() {
       <Header />
       <article className="flex flex-col w-full items-center h-full">
         <div className="w-4/5 h-4/5 items-center">
-          <section className="flex flex-col items-center">
+          <section className="flex flex-col items-center bg-10">
             <h1 className="flex flex-row text-5xl">
               장바구니
               <TiShoppingCart className="ml-2" />
@@ -25,7 +25,7 @@ export default function CartPage() {
           </div>
 
           <section className="flex flex-row justify-between w-full h-full">
-            <article className="flex flex-col items-center border h-full w-3/4 mt-10">
+            <article className="flex flex-col items-center border h-full w-3/4 ">
               <div className="p-10">
                 {!hasProducts && <p className="text-lg ">장바구니에 상품이 없습니다. 열심히 쇼핑해주세요</p>}
               </div>

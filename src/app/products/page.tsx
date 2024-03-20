@@ -1,7 +1,9 @@
 'use client';
 import { db } from '@/api/fiebaseApi';
+import { userId } from '@/api/user';
 import Header from '@/components/common/Header';
 import { ProductType } from '@/types/product-type';
+import Cartbutton from '@/utill/hooks/Cart';
 import { collection, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
@@ -17,10 +19,10 @@ export default function ProductPage() {
         const fetchedProducts: any = [];
         querySnapshot.forEach((doc) => {
           const products = doc.data().newProduct;
-          console.log('products', products);
+          // console.log('products', products);
           fetchedProducts.push({ ...products, id: doc.id, products });
         });
-        console.log('fetchedProducts', fetchedProducts);
+        // console.log('fetchedProducts', fetchedProducts);
         if (fetchedProducts.length != null) {
         }
 
@@ -32,6 +34,8 @@ export default function ProductPage() {
 
     fetchProductsData();
   }, []);
+
+  console.log('유저아이디', userId);
 
   return (
     <div>
@@ -48,7 +52,7 @@ export default function ProductPage() {
                 </div>
                 <div className="flex justify-end gap-2 items-center pl-5">
                   <SlHeart className="text-2xl hover:text-rose-500 cursor-pointer" />
-                  <LiaCartArrowDownSolid className="text-4xl hover:text-stone-300 cursor-pointer" />
+                  <Cartbutton item={item} userId={userId} />
                 </div>
               </div>
             </div>

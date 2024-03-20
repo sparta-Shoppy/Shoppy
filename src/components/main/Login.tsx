@@ -32,7 +32,6 @@ const Login = () => {
     }
   };
 
-  console.log(isLoginToggle);
   return (
     <>
       {/* // true: 로그인 모달창 띄우기 */}

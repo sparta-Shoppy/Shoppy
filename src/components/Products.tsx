@@ -1,6 +1,8 @@
 'use client';
 import { db, storage } from '@/api/fiebaseApi';
+import { userId } from '@/api/user';
 import { ProductType } from '@/types/product-type';
+import Cartbutton from '@/utill/hooks/Cart';
 import { collection, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
@@ -47,7 +49,7 @@ function Products() {
               </div>
               <div className="flex justify-end gap-2 items-center pl-5">
                 <SlHeart className="text-2xl hover:text-rose-500 cursor-pointer" />
-                <LiaCartArrowDownSolid className="text-4xl hover:text-stone-300 cursor-pointer" />
+                <Cartbutton item={item} userId={userId} />
               </div>
             </div>
           </div>
