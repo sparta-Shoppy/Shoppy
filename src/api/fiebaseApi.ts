@@ -1,10 +1,10 @@
 // Import the functions you need from the SDKs you need
 
 import { ProductType } from '@/types/product-type';
-import exp from 'constants';
+
 import { FirebaseApp, getApp, initializeApp } from 'firebase/app';
-import { getDatabase, get, ref, remove, set } from 'firebase/database';
-import { collection, getFirestore } from 'firebase/firestore';
+import { getDatabase } from 'firebase/database';
+import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 //지역변수로 사용하기
@@ -40,9 +40,5 @@ const firebaseApp = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 
 export const db = getFirestore(app);
-
-const user = window.localStorage.getItem('user');
-const userObject = user ? JSON.parse(user) : null;
-export const userId = userObject ? userObject.uid : null;
 
 export default firebaseApp;

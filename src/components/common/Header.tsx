@@ -1,6 +1,6 @@
 'use client';
 
-import { app, userId } from '@/api/fiebaseApi';
+import { app } from '@/api/fiebaseApi';
 import { onUserStateChange } from '@/api/login';
 import { Auth, getAuth, signOut } from 'firebase/auth';
 import { useEffect, useState } from 'react';
@@ -12,6 +12,7 @@ import { TiShoppingCart } from 'react-icons/ti';
 import { FaUserMinus } from 'react-icons/fa';
 import { FaUserCog } from 'react-icons/fa';
 import { FaUserCheck } from 'react-icons/fa';
+import { userId } from '@/api/user';
 
 const Header = () => {
   // 전역으로 로그인 정보를 관리
