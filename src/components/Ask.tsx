@@ -186,7 +186,7 @@ function Ask() {
                     onChange={askChangeInput}
                     className="admin__input-field"
                   />
-                ) : prev.secret && loginNow !== uid ? (
+                ) : prev.secret && loginNow !== prev.writerId ? (
                   <>
                     비밀글입니다. <HiLockClosed />
                   </>
