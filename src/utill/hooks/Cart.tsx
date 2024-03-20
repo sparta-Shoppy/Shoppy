@@ -51,10 +51,8 @@ export default function Cartbutton({ item, userId }: CartButtonProps) {
           ]
         });
       }
-
       toast.success('장바구니에 추가되었습니다.');
     } catch (error) {
-      console.error('장바구니에 추가하지 못했습니다.', error);
       toast.error('장바구니에 추가하지 못했습니다.');
     }
   };

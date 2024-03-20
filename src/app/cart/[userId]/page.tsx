@@ -56,8 +56,8 @@ export default function CartPage() {
               <TiShoppingCart className="ml-2" />
             </h1>
           </section>
-          <div className="flex flex-row w-full mt-30">
-            <button>삭제하기</button>
+          <div className="flex flex-row w-full mt-30 mb-5 text-2xl">
+            <button>전체 삭제하기</button>
           </div>
 
           <section className="flex flex-row justify-between w-full h-full ">
@@ -78,14 +78,16 @@ export default function CartPage() {
                 <p>상품금액</p>
                 <p>{total}원</p>
               </div>
-              <div className="flex flex-row justify-between mt-3">
+              <div className="flex flex-row justify-between mt-3 text-[#ccc]">
                 <p>배송비</p>
                 <p>3,000 원</p>
               </div>
 
-              <div className="flex flex-row justify-between mt-5 border-t-2 border-[#B4B4B8]-500">
+              <div className="flex flex-row justify-between text-2xl mt-5 border-t-2 border-[#B4B4B8]-500">
                 <p className="mt-5">결제예정금액</p>
-                <p className="mt-5">{totalPrice}원</p>
+                <p className="mt-5">
+                  <span className="text-3xl">{totalPrice}</span>원
+                </p>
               </div>
             </article>
           </section>

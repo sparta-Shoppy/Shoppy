@@ -46,23 +46,32 @@ export default function CartItem({ product }: ProductProps) {
   console.log('userCart', userCarts);
   const productPrice = price * quantity;
 
+  const onClickCheckBox = () => {};
+
   return (
-    <div key={productId} className="flex flex-row items-center border-b-2 border-[#B4B4B8]-500 p-3 w-full">
-      <div className="flex flex-row align-middle items-center p-3">
-        <input type="checkbox" className="mr-10 w-4 h-4" />
-        <img src={image} alt={title} className="w-60 h-60" />
-      </div>
-      <div className="flex flex-col ml-10">
-        <h3 className="mb-6 text-xl">{title}</h3>
-      </div>
-      <div className="flex flex-col justify-end">
-        <div className="flex flex-row-reverse gap-5 ">
-          <FaPlusCircle />
-          <p>{quantity}</p>
-          <FaMinusCircle />
+    <li key={productId}>
+      <label
+        htmlFor={productId}
+        className="flex justify-between items-center space-x-2 border-b-2 border-[#B4B4B8]-500 p-3 w-full"
+      >
+        <div className=" flex items-center gap-10 ">
+          <input type="checkbox" id={productId} className=" w-4 h-4" onClick={onClickCheckBox} />
+          <img src={image} alt={title} className="w-60 h-60" />
+          <h3 className=" text-xl">{title}</h3>
         </div>
-        <div>{productPrice} 원</div>
-      </div>
-    </div>
+
+        <div className="relative">
+          <button className="text-3xl absolute right-0 -top-24 text-[#ccc]">&times;</button>
+          <div className="flex gap-10 items-center text-2xl">
+            <FaMinusCircle />
+            <p>{quantity}</p>
+            <FaPlusCircle />
+          </div>
+          <div className="absolute right-5 top-20 text-xl whitespace-nowrap">
+            <span className="text-2xl">{productPrice}</span> 원
+          </div>
+        </div>
+      </label>
+    </li>
   );
 }
