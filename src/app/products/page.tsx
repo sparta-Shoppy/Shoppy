@@ -4,15 +4,16 @@ import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
 import { stringTransform } from '@/hooks/transform';
 import { ProductType } from '@/types/product-type';
-import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
+import { collection, getDocs, query } from 'firebase/firestore';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { IoHeartSharp } from 'react-icons/io5';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
-import { SlHeart } from 'react-icons/sl';
 
 export default function ProductPage() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [selectedTab, setSelectedTab] = useState('높은 가격순');
+  const [heart, setHeart] = useState(false);
 
   const params = useSearchParams();
   console.log('params', params.get('category'));
@@ -52,6 +53,11 @@ export default function ProductPage() {
 
     fetchProductsData();
   }, [selectedTab]);
+
+  // 하트 클릭 시 색상 변경
+  const handleHeart = () => {
+    setHeart(!heart);
+  };
 
   return (
     <div>
@@ -96,7 +102,11 @@ export default function ProductPage() {
                       <p className="text-lg font-semibold">{item.price ? stringTransform(item.price) : null} 원</p>
                     </div>
                     <div className="flex gap-2 items-center">
-                      <SlHeart className="text-3xl hover:text-rose-500 cursor-pointer" />
+                      {heart ? (
+                        <IoHeartSharp onClick={handleHeart} className="text-3xl text-rose-500 cursor-pointer" />
+                      ) : (
+                        <IoHeartSharp onClick={handleHeart} className="text-3xl hover:text-rose-500 cursor-pointer" />
+                      )}
                     </div>
                   </div>
                 </div>

@@ -8,14 +8,14 @@ import { collection, getDocs } from 'firebase/firestore';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { GiFruitBowl, GiHamburger } from 'react-icons/gi';
-import { IoFishOutline } from 'react-icons/io5';
+import { IoFishOutline, IoHeartSharp } from 'react-icons/io5';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
-import { SlHeart } from 'react-icons/sl';
 import { TbMeat } from 'react-icons/tb';
 
 export default function HomePage() {
   const [selectedTab, setSelectedTab] = useState('신상품');
   const [products, setProducts] = useState<ProductType[]>([]);
+  const [heart, setHeart] = useState(false);
 
   useEffect(() => {
     const fetchProductsData = async () => {
@@ -30,6 +30,7 @@ export default function HomePage() {
         if (fetchedProducts.length != null) {
         }
 
+        // 등록일 기준, 가격 기준으로 정렬
         const sortedProducts =
           selectedTab === '신상품'
             ? fetchedProducts.sort(
@@ -45,6 +46,11 @@ export default function HomePage() {
 
     fetchProductsData();
   }, [selectedTab]);
+
+  // 하트 클릭 시 색상 변경
+  const handleHeart = () => {
+    setHeart(!heart);
+  };
 
   return (
     <div className="h-screen">
@@ -167,7 +173,11 @@ export default function HomePage() {
                   <p>{stringTransform(item.price)}</p>
                 </div>
                 <div className="flex justify-end gap-2 items-center pl-5">
-                  <SlHeart className="text-2xl hover:text-rose-500 cursor-pointer" />
+                  {heart ? (
+                    <IoHeartSharp onClick={handleHeart} className="text-3xl text-rose-500 cursor-pointer" />
+                  ) : (
+                    <IoHeartSharp onClick={handleHeart} className="text-3xl hover:text-rose-500 cursor-pointer" />
+                  )}
                   <LiaCartArrowDownSolid className="text-4xl hover:text-stone-300 cursor-pointer" />
                 </div>
               </div>
