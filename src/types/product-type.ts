@@ -7,6 +7,7 @@ export interface ProductType {
   seller: string;
   price: number;
   weight: number;
+  createdAt: string;
 }
 export interface NewReviewType {
   reviewId: string;
