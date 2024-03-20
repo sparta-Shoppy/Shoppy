@@ -35,8 +35,6 @@ export default function ProductPage() {
     fetchProductsData();
   }, []);
 
-  console.log('유저아이디', userId);
-
   return (
     <div>
       <Header />

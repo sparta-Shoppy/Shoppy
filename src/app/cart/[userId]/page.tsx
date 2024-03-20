@@ -1,13 +1,38 @@
 'use client';
 
+import { db } from '@/api/fiebaseApi';
+import { userId } from '@/api/user';
 import Header from '@/components/common/Header';
 import { ProductType } from '@/types/product-type';
-import Cartbutton from '@/utill/hooks/Cart';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
 import { TiShoppingCart } from 'react-icons/ti';
 
 export default function CartPage() {
-  const hasProducts = '';
-  //products && products.length > 0;
+  const [userCarts, setUserCart] = useState<ProductType[]>([]);
+
+  useEffect(() => {
+    const fetchCartData = async () => {
+      const cartRef = doc(db, 'carts', userId);
+
+      console.log('cartRef', cartRef);
+
+      try {
+        const cartSnap = await getDoc(cartRef);
+        if (cartSnap.exists()) {
+          const cartData = cartSnap.data();
+
+          if (cartData.products && Array.isArray(cartData.products)) {
+            setUserCart(cartData.products);
+          }
+        }
+      } catch {}
+    };
+
+    fetchCartData();
+  }, []);
+
+  console.log('userCart', userCarts);
 
   return (
     <div className="w-full h-lvh">
@@ -27,7 +52,22 @@ export default function CartPage() {
           <section className="flex flex-row justify-between w-full h-full">
             <article className="flex flex-col items-center border h-full w-3/4 ">
               <div className="p-10">
-                {!hasProducts && <p className="text-lg ">장바구니에 상품이 없습니다. 열심히 쇼핑해주세요</p>}
+                {userCarts.length === 0 ? (
+                  <p className="text-lg ">장바구니에 상품이 없습니다. 열심히 쇼핑해주세요</p>
+                ) : (
+                  userCarts.map((cartItem) => (
+                    <div key={cartItem.productId} className="flex flex-row ">
+                      <div className="flex flex-row align-middle items-center p-3">
+                        <input type="checkbox"></input>
+                        <img src={cartItem.image} alt={cartItem.title} className="w-40 h-50" />
+                      </div>
+                      <div>
+                        <h3>{cartItem.title}</h3>
+                        <p>{cartItem.price}원</p>
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
             </article>
             <article className="flex flex-col w-1/4 mt-20 m-10 text-2xl">
