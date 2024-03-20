@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Login from '../main/Login';
 import Join from '../main/Join';
 import Link from 'next/link';
+// import SocialKakao from '@/api/KakaoLogin';
 
 interface HeaderTextProps {
   text: string;
@@ -75,6 +76,7 @@ const Header = () => {
           <div className="w-72 flex justify-evenly items-center text-l">
             <Join />
             <Login />
+            {/* <SocialKakao /> */}
           </div>
         )}
       </div>

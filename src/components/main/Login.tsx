@@ -23,6 +23,7 @@ const Login = () => {
       try {
         await signInWithEmailAndPassword(auth, email, password);
         toast.success('로그인에 성공하였습니다.');
+        (e.target as HTMLFormElement).reset();
       } catch (error: any) {
         toast.error(error.code);
       }

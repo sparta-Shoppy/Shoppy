@@ -21,3 +21,9 @@ export const CATEGORIES: CategoryType[] = ['과일/채소', '고기', '가공식
 
 export type DeliveryType = '샛별배송' | '3일 이내 배송' | '7일 이내 배송';
 export const DELIVERYS: DeliveryType[] = ['샛별배송', '3일 이내 배송', '7일 이내 배송'];
+
+export interface NewUserType {
+  email: string;
+  password: string;
+  nickname: string;
+}
