@@ -2,7 +2,7 @@
 import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
 import { ProductType } from '@/types/product-type';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
 import { SlHeart } from 'react-icons/sl';
@@ -13,6 +13,10 @@ export default function ProductPage() {
   useEffect(() => {
     const fetchProductsData = async () => {
       try {
+        const docRef = doc(db, 'user');
+        const docSnap = await getDoc(docRef);
+
+        console.log(docSnap);
         const querySnapshot = await getDocs(collection(db, 'product'));
         const fetchedProducts: any = [];
         querySnapshot.forEach((doc) => {

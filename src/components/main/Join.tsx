@@ -5,14 +5,15 @@ import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
 import { joinModalAction, joinState } from '@/store/modules/isModalToggle';
 import { NewUserType } from '@/types/product-type';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { addDoc, collection } from 'firebase/firestore';
+import { query } from 'firebase/database';
+import { addDoc, collection, getDocs, where } from 'firebase/firestore';
 import { FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
 
 const Join = () => {
   const auth = getAuth(app);
-  //회원가입 모달창 Toggle
 
+  //회원가입 모달창 Toggle
   const dispatch = useAppDispatch();
   const isJoinToggle = useAppSelector(joinState);
 
@@ -66,7 +67,25 @@ const Join = () => {
     await addDoc(collection(db, 'user'), newUser);
   };
 
-  const onIdCheckEventHandler = () => {};
+  //중복 확인 기능
+  // const onIdCheckEventHandler = async () => {
+  //   try {
+  //     // const q = query(collection(db, 'user'), where('email', '==', true));
+
+  //     const fetchedProducts: any = [];
+  //     querySnapshot.forEach((doc) => {
+  //       const user = doc.data();
+  //       console.log('user', user);
+  //       // fetchedProducts.push({ ...products, id: doc.id, products });
+  //     });
+  //     console.log('fetchedProducts', fetchedProducts);
+  //     if (fetchedProducts.length != null) {
+  //     }
+  //     // setProducts(fetchedProducts);
+  //   } catch (error) {
+  //     console.log('상품 데이터 가져오기 실패', error);
+  //   }
+  // };
 
   return (
     <>
@@ -107,7 +126,7 @@ const Join = () => {
                   placeholder="이메일를 입력해주세요"
                   autoComplete="username"
                 ></input>
-                <button className="w-32 bg-slate-200 p-1 rounded-md mb-3" onClick={onIdCheckEventHandler}>
+                <button type="button" className="w-32 bg-slate-200 p-1 rounded-md mb-3" onClick={onIdCheckEventHandler}>
                   중복확인
                 </button>
               </div>
@@ -115,7 +134,6 @@ const Join = () => {
                 className="p-1 w-full border-b border-slate-300 mb-3"
                 type="password"
                 name="password"
-                required
                 placeholder="비밀번호를 입력해주세요"
                 autoComplete="new-password"
               ></input>
@@ -123,7 +141,6 @@ const Join = () => {
                 className="p-1 w-full border-b border-slate-300 mb-3"
                 type="password"
                 name="password"
-                required
                 placeholder="비밀번호 확인"
                 autoComplete="new-password"
               ></input>

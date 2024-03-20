@@ -1,15 +1,14 @@
 'use client';
 
-import Image from 'next/image';
-import HomePage from './home/page';
 import { useAppSelector } from '@/hooks/useRedux';
 import { joinState } from '@/store/modules/isModalToggle';
+import HomePage from './home/page';
 
 export default function Home() {
-  const selector = useAppSelector(joinState);
-  console.log(selector);
+  const isJoinToggle = useAppSelector(joinState);
+
   return (
-    <div className={` ${selector ? 'active' : ''}`}>
+    <div className={` ${isJoinToggle ? 'active' : ''}`}>
       <HomePage />
     </div>
   );

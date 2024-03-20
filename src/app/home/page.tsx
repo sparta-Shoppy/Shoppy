@@ -1,10 +1,7 @@
 'use client';
 
-import Products from '@/components/Products';
 import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
-import { useAppSelector } from '@/hooks/useRedux';
-import { joinState } from '@/store/modules/isModalToggle';
 import Link from 'next/link';
 import { useState } from 'react';
 import { GiFruitBowl, GiHamburger } from 'react-icons/gi';
@@ -15,8 +12,7 @@ import { TbMeat } from 'react-icons/tb';
 
 export default function HomePage() {
   const [selectedTab, setSelectedTab] = useState('신상품');
-  const isJoinToggle = useAppSelector(joinState);
-  console.log(isJoinToggle);
+
   return (
     <div className="h-screen ">
       <Header />
