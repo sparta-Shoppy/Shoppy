@@ -18,36 +18,14 @@ interface ProductProps {
 }
 
 export default function CartItem({ product }: ProductProps) {
-  const [userCarts, setUserCart] = useState<ProductType[]>([]);
-
   const { productId, image, title, price, quantity } = product;
 
-  useEffect(() => {
-    const fetchCartData = async () => {
-      const cartRef = doc(db, 'carts', userId);
-
-      console.log('cartRef', cartRef);
-
-      try {
-        const cartSnap = await getDoc(cartRef);
-        if (cartSnap.exists()) {
-          const cartData = cartSnap.data();
-
-          if (cartData.products && Array.isArray(cartData.products)) {
-            setUserCart(cartData.products);
-          }
-        }
-      } catch {}
-    };
-
-    fetchCartData();
-  }, []);
-
-  console.log('userCart', userCarts);
   const productPrice = price * quantity;
 
   const onClickCheckBox = () => {};
-
+  const handleMinus = () => {};
+  const handlePlus = () => {};
+  const handleDelete = () => {};
   return (
     <li key={productId}>
       <label
@@ -61,11 +39,16 @@ export default function CartItem({ product }: ProductProps) {
         </div>
 
         <div className="relative">
-          <button className="text-3xl absolute right-0 -top-24 text-[#ccc]">&times;</button>
+          <button //
+            className="text-3xl absolute right-0 -top-24 text-[#ccc]"
+            onClick={handleDelete}
+          >
+            &times;
+          </button>
           <div className="flex gap-10 items-center text-2xl">
-            <FaMinusCircle />
+            <FaMinusCircle onClick={handleMinus} />
             <p>{quantity}</p>
-            <FaPlusCircle />
+            <FaPlusCircle onClick={handlePlus} />
           </div>
           <div className="absolute right-5 top-20 text-xl whitespace-nowrap">
             <span className="text-2xl">{productPrice}</span> 원
