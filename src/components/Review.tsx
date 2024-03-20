@@ -3,9 +3,11 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore';
-import { db } from '../api/fiebaseApi';
+import { database, db } from '../api/fiebaseApi';
 import { NewReviewType } from '@/types/product-type';
 import { toast } from 'react-toastify';
+import { useAppSelector } from '@/hooks/useRedux';
+import { ref } from 'firebase/database';
 
 function Review() {
   const [content, setContent] = useState<string>('');
@@ -15,13 +17,18 @@ function Review() {
   const [review, setReview] = useState<NewReviewType[]>();
 
   const params = useParams();
-  const loginNow = '현재아이디';
+  const uid = useAppSelector((state) => state.user.value);
+  const loginNow: any = uid;
+
+  // console.log('uid', uid);
+  // const userRef = ref(database, 'users/' + uid);
+  // console.log('dd', userRef);
 
   // 작성
   const reviewSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newReview = {
-      writerId: '현재아이디',
+      writerId: uid,
       content,
       createdAt: new Date().toLocaleString('ko', {
         year: '2-digit',

@@ -7,6 +7,7 @@ import { db } from '../api/fiebaseApi';
 import { NewAskType } from '@/types/product-type';
 import { toast } from 'react-toastify';
 import { HiLockClosed } from 'react-icons/hi2';
+import { useAppSelector } from '@/hooks/useRedux';
 
 function Ask() {
   const [content, setContent] = useState<string>('');
@@ -17,6 +18,7 @@ function Ask() {
   const [ask, setAsk] = useState<NewAskType[]>();
 
   const params = useParams();
+  const uid = useAppSelector((state) => state.user.value);
   const loginNow = '현재아이디';
   // 작성
   const askSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -39,6 +41,7 @@ function Ask() {
       await addDoc(collection(db, 'ask'), newAsk);
       toast.success('후기 등록 완료!');
       setContent('');
+      setAskSecret(false);
     } catch (error) {
       toast.error('후기 등록 실패');
     }
@@ -183,11 +186,12 @@ function Ask() {
                     onChange={askChangeInput}
                     className="admin__input-field"
                   />
-                ) : (
-                  // <div className="text-3xl">{prev.content}</div>
+                ) : prev.secret ? (
                   <>
                     비밀글입니다. <HiLockClosed />
                   </>
+                ) : (
+                  <div className="text-3xl">{prev.content}</div>
                 )}
                 {loginNow === prev.writerId ? (
                   <div className="flex gap-2">
