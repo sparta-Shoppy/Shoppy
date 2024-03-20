@@ -25,12 +25,14 @@ const Login = () => {
       try {
         await signInWithEmailAndPassword(auth, email, password);
         toast.success('로그인에 성공하였습니다.');
+        setIsLoginToggle(false);
       } catch (error: any) {
         toast.error(error.code);
       }
     }
   };
 
+  console.log(isLoginToggle);
   return (
     <>
       {/* // true: 로그인 모달창 띄우기 */}
