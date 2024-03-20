@@ -6,8 +6,10 @@ import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc,
 import { db } from '../api/fiebaseApi';
 import { NewAskType } from '@/types/product-type';
 import { toast } from 'react-toastify';
-import { HiLockClosed } from 'react-icons/hi2';
 import { useAppSelector } from '@/hooks/useRedux';
+import { GrCheckbox } from 'react-icons/gr';
+import { FiCheckSquare } from 'react-icons/fi';
+import { HiLockClosed } from 'react-icons/hi2';
 
 function Ask() {
   const [content, setContent] = useState<string>('');
@@ -172,9 +174,11 @@ function Ask() {
         {ask?.map((prev) => {
           return (
             <div className="m-4" key={prev.askId}>
-              <div>
-                <span className="text-xl font-bold mr-2">{prev.writerId}</span>
-                <span className="text-sm text-gray-400">{prev.createdAt}</span>
+              <div className="flex gap-1">
+                <span className="text-xl font-bold">{prev.writerId}</span>
+                <span className="text-sm text-gray-400 mt-1.5">{prev.createdAt}</span>
+                <GrCheckbox className="mt-1.5" />
+                <FiCheckSquare className="mt-1.5" />
               </div>
               <div className="flex justify-between items-center p-2">
                 {changeNow && nowId === prev.askId ? (
