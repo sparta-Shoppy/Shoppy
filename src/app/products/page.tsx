@@ -2,8 +2,10 @@
 import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
+import { stringTransform } from '@/hooks/transform';
 import { ProductType } from '@/types/product-type';
-import { DocumentData, collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
 import { SlHeart } from 'react-icons/sl';
@@ -12,25 +14,33 @@ export default function ProductPage() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [selectedTab, setSelectedTab] = useState('높은 가격순');
 
+  const params = useSearchParams();
+  console.log('params', params.get('category'));
+  // params - / 기준으로 전달
+  // useSearchParams - ? 기준으로 전달
+
   useEffect(() => {
     const fetchProductsData = async () => {
       try {
-        const querySnapshot = await getDocs(query(collection(db, 'product'), orderBy('price', 'desc')));
-
+        const querySnapshot = await getDocs(
+          query(
+            collection(db, 'product'),
+            where('newProduct.category', '==', `${params}`),
+            orderBy('newProduct.price', 'desc')
+          )
+        );
         console.log('querySnapshot', querySnapshot);
-
         const fetchedProducts: any = [];
 
         querySnapshot.forEach((doc) => {
           console.log('doc', doc);
-          const products = doc.data();
-          console.log('products', products);
+          const products = doc.data().newProduct;
           fetchedProducts.push({ ...products, id: doc.id, products });
         });
-        console.log('fetchedProducts', fetchedProducts);
         if (fetchedProducts.length != null) {
         }
 
+        console.log('fetchedProducts', fetchedProducts);
         setProducts(fetchedProducts);
       } catch (error) {
         console.log('상품 데이터 가져오기 실패', error);
@@ -39,10 +49,6 @@ export default function ProductPage() {
 
     fetchProductsData();
   }, []);
-
-  const stringTransform = (price: number) => {
-    return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
-  };
 
   const productsSort = () => {
     if (selectedTab === '높은 가격순') {

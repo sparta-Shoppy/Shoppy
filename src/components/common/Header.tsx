@@ -12,6 +12,7 @@ import { onUserStateChange } from '@/api/login';
 import { deleteAdminCookie } from '@/api/cookie';
 import { useAppDispatch } from '@/hooks/useRedux';
 import { userAction } from '@/store/modules/user';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
   const auth = getAuth(app);
@@ -19,6 +20,7 @@ const Header = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isUser, setIsUser] = useState(false);
 
+  const router = useRouter();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -38,6 +40,7 @@ const Header = () => {
     signOut(auth);
     deleteAdminCookie();
 
+    router.replace('/');
     setIsUser(false);
   };
 

@@ -1,8 +1,12 @@
 'use client';
+import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
+import { stringTransform } from '@/hooks/transform';
+import { ProductType } from '@/types/product-type';
+import { collection, getDocs, query } from 'firebase/firestore';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GiFruitBowl, GiHamburger } from 'react-icons/gi';
 import { IoFishOutline } from 'react-icons/io5';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
@@ -11,6 +15,29 @@ import { TbMeat } from 'react-icons/tb';
 
 export default function HomePage() {
   const [selectedTab, setSelectedTab] = useState('신상품');
+  const [products, setProducts] = useState<ProductType[]>([]);
+
+  useEffect(() => {
+    const fetchProductsData = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'product'));
+        const fetchedProducts: any = [];
+
+        querySnapshot.forEach((doc) => {
+          const products = doc.data().newProduct;
+          fetchedProducts.push({ ...products, id: doc.id, products });
+        });
+        if (fetchedProducts.length != null) {
+        }
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.log('상품 데이터 가져오기 실패', error);
+      }
+    };
+
+    fetchProductsData();
+  }, []);
+
   return (
     <div className="h-screen">
       <Header />
@@ -86,16 +113,16 @@ export default function HomePage() {
         </div>
       </div>
       <div className="flex justify-evenly w-4/5 p-10 m-auto text-xl">
-        <Link href={'/products'} className="main__tabs-field">
+        <Link href={'/products?category=과일/채소'} className="main__tabs-field">
           <GiFruitBowl /> 과일/채소
         </Link>
-        <Link href={'/products'} className="main__tabs-field">
+        <Link href={'/products?category=고기'} className="main__tabs-field">
           <TbMeat /> 고기
         </Link>
-        <Link href={'/products'} className="main__tabs-field">
+        <Link href={'/products?category=가공식품'} className="main__tabs-field">
           <GiHamburger /> 가공식품
         </Link>
-        <Link href={'/products'} className="main__tabs-field">
+        <Link href={'/products?category=해산물'} className="main__tabs-field">
           <IoFishOutline /> 해산물
         </Link>
       </div>
@@ -118,21 +145,27 @@ export default function HomePage() {
           베스트
         </span>
       </div>
-      <div className="flex justify-center w-4/5 m-auto gap-20">
-        <div className="w-1/5 h-96 cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300 pb-5">
-          <img src="/assets/fast-food1.PNG" alt="가공식품" className="w-full h-4/5 object-cover rounded-md" />
-          <div className="flex justify-between p-3">
-            <div>
-              <p>3,520원</p>
-              <p>[저스트] 크림치즈 베이글 샌드</p>
-            </div>
-            <div className="flex justify-end gap-2 items-center pl-5">
-              <SlHeart className="text-2xl hover:text-rose-500 cursor-pointer" />
-              <LiaCartArrowDownSolid className="text-4xl hover:text-stone-300 cursor-pointer" />
+      <div className="flex justify-center w-4/5 m-auto gap-20 flex-wrap">
+        {products.map((item) => (
+          <div
+            key={item.productId}
+            className="w-1/4 h-96 flex flex-wrap justify-center cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300 pb-5"
+          >
+            <img src={item.image} alt="상품" className="w-full h-4/5 object-cover rounded-tl-md rounded-tr-md" />
+            <div className="flex justify-between p-3">
+              <div>
+                <p>{item.title}</p>
+                <p>{stringTransform(item.price)}</p>
+              </div>
+              <div className="flex justify-end gap-2 items-center pl-5">
+                <SlHeart className="text-2xl hover:text-rose-500 cursor-pointer" />
+                <LiaCartArrowDownSolid className="text-4xl hover:text-stone-300 cursor-pointer" />
+              </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
+
       <div className="flex justify-center">
         <button className="w-28 p-1 border rounded-md bg-slate-200 hover:bg-white">MORE</button>
       </div>
