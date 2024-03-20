@@ -16,6 +16,8 @@ import CartItem from '@/components/cart/CartItem';
 export default function CartPage() {
   const [userCarts, setUserCart] = useState<ProductType[]>([]);
 
+  console.log('유저카트', userCarts);
+
   useEffect(() => {
     const fetchCartData = async () => {
       const cartRef = doc(db, 'carts', userId);
@@ -38,8 +40,11 @@ export default function CartPage() {
   }, []);
 
   console.log('userCart', userCarts);
-  const hasProducts = userCarts && userCarts.length > 0;
 
+  const deliveryprice = 3000;
+  const hasProducts = userCarts && userCarts.length > 0;
+  const total = userCarts && userCarts.reduce((prev, current) => prev + current.price * current.quantity, 1);
+  const totalPrice = total + deliveryprice;
   return (
     <div className="w-full h-lvh">
       <Header />
@@ -71,7 +76,7 @@ export default function CartPage() {
             <article className="flex flex-col w-1/4 mt-20 m-10 text-xl">
               <div className="flex flex-row justify-between">
                 <p>상품금액</p>
-                <p>{}원</p>
+                <p>{total}원</p>
               </div>
               <div className="flex flex-row justify-between mt-3">
                 <p>배송비</p>
@@ -80,7 +85,7 @@ export default function CartPage() {
 
               <div className="flex flex-row justify-between mt-5 border-t-2 border-[#B4B4B8]-500">
                 <p className="mt-5">결제예정금액</p>
-                <p className="mt-5">{}원</p>
+                <p className="mt-5">{totalPrice}원</p>
               </div>
             </article>
           </section>

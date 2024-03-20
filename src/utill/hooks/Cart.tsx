@@ -29,7 +29,8 @@ export default function Cartbutton({ item, userId }: CartButtonProps) {
             delivery: item.delivery,
             seller: item.seller,
             price: item.price,
-            weight: item.weight
+            weight: item.weight,
+            quantity: item.quantity
           })
         });
       } else {

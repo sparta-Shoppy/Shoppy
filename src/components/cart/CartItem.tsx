@@ -44,25 +44,25 @@ export default function CartItem({ product }: ProductProps) {
   }, []);
 
   console.log('userCart', userCarts);
-
-  const totalPrice = userCarts && userCarts.reduce((prev, current) => prev + current.price * current.quantity, 0);
+  const productPrice = price * quantity;
 
   return (
-    <div key={productId} className="flex flex-row items-center border-b-2 border-[#B4B4B8]-500 p-3 ">
+    <div key={productId} className="flex flex-row items-center border-b-2 border-[#B4B4B8]-500 p-3 w-full">
       <div className="flex flex-row align-middle items-center p-3">
         <input type="checkbox" className="mr-10 w-4 h-4" />
-        <img src={image} alt={title} className="w-40 h-40" />
+        <img src={image} alt={title} className="w-60 h-60" />
       </div>
       <div className="flex flex-col ml-10">
         <h3 className="mb-6 text-xl">{title}</h3>
-        <p>{price}원</p>
       </div>
-      <div className="flex flex-row">
-        <FaPlusCircle />
-        <p>{quantity}</p>
-        <FaMinusCircle />
+      <div className="flex flex-col justify-end">
+        <div className="flex flex-row-reverse gap-5 ">
+          <FaPlusCircle />
+          <p>{quantity}</p>
+          <FaMinusCircle />
+        </div>
+        <div>{productPrice} 원</div>
       </div>
-      <div>{totalPrice}</div>
     </div>
   );
 }
