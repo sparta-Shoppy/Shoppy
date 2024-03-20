@@ -17,18 +17,14 @@ function Review() {
   const [review, setReview] = useState<NewReviewType[]>();
 
   const params = useParams();
-  const uid = useAppSelector((state) => state.user.value);
-  const loginNow: any = uid;
-
-  // console.log('uid', uid);
-  // const userRef = ref(database, 'users/' + uid);
-  // console.log('dd', userRef);
+  const userUid = useAppSelector((state) => state.user.value);
+  const loginNow: any = userUid;
 
   // 작성
   const reviewSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newReview = {
-      writerId: uid,
+      writerId: userUid,
       content,
       createdAt: new Date().toLocaleString('ko', {
         year: '2-digit',

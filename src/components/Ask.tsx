@@ -20,13 +20,15 @@ function Ask() {
   const [ask, setAsk] = useState<NewAskType[]>();
 
   const params = useParams();
-  const uid = useAppSelector((state) => state.user.value);
-  const loginNow: any = uid;
+  const userUid = useAppSelector((state) => state.user.value);
+  const adminNow = useAppSelector((state) => state.user.adminReal);
+
+  const loginNow: any = userUid;
   // 작성
   const askSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newAsk = {
-      writerId: uid,
+      writerId: userUid,
       content,
       createdAt: new Date().toLocaleString('ko', {
         year: '2-digit',
@@ -190,7 +192,7 @@ function Ask() {
                     onChange={askChangeInput}
                     className="admin__input-field"
                   />
-                ) : prev.secret && loginNow !== prev.writerId ? (
+                ) : prev.secret && loginNow !== prev.writerId && !adminNow ? (
                   <>
                     비밀글입니다. <HiLockClosed />
                   </>

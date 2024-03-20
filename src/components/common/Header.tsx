@@ -11,7 +11,7 @@ import { onUserStateChange } from '@/api/login';
 
 import { deleteAdminCookie } from '@/api/cookie';
 import { useAppDispatch } from '@/hooks/useRedux';
-import { userAction } from '@/store/modules/user';
+import { userAction, userAdmin } from '@/store/modules/user';
 import { useRouter } from 'next/navigation';
 
 const Header = () => {
@@ -29,8 +29,10 @@ const Header = () => {
         setIsAdmin(user.isAdmins ?? false);
         setIsUser(true);
         dispatch(userAction(user.uid));
+        dispatch(userAdmin(true));
       } else {
         setIsAdmin(false); //1) false로 준 이유?
+        dispatch(userAdmin(false));
       }
     });
   }, []);
@@ -48,7 +50,11 @@ const Header = () => {
     <>
       <div className="flex items-center m-auto w-11/12  justify-between">
         <Link href={'/'}>
-          <img src="../../../assets/logo.png" alt="logo" className="mt-2 w-24" />
+          <img
+            src="https://github.com/sparta-Shoppy/Shoppy/blob/dev/public/assets/logo.png?raw=true"
+            alt="logo"
+            className="mt-2 w-24"
+          />
         </Link>
         {/*로그인된 상태*/}
         {isUser ? (
