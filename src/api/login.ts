@@ -1,7 +1,7 @@
 import { database } from '@/api/fiebaseApi';
 import { Auth, User, onAuthStateChanged } from 'firebase/auth';
 import { get, ref } from 'firebase/database';
-import { setCookie } from './cookies';
+import { setAdminCookie, setUserCookie } from './cookie';
 
 //request, response 개념
 export async function onUserStateChange(auth: Auth, call: any) {
@@ -22,7 +22,7 @@ async function admins(user: any) {
     if (checkRef.exists()) {
       const admins = checkRef.val();
       const isAdmins = admins.includes(user.uid); //로그인된 user가 관리자일 경우 isAdmins= true, 사용자일 경우 isAdmins= false
-      isAdmins ? setCookie('admin', user, 1) : setCookie('user', user, 1);
+      isAdmins ? setAdminCookie(user.uid) : setUserCookie(user.uid);
       return { ...user, isAdmins };
     }
     return user;

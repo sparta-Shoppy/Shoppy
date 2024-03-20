@@ -7,9 +7,9 @@ import { useEffect, useState } from 'react';
 import Join from '../main/Join';
 import Login from '../main/Login';
 
-import { delCookie } from '@/api/cookies';
 import { onUserStateChange } from '@/api/login';
 
+import { deleteAdminCookie } from '@/api/cookie';
 import { useAppDispatch } from '@/hooks/useRedux';
 import { userAction } from '@/store/modules/user';
 
@@ -36,8 +36,7 @@ const Header = () => {
   //로그아웃 기능
   const onLogOutClickEventHandler = () => {
     signOut(auth);
-    delCookie('user');
-    delCookie('admin');
+    deleteAdminCookie();
 
     setIsUser(false);
   };
