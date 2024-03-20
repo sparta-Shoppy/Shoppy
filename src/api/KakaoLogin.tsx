@@ -1,10 +1,10 @@
 // import { useEffect } from 'react';
 
 // const SocialKakao = () => {
-//   const Rest_api_key = 'REST API KEY'; //REST API KEY
+//   const Rest_api_key = '16fc74ce90c16c9865fec22e045490ab'; //REST API KEY
 //   const redirect_uri = 'http://localhost:3000/auth'; //Redirect URI
 //   // oauth 요청 URL
-//   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${'16fc74ce90c16c9865fec22e045490ab'}&redirect_uri=${'http://localhost:3000/login'}&response_type=code`;
+//   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`;
 
 //   const handleLogin = () => {
 //     window.location.href = kakaoURL;
@@ -24,7 +24,7 @@
 
 // // Access Token 받아오기
 // const getAccessToken = async () => {
-// //   if (accessTokenFetching) return; // Return early if fetching
+//   //   if (accessTokenFetching) return; // Return early if fetching
 
 //   console.log('getAccessToken 호출');
 

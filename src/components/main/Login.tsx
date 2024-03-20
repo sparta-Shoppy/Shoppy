@@ -1,6 +1,8 @@
 'use Client';
 
 import { app } from '@/api/fiebaseApi';
+import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
+import { loginModalAction, loginState } from '@/store/modules/isModalToggle';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -9,7 +11,8 @@ const Login = () => {
   const auth = getAuth(app);
 
   //로그인 모달창 Toggle
-  const [isLoginToggle, setIsLoginToggle] = useState(false);
+  const dispatch = useAppDispatch();
+  const isLoginToggle = useAppSelector(loginState);
 
   const onLoginSubmitEventHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,28 +27,28 @@ const Login = () => {
         await signInWithEmailAndPassword(auth, email, password);
         toast.success('로그인에 성공하였습니다.');
         (e.target as HTMLFormElement).reset();
-        setIsLoginToggle(false);
+        dispatch(loginModalAction(false));
       } catch (error: any) {
         toast.error(error.code);
       }
     }
   };
 
-  console.log(isLoginToggle);
   return (
     <>
       {/* // true: 로그인 모달창 띄우기 */}
       {isLoginToggle ? (
-        <div className="">
-          <form onSubmit={onLoginSubmitEventHandler}>
-            아이디: <input type="email" name="email" required placeholder="아이디 입력"></input>
-            비밀번호: <input type="password" name="password" required placeholder="비밀번호 입력"></input>
-            <button type="submit"> 로그인 버튼 </button>
-          </form>
-        </div>
+        <form onSubmit={onLoginSubmitEventHandler}>
+          아이디: <input type="email" name="email" required placeholder="아이디 입력"></input>
+          비밀번호: <input type="password" name="password" required placeholder="비밀번호 입력"></input>
+          <button type="submit"> 로그인 버튼 </button>
+        </form>
       ) : (
         // false일 경우 로그인 버튼만 등장
-        <button className="cursor-pointer hover:text-slate-300 font-bold" onClick={() => setIsLoginToggle(true)}>
+        <button
+          className="cursor-pointer hover:text-slate-300 font-bold"
+          onClick={() => dispatch(loginModalAction(true))}
+        >
           로그인
         </button>
       )}

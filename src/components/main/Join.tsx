@@ -1,6 +1,8 @@
 'use client';
 
 import { app, db } from '@/api/fiebaseApi';
+import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
+import { joinModalAction, joinState } from '@/store/modules/isModalToggle';
 import { NewUserType } from '@/types/product-type';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { addDoc, collection } from 'firebase/firestore';
@@ -10,7 +12,10 @@ import { toast } from 'react-toastify';
 const Join = () => {
   const auth = getAuth(app);
   //회원가입 모달창 Toggle
-  const [isJoinToggle, setIsJoinToggle] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const isJoinToggle = useAppSelector(joinState);
+
   const createdAt = new Date().toLocaleString('ko', {
     year: '2-digit',
     month: '2-digit',
@@ -40,7 +45,7 @@ const Join = () => {
         setDatabase({ email, password, nickname });
 
         toast.success('회원가입에 성공했습니다.');
-        setIsJoinToggle(false);
+        dispatch(joinModalAction(false));
         (e.target as HTMLFormElement).reset();
       } catch (error: any) {
         toast.success('중복된 아이디 입니다.');
@@ -55,26 +60,86 @@ const Join = () => {
       email,
       password,
       nickname,
-      cart: [],
       createdAt
     };
 
     await addDoc(collection(db, 'user'), newUser);
   };
 
+  const onIdCheckEventHandler = () => {};
+
   return (
     <>
       {/* // true: 회원가입 모달창 띄우기 */}
       {isJoinToggle ? (
-        <form onSubmit={onJoinSubmitEventHandler}>
-          <input type="email" name="email" required placeholder="이메일를 입력해주세요"></input>
-          <input type="password" name="password" required placeholder="비밀번호를 입력해주세요"></input>
-          <input type="text" name="nickname" required placeholder="닉네임을 입력해주세요"></input>
-          <button type="submit">회원가입</button>
-        </form>
+        <div className="fixed w-full h-screen inset-0 flex flex-col justify-center items-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white  w-3/5 flex flex-col items-center rounded-md pb-10">
+            <div className="w-full flex-col justify-end  p-8">
+              <p className="flex justify-end">
+                <span
+                  className="inline-block text-right bt cursor-pointer"
+                  onClick={() => dispatch(joinModalAction(false))}
+                >
+                  닫기
+                </span>
+              </p>
+
+              <h2 className=" p-2 flex justify-center">Join</h2>
+            </div>
+
+            <form
+              className="w-3/5 flex flex-col gap-7 items-center justify-center "
+              onSubmit={onJoinSubmitEventHandler}
+            >
+              <input
+                className="p-1 w-full border-b border-slate-300 mb-3"
+                type="text"
+                name="nickname"
+                required
+                placeholder="닉네임을 입력해주세요"
+              ></input>
+              <div className="w-full flex gap-5">
+                <input
+                  className="p-1 w-full border-b border-slate-300 mb-3"
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="이메일를 입력해주세요"
+                  autoComplete="username"
+                ></input>
+                <button className="w-32 bg-slate-200 p-1 rounded-md mb-3" onClick={onIdCheckEventHandler}>
+                  중복확인
+                </button>
+              </div>
+              <input
+                className="p-1 w-full border-b border-slate-300 mb-3"
+                type="password"
+                name="password"
+                required
+                placeholder="비밀번호를 입력해주세요"
+                autoComplete="new-password"
+              ></input>
+              <input
+                className="p-1 w-full border-b border-slate-300 mb-3"
+                type="password"
+                name="password"
+                required
+                placeholder="비밀번호 확인"
+                autoComplete="new-password"
+              ></input>
+
+              <button type="submit" className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white mt-8">
+                회원가입
+              </button>
+            </form>
+          </div>
+        </div>
       ) : (
         // false일 경우 회원가입 버튼만 등장
-        <button className="cursor-pointer hover:text-slate-300 font-bold" onClick={() => setIsJoinToggle(true)}>
+        <button
+          className={`cursor-pointer hover:text-slate-300 font-bold ${'body' + (isJoinToggle ? 'active' : '')}`}
+          onClick={() => dispatch(joinModalAction(true))}
+        >
           회원가입
         </button>
       )}

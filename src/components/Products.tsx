@@ -1,5 +1,5 @@
 'use client';
-import { db, storage } from '@/api/fiebaseApi';
+import { db } from '@/api/fiebaseApi';
 import { ProductType } from '@/types/product-type';
 import { collection, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';

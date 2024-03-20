@@ -43,7 +43,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex items-center m-auto w-11/12  justify-between">
+      <header className="flex items-center m-auto w-11/12  justify-between">
         <Link href={'/'}>
           <img src="assets/logo.png" alt="logo" className="mt-2 w-24" />
           {/* <img src="../../../assets/logo.png" alt="logo" className="mt-2 w-24" /> */}
@@ -62,14 +62,12 @@ const Header = () => {
             )}
           </div>
         ) : (
-          //  비로그인 상태
           <div className="w-72 flex justify-evenly items-center text-l">
             <Join />
             <Login />
-            {/* <SocialKakao /> */}
           </div>
         )}
-      </div>
+      </header>
     </>
   );
 };
