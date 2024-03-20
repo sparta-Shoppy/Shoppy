@@ -83,7 +83,7 @@ export default function Admin() {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mt-20 mb-20">
       <Header />
       {/* <h1 className="items-center text-4xl font-bold"> 제품 등록하기 </h1> */}
       <form onSubmit={handleSubmit} className="flex flex-col m-auto w-1/3 ">
@@ -198,7 +198,7 @@ export default function Admin() {
           placeholder="중량/용량을 입력해주세요"
           className="admin__input-field"
         />
-        <button type="submit" disabled={isSubmitting}>
+        <button type="submit" disabled={isSubmitting} className="border">
           등록
         </button>
       </form>

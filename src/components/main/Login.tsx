@@ -5,6 +5,8 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
 
+import { FaUserCheck } from 'react-icons/fa';
+
 const Login = () => {
   const auth = getAuth(app);
 
@@ -43,7 +45,10 @@ const Login = () => {
       ) : (
         // false일 경우 로그인 버튼만 등장
         <button className="cursor-pointer hover:text-slate-300 font-bold" onClick={() => setIsLoginToggle(true)}>
-          로그인
+          <div className="flex flex-row ml-3">
+            로그인
+            <FaUserCheck className="text-2xl ml-1 mr-1" />
+          </div>
         </button>
       )}
     </>

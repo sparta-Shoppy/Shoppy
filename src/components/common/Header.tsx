@@ -1,12 +1,17 @@
 'use client';
 
-import { app } from '@/api/fiebaseApi';
+import { app, userId } from '@/api/fiebaseApi';
 import { onUserStateChange } from '@/api/login';
 import { Auth, getAuth, signOut } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import Login from '../main/Login';
 import Join from '../main/Join';
 import Link from 'next/link';
+
+import { TiShoppingCart } from 'react-icons/ti';
+import { FaUserMinus } from 'react-icons/fa';
+import { FaUserCog } from 'react-icons/fa';
+import { FaUserCheck } from 'react-icons/fa';
 
 const Header = () => {
   // 전역으로 로그인 정보를 관리
@@ -45,24 +50,33 @@ const Header = () => {
     signOut(auth);
   };
 
-  console.log(isAdmin);
-
   return (
     <>
       <div className="flex items-center m-auto w-11/12  justify-between">
         <Link href={'/'}>
-          <img src="assets/logo.png" alt="logo" className="mt-2 w-24" />
-          {/* <img src="../../../assets/logo.png" alt="logo" className="mt-2 w-24" /> */}
+          <img src="../../../assets/logo.png" alt="logo" className="mt-2 w-24" />
         </Link>
         {/*로그인된 상태*/}
         {auth.currentUser ? (
           <div className="flex flex-row">
-            <button onClick={onLogOutClickEventHandler} className="text-xl">
-              로그아웃
+            <Link href={`/cart/${userId}`} className="text-xl">
+              <div className="flex flex-row">
+                장바구니
+                <TiShoppingCart className="text-2xl ml-1 mr-1" />
+              </div>
+            </Link>
+            <button onClick={onLogOutClickEventHandler} className="ml-4 text-xl">
+              <div className="flex flex-row">
+                로그아웃
+                <FaUserMinus className="text-2xl ml-1 mr-1" />
+              </div>
             </button>
             {isAdmin && (
-              <Link href={'/admin'}>
-                <h1 className="ml-4 text-xl">관리자창</h1>
+              <Link href={'/admin'} className="text-xl">
+                <div className="flex flex-row ml-3">
+                  관리자창
+                  <FaUserCog className="text-2xl ml-1 mr-1" />
+                </div>
               </Link>
             )}
           </div>
