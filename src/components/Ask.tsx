@@ -21,6 +21,7 @@ function Ask() {
 
   const params = useParams();
   const uid = useAppSelector((state) => state.user.value);
+  console.log('uid', uid);
   const loginNow: any = uid;
   // 작성
   const askSubmit = async (e: FormEvent<HTMLFormElement>) => {
