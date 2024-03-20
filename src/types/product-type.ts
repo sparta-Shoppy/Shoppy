@@ -8,6 +8,7 @@ export interface ProductType {
   seller: string;
   price: number;
   weight: string;
+  quantity: number;
 }
 export interface NewReviewType {
   reviewId: string;

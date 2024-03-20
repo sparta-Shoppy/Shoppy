@@ -65,7 +65,8 @@ export default function Admin() {
         seller,
         price,
         weight,
-        createdAt: new Date()?.toLocaleString()
+        createdAt: new Date()?.toLocaleString(),
+        quantity: 1
       };
 
       await addDoc(collection(db, 'product'), {
@@ -86,7 +87,7 @@ export default function Admin() {
     <div className="flex flex-col items-center ">
       <Header />
       {/* <h1 className="items-center text-4xl font-bold"> 제품 등록하기 </h1> */}
-      <form onSubmit={handleSubmit} className="flex flex-col m-auto w-1/3 mt-20 mb-20">
+      <form onSubmit={handleSubmit} className="flex flex-col m-auto w-1/3 mt-15 mb-20">
         <div className=" flex flex-colitems-center h-auto mt-10">
           {imageUrl ? (
             <img src={imageUrl} alt="image" className="flex w-96 h-auto items-center mx-auto" />
