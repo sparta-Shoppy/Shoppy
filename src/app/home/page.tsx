@@ -1,5 +1,4 @@
 'use client';
-
 import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
 import Link from 'next/link';
@@ -12,7 +11,6 @@ import { TbMeat } from 'react-icons/tb';
 
 export default function HomePage() {
   const [selectedTab, setSelectedTab] = useState('신상품');
-
   return (
     <div className="h-screen">
       <Header />
@@ -20,50 +18,73 @@ export default function HomePage() {
       <div className="carousel w-full h-80  overflow-hidden relative">
         <div id="slide1" className="carousel-item relative w-full">
           <img src="assets/main1.PNG" className="w-full h-80" />
-          <div className="main__slideImgWrapper">
-            <a href="#slide4" className="main__slideButton">
+          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a
+              href="#slide4"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❮
             </a>
-            <a href="#slide2" className="main__slideButton">
+            <a
+              href="#slide2"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❯
             </a>
           </div>
         </div>
         <div id="slide2" className="carousel-item relative w-full">
           <img src="assets/main2.PNG" className="w-full h-80" />
-          <div className="main__slideImgWrapper">
-            <a href="#slide1" className="main__slideButton">
+          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a
+              href="#slide1"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❮
             </a>
-            <a href="#slide3" className="main__slideButton">
+            <a
+              href="#slide3"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❯
             </a>
           </div>
         </div>
         <div id="slide3" className="carousel-item relative w-full">
           <img src="assets/main3.PNG" className="w-full h-80" />
-          <div className="main__slideImgWrapper">
-            <a href="#slide2" className="main__slideButton">
+          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a
+              href="#slide2"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❮
             </a>
-            <a href="#slide4" className="main__slideButton">
+            <a
+              href="#slide4"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❯
             </a>
           </div>
         </div>
         <div id="slide4" className="carousel-item relative w-full">
           <img src="assets/main4.PNG" className="w-full h-80" />
-          <div className="main__slideImgWrapper">
-            <a href="#slide3" className="main__slideButton">
+          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a
+              href="#slide3"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❮
             </a>
-            <a href="#slide1" className="main__slideButton">
+            <a
+              href="#slide1"
+              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
+            >
               ❯
             </a>
           </div>
         </div>
       </div>
-
       <div className="flex justify-evenly w-4/5 p-10 m-auto text-xl">
         <Link href={'/products'} className="main__tabs-field">
           <GiFruitBowl /> 과일/채소

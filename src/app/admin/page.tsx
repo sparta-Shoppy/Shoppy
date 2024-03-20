@@ -69,7 +69,7 @@ export default function Admin() {
       };
 
       await addDoc(collection(db, 'product'), {
-        newProduct
+        ...newProduct
       });
       toast?.success('상품이 등록되었습니다.');
       (e.target as HTMLFormElement).reset();
