@@ -32,7 +32,8 @@ function Ask() {
         minute: '2-digit',
         hour12: true
       }),
-      productId: params.id
+      productId: params.id,
+      secret: askSecret
     };
     try {
       await addDoc(collection(db, 'ask'), newAsk);
@@ -143,6 +144,18 @@ function Ask() {
           required
           className="admin__input-field"
         />
+
+        <label htmlFor="secretCheck">
+          <input
+            id="secretCheck"
+            type="checkbox"
+            checked={askSecret}
+            onChange={(e) => {
+              setAskSecret(e.target.checked);
+            }}
+          />
+          비밀 글
+        </label>
 
         <button
           type="submit"
