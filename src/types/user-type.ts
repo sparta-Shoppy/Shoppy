@@ -5,7 +5,7 @@ export interface userValidate {
   nickname: string;
   password: string;
   passwordCheck: string;
-  isIdCheck: boolean;
+  isIdCheck?: boolean;
 }
 
 export interface SetUser {

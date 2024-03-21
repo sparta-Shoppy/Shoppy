@@ -1,7 +1,7 @@
-import { NewUserType } from '@/types/product-type';
+import { userValidate } from '@/types/user-type';
 import { useState, ChangeEvent } from 'react';
 
-const useInput = (initialValue: NewUserType) => {
+const useInput = (initialValue: userValidate) => {
   const [value, setValue] = useState(initialValue);
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {

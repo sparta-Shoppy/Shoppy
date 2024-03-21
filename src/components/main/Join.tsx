@@ -6,8 +6,8 @@ import { app, db } from '@/api/fiebaseApi';
 import { User, createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 
-import useInput from '@/hooks/useInput';
-import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
+import useInput from '@/utill/hooks/useInput';
+import { useAppDispatch, useAppSelector } from '@/utill/hooks/useRedux';
 
 import { joinModalAction, joinState } from '@/store/modules/isModalToggle';
 

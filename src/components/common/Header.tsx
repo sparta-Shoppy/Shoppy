@@ -11,7 +11,7 @@ import Login from '../main/Login';
 import { onUserStateChange } from '@/api/login';
 
 import { deleteAdminCookie } from '@/api/cookie';
-import { useAppDispatch } from '@/hooks/useRedux';
+import { useAppDispatch } from '@/utill/hooks/useRedux';
 import { userAction } from '@/store/modules/user';
 import { useRouter } from 'next/navigation';
 

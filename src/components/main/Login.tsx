@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { app } from '@/api/fiebaseApi';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
-import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '@/utill/hooks/useRedux';
 import { loginModalAction, loginState } from '@/store/modules/isModalToggle';
 
 import { FaUserCheck } from 'react-icons/fa';
