@@ -2,14 +2,11 @@
 
 import { app } from '@/api/fiebaseApi';
 import { getAuth, signOut } from 'firebase/auth';
-
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Join from '../main/Join';
 import Login from '../main/Login';
-
 import { onUserStateChange } from '@/api/login';
-
 import { deleteAdminCookie } from '@/api/cookie';
 import { useAppDispatch } from '@/hooks/useRedux';
 import { userAction } from '@/store/modules/user';
