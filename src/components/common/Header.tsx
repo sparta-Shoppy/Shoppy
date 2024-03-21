@@ -28,7 +28,7 @@ const Header = () => {
         setIsUser(true);
         dispatch(userAction(user.uid));
       } else {
-        setIsAdmin(false); //1) false로 준 이유?
+        setIsAdmin(false);
       }
     });
   }, []);

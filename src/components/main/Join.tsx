@@ -16,7 +16,12 @@ import { SetUser, userValidate } from '@/types/user-type';
 const Join = () => {
   const auth = getAuth(app);
 
+  //"중복확인" 버튼 클릭 여부
   const [isIdCheck, setIsIdCheck] = useState(false);
+  //회원가입 모달창 Toggle
+  const dispatch = useAppDispatch();
+  const isJoinToggle = useAppSelector(joinState);
+  //useInput hooks
   const { value, onChangeHandler, reset } = useInput({
     email: '',
     password: '',
@@ -25,19 +30,6 @@ const Join = () => {
   });
 
   const { email, password, passwordCheck, nickname } = value;
-
-  //회원가입 모달창 Toggle
-  const dispatch = useAppDispatch();
-  const isJoinToggle = useAppSelector(joinState);
-
-  const createdAt = new Date().toLocaleString('ko', {
-    year: '2-digit',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true
-  });
 
   //회원가입 기능
   const onJoinSubmitEventHandler = async (e: FormEvent<HTMLFormElement>) => {
@@ -50,13 +42,13 @@ const Join = () => {
         await createUserWithEmailAndPassword(auth, email, password);
 
         //firebase 저장
-        setDatabase({ auth, email, password, nickname, createdAt });
+        setDatabase({ auth, email, password, nickname });
 
         toast.success('회원가입에 성공했습니다.');
         dispatch(joinModalAction(false));
         reset();
       } catch (error) {
-        toast.success('중복된 아이디입니다.');
+        toast.error('중복된 아이디입니다.');
       }
     }
   };
@@ -142,7 +134,6 @@ const Join = () => {
                 placeholder="비밀번호 확인"
                 autoComplete="new-password"
               ></input>
-
               <button type="submit" className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white mt-8">
                 회원가입
               </button>
@@ -167,21 +158,21 @@ export default Join;
 //유효성 검사
 const validation = ({ password, passwordCheck, nickname, isIdCheck }: userValidate) => {
   if (password.length < 6) {
-    toast.success('비밀번호는 6자리 이상 입력해주세요.');
+    toast.error('비밀번호는 6자리 이상 입력해주세요.');
     return false;
   }
 
   if (nickname.length < 3) {
-    toast.success('닉네임은 3자리 이상 입력해주세요.');
+    toast.error('닉네임은 3자리 이상 입력해주세요.');
     return false;
   }
 
   if (password !== passwordCheck) {
-    toast.success('비밀번호가 일치하지 않습니다.');
+    toast.error('비밀번호가 일치하지 않습니다.');
     return false;
   }
   if (isIdCheck === false) {
-    toast.success('중복확인을 클릭해주세요');
+    toast.error('중복확인을 클릭해주세요');
     return false;
   }
 
@@ -194,26 +185,40 @@ const idValidation = ({ users, email }: { users: any; email: string }) => {
   const isIdCheck = users?.find((item: User) => (item.email == email ? true : false));
 
   if (email === '') {
-    toast.success('아이디를 입력해주세요');
+    toast.error('아이디를 입력해주세요');
     return false;
   }
 
   if (!email.match(validRegex)) {
-    toast.success('이메일 형식이 올바르지 않습니다.');
+    toast.error('이메일 형식이 올바르지 않습니다.');
     return false;
   }
 
   if (isIdCheck) {
-    toast.success('존재하는 아이디입니다.');
+    toast.error('존재하는 아이디입니다.');
     return false;
   } else {
-    toast.success('사용가능한 아이디입니다.');
+    toast.error('사용가능한 아이디입니다.');
     return true;
   }
 };
 
-const setDatabase = async ({ auth, email, password, nickname, createdAt }: SetUser): Promise<void> => {
+//FireStore에 저장
+const setDatabase = async ({ auth, email, password, nickname }: SetUser): Promise<void> => {
+  //여기에 선언한 이유
+  //fireAuth에 저장한 후 ==> auth에 저장된 uid값을 불러와야한다.
+
   const userId = auth.currentUser?.uid;
+
+  const createdAt = new Date().toLocaleString('ko', {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  });
+
   const newUser = {
     userId,
     email,

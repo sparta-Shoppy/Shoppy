@@ -13,5 +13,4 @@ export interface SetUser {
   email: string;
   password: string;
   nickname: string;
-  createdAt: string;
 }
