@@ -3,7 +3,7 @@ import { RootState } from '../config/configStore';
 
 //인터페이스 정의
 interface UserState {
-  value: string | null;
+  value: object | null;
   adminReal: boolean;
 }
 

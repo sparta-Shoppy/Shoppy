@@ -2,42 +2,35 @@
 import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
-import { stringTransform } from '@/hooks/transform';
+import MainProductItems from '@/components/main/MainProductItems';
 import { ProductType } from '@/types/product-type';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { GiFruitBowl, GiHamburger } from 'react-icons/gi';
 import { IoFishOutline } from 'react-icons/io5';
-import { LiaCartArrowDownSolid } from 'react-icons/lia';
-import { SlHeart } from 'react-icons/sl';
 import { TbMeat } from 'react-icons/tb';
 
 export default function HomePage() {
-  const [selectedTab, setSelectedTab] = useState('신상품');
+  const [selectedTab, setSelectedTab] = useState(true);
   const [products, setProducts] = useState<ProductType[]>([]);
 
   useEffect(() => {
     const fetchProductsData = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, 'product'));
-        const fetchedProducts: any = [];
+        const querySnapshot = await getDocs(
+          selectedTab
+            ? query(collection(db, 'product'), orderBy('createdAt', 'desc'))
+            : query(collection(db, 'product'), orderBy('createdAt', 'asc'))
+        );
+        const fetchedProducts: any[] = [];
 
         querySnapshot.forEach((doc) => {
           const products = doc.data();
           fetchedProducts.push({ ...products, id: doc.id, products });
         });
-        if (fetchedProducts.length != null) {
-        }
 
-        const sortedProducts =
-          selectedTab === '신상품'
-            ? fetchedProducts.sort(
-                (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-              )
-            : fetchedProducts.sort((a: any, b: any) => b.price - a.price);
-
-        setProducts(sortedProducts);
+        setProducts(fetchedProducts);
       } catch (error) {
         console.log('상품 데이터 가져오기 실패', error);
       }
@@ -136,45 +129,22 @@ export default function HomePage() {
       </div>
       <div className="w-4/5 flex justify-end mb-5">
         <span
-          className={`cursor-pointer mr-2 ${
-            selectedTab === '신상품' ? 'text-cyan-400' : 'text-black hover:text-cyan-400'
-          }`}
-          onClick={() => setSelectedTab('신상품')}
+          className={`cursor-pointer mr-2 ${selectedTab ? 'text-cyan-400' : 'text-black hover:text-cyan-400'}`}
+          onClick={() => setSelectedTab(true)}
         >
           신상품
         </span>
         ||
         <span
-          className={`cursor-pointer mx-2 ${
-            selectedTab === '베스트' ? 'text-pink-300' : 'text-black hover:text-pink-300'
-          }`}
-          onClick={() => setSelectedTab('베스트')}
+          className={`cursor-pointer mx-2 ${!selectedTab ? 'text-pink-300' : 'text-black hover:text-pink-300'}`}
+          onClick={() => setSelectedTab(false)}
         >
           베스트
         </span>
       </div>
       <div className="flex justify-center w-4/5 m-auto gap-20 flex-wrap">
         {products?.map((item) => {
-          return (
-            <div
-              key={item.productId}
-              className="w-1/4 h-96 flex flex-wrap justify-center cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300 pb-5"
-            >
-              <Link href={`/products/${item.productId}`}>
-                <img src={item.image} alt="상품" className="w-full h-4/5 object-cover rounded-tl-md rounded-tr-md" />
-              </Link>
-              <div className="flex justify-between p-3">
-                <div>
-                  <p>{item.title}</p>
-                  <p>{stringTransform(item.price)}</p>
-                </div>
-                <div className="flex justify-end gap-2 items-center pl-5">
-                  <SlHeart className="text-2xl hover:text-rose-500 cursor-pointer" />
-                  <LiaCartArrowDownSolid className="text-4xl hover:text-stone-300 cursor-pointer" />
-                </div>
-              </div>
-            </div>
-          );
+          return <MainProductItems key={item.productId} item={item} />;
         })}
       </div>
 

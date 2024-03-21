@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 
+import { ProductType } from '@/types/product-type';
 import { FirebaseApp, getApp, initializeApp } from 'firebase/app';
 import { getDatabase, ref, remove, set } from 'firebase/database';
 import { doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';

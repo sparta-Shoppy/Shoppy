@@ -48,15 +48,18 @@ export default function Admin() {
     const price = formData.get('price') as string;
     const weight = formData.get('weight') as string;
 
+    console.log('확인', typeof price);
+
     try {
       let image = '';
       if (imageUrl) {
         const data = await uploadString(storageRef, imageUrl, 'data_url');
         image = await getDownloadURL(data?.ref);
       }
-
+      const keyword = title.split(' ');
       const newProduct = {
         productId: uuidv4(),
+        keyword,
         image,
         category,
         title,

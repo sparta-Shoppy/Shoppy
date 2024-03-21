@@ -5,14 +5,23 @@ import Ask from '@/components/Ask';
 import Review from '@/components/Review';
 import Header from '@/components/common/Header';
 import { ProductType } from '@/types/product-type';
+import Cartbutton from '@/utill/hooks/Cart';
 import { collection, getDocs, where, query } from 'firebase/firestore';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { LiaCartArrowDownSolid } from 'react-icons/lia';
-import { SlHeart } from 'react-icons/sl';
+import { IoHeartSharp } from 'react-icons/io5';
+import { userId } from '@/api/user';
 
 export default function ProductDetailPage() {
   const [nowItem, setNowItem] = useState<ProductType[]>();
+  const [heart, setHeart] = useState(false);
+
+  // 하트 클릭 시 색상 변경
+  const handleHeart = () => {
+    setHeart((prev) => {
+      return !prev;
+    });
+  };
 
   useEffect(() => {
     const fetchItemData = async () => {
@@ -46,9 +55,11 @@ export default function ProductDetailPage() {
               <div>판매자 {prev.seller}</div>
               <div>판매단위 {prev.price}</div>
               <div>중량 {prev.weight}</div>
-              <div className="flex items-center gap-2">
-                <SlHeart className="text-2xl hover:text-rose-500 cursor-pointer" />
-                <LiaCartArrowDownSolid className="text-4xl hover:text-stone-300 cursor-pointer" />
+              <div className="flex gap-2 items-center">
+                <button onClick={handleHeart}>
+                  <IoHeartSharp className={`${heart ? 'text-3xl text-rose-500' : 'text-3xl hover:text-rose-500'}`} />
+                </button>
+                <Cartbutton item={prev} userId={userId} />
               </div>
             </div>
           </div>
