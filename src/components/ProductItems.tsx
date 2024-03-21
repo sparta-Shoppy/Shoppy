@@ -1,6 +1,6 @@
 import { stringTransform } from '@/hooks/transform';
 import { ProductType } from '@/types/product-type';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
 
@@ -9,7 +9,9 @@ function ProductItems({ item }: { item: ProductType }) {
 
   // 하트 클릭 시 색상 변경
   const handleHeart = () => {
-    setHeart(!heart);
+    setHeart((prev) => {
+      return !prev;
+    });
   };
   return (
     <div key={item.productId} className="w-1/4 p-5">
@@ -29,12 +31,9 @@ function ProductItems({ item }: { item: ProductType }) {
               <p className="text-lg font-semibold">{item.price ? stringTransform(item.price) : null} 원</p>
             </div>
             <div className="flex gap-2 items-center">
-              <IoHeartSharp
-                onClick={handleHeart}
-                className={`${
-                  heart ? 'text-3xl text-rose-500 cursor-pointer"' : 'text-3xl hover:text-rose-500 cursor-pointer'
-                }`}
-              />
+              <button onClick={handleHeart}>
+                <IoHeartSharp className={`${heart ? 'text-3xl text-rose-500' : 'text-3xl hover:text-rose-500'}`} />
+              </button>
             </div>
           </div>
         </div>

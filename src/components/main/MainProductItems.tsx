@@ -9,7 +9,9 @@ function MainProductItems({ item }: { item: ProductType }) {
 
   // 하트 클릭 시 색상 변경
   const handleHeart = () => {
-    setHeart(!heart);
+    setHeart((prev) => {
+      return !prev;
+    });
   };
 
   return (
@@ -24,12 +26,9 @@ function MainProductItems({ item }: { item: ProductType }) {
           <p>{stringTransform(item.price)}</p>
         </div>
         <div className="flex justify-end gap-2 items-center pl-5">
-          <IoHeartSharp
-            onClick={handleHeart}
-            className={`${
-              heart ? 'text-3xl text-rose-500 cursor-pointer"' : 'text-3xl hover:text-rose-500 cursor-pointer'
-            }`}
-          />
+          <button onClick={handleHeart}>
+            <IoHeartSharp className={`${heart ? 'text-3xl text-rose-500' : 'text-3xl hover:text-rose-500'}`} />
+          </button>
           <LiaCartArrowDownSolid className="text-4xl hover:text-stone-300 cursor-pointer" />
         </div>
       </div>
