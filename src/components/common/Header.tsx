@@ -56,7 +56,11 @@ const Header = () => {
     <>
       <div className="flex items-center m-auto w-11/12  justify-between">
         <Link href={'/'}>
-          <img src="../../../assets/logo.png" alt="logo" className="mt-2 w-24" />
+          <img
+            src="https://github.com/sparta-Shoppy/Shoppy/blob/dev/public/assets/logo.png?raw=true"
+            alt="logo"
+            className="mt-2 w-24"
+          />
         </Link>
         {/*로그인된 상태*/}
         {isUser ? (
