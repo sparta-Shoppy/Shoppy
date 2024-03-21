@@ -65,7 +65,7 @@ export default function Admin() {
         seller,
         price,
         weight,
-        createdAt: new Date()?.toLocaleString(),
+        createdAt: new Date(),
         quantity: 1
       };
 
@@ -89,7 +89,6 @@ export default function Admin() {
       {/* <h1 className="items-center text-4xl font-bold"> 제품 등록하기 </h1> */}
 
       <form onSubmit={handleSubmit} className="flex flex-col m-auto w-1/3 mt-15 mb-20">
-        =======
         <div className=" flex flex-colitems-center h-auto mt-10">
           {imageUrl ? (
             <img src={imageUrl} alt="image" className="flex w-96 h-auto items-center mx-auto" />
