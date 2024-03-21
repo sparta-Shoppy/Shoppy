@@ -20,13 +20,13 @@ function MainProductItems({ item }: { item: ProductType }) {
       key={item.productId}
       className="w-1/4 h-96 flex flex-wrap justify-center cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300 pb-5"
     >
-      <img src={item.image} alt="상품" className="w-full h-4/5 object-cover rounded-tl-md rounded-tr-md" />
-      <div className="flex justify-between p-3">
+      <img src={item.image} alt="상품" className="w-full h-4/5 object-cover rounded-md" />
+      <div className="w-full flex justify-between p-3">
         <div>
           <p>{item.title}</p>
           <p>{stringTransform(item.price)}</p>
         </div>
-        <div className="flex justify-end gap-2 items-center pl-5">
+        <div className="flex justify-between gap-2 items-center pl-5">
           <button onClick={handleHeart}>
             <IoHeartSharp className={`${heart ? 'text-3xl text-rose-500' : 'text-3xl hover:text-rose-500'}`} />
           </button>
