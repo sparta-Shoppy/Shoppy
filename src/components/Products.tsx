@@ -1,16 +1,16 @@
 'use client';
 import { db } from '@/api/fiebaseApi';
-import { userState } from '@/store/modules/user';
+import { userId } from '@/api/user';
+
 import { ProductType } from '@/types/product-type';
 import Cartbutton from '@/utill/hooks/Cart';
-import { useAppSelector } from '@/utill/hooks/useRedux';
+
 import { collection, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { SlHeart } from 'react-icons/sl';
 
 function Products() {
   const [products, setProducts] = useState<ProductType[]>([]);
-  const { userId } = useAppSelector(userState);
 
   useEffect(() => {
     const fetchProductsData = async () => {

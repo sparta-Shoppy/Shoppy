@@ -1,17 +1,18 @@
 'use client';
 
+import { deleteAdminCookie } from '@/api/cookie';
 import { app } from '@/api/fiebaseApi';
+import { onUserStateChange } from '@/api/login';
+import { userAction } from '@/store/modules/user';
+import { useAppDispatch } from '@/utill/hooks/useRedux';
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Join from '../main/Join';
 import Login from '../main/Login';
-import { onUserStateChange } from '@/api/login';
-import { deleteAdminCookie } from '@/api/cookie';
-import { userAction, userState } from '@/store/modules/user';
-import { useAppDispatch, useAppSelector } from '@/utill/hooks/useRedux';
-import { useRouter } from 'next/navigation';
 
+import { userId } from '@/api/user';
 import { FaUserCog, FaUserMinus } from 'react-icons/fa';
 import { TiShoppingCart } from 'react-icons/ti';
 
@@ -21,8 +22,6 @@ const Header = () => {
 
   const [isAdmin, setIsAdmin] = useState(false);
   const [isUser, setIsUser] = useState(false);
-
-  const { userId } = useAppSelector(userState);
 
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -46,6 +45,7 @@ const Header = () => {
   const onLogOutClickEventHandler = () => {
     signOut(auth);
     deleteAdminCookie();
+    window.localStorage.removeItem('user');
 
     router.replace('/');
     setIsUser(false);

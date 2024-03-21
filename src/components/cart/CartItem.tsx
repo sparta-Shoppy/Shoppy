@@ -9,8 +9,6 @@ import { ProductType } from '@/types/product-type';
 import { arrayRemove, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { update } from 'firebase/database';
 import { toast } from 'react-toastify';
-import { useAppSelector } from '@/utill/hooks/useRedux';
-import { userState } from '@/store/modules/user';
 
 interface ProductProps {
   product: ProductType;
@@ -18,9 +16,7 @@ interface ProductProps {
 
 export default function CartItem({ product }: ProductProps) {
   const { productId, image, title, price, quantity } = product;
-  const { userId } = useAppSelector(userState);
 
-  console.log(userId);
   const productPrice = price * quantity;
 
   const onClickCheckBox = () => {};

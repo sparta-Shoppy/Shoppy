@@ -11,7 +11,7 @@ export async function onUserStateChange(auth: Auth, call: any) {
 
     if (updatedUser) {
       // 로컬스토리지에 user 저장
-      const userString = JSON.stringify(updatedUser);
+      const userString = JSON.stringify(user);
       window.localStorage.setItem('user', userString);
     }
 

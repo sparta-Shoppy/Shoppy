@@ -6,8 +6,6 @@ import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc,
 import { db } from '../api/fiebaseApi';
 import { NewReviewType } from '@/types/product-type';
 import { toast } from 'react-toastify';
-import { useAppSelector } from '@/utill/hooks/useRedux';
-import { userState } from '@/store/modules/user';
 
 function Review() {
   const [content, setContent] = useState<string>('');
@@ -18,10 +16,6 @@ function Review() {
 
   const params = useParams();
   const loginNow = '현재아이디';
-
-  const test = useAppSelector(userState);
-
-  console.log(test);
 
   // 작성
   const reviewSubmit = async (e: FormEvent<HTMLFormElement>) => {

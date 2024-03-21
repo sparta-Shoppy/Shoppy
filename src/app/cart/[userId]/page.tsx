@@ -1,7 +1,7 @@
 'use client';
 
 import { db } from '@/api/fiebaseApi';
-
+import { userId } from '@/api/user';
 import Header from '@/components/common/Header';
 import { ProductType } from '@/types/product-type';
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
@@ -9,13 +9,9 @@ import { useEffect, useState } from 'react';
 
 import { TiShoppingCart } from 'react-icons/ti';
 import CartItem from '@/components/cart/CartItem';
-import { useAppSelector } from '@/utill/hooks/useRedux';
-import { userState } from '@/store/modules/user';
-// import { userId } from '@/api/user';
 
 export default function CartPage() {
   const [userCarts, setUserCart] = useState<ProductType[]>([]);
-  const { userId } = useAppSelector(userState);
 
   useEffect(() => {
     const fetchCartData = async () => {
