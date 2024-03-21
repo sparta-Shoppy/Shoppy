@@ -160,7 +160,9 @@ export default function HomePage() {
               key={item.productId}
               className="w-1/4 h-96 flex flex-wrap justify-center cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300 pb-5"
             >
-              <img src={item.image} alt="상품" className="w-full h-4/5 object-cover rounded-tl-md rounded-tr-md" />
+              <Link href={`/products/${item.productId}`}>
+                <img src={item.image} alt="상품" className="w-full h-4/5 object-cover rounded-tl-md rounded-tr-md" />
+              </Link>
               <div className="flex justify-between p-3">
                 <div>
                   <p>{item.title}</p>

@@ -3,11 +3,10 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore';
-import { database, db } from '../api/fiebaseApi';
+import { db } from '../api/fiebaseApi';
 import { NewReviewType } from '@/types/product-type';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '@/hooks/useRedux';
-import { ref } from 'firebase/database';
 
 function Review() {
   const [content, setContent] = useState<string>('');

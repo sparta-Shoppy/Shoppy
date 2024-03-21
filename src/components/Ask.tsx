@@ -24,9 +24,6 @@ function Ask() {
   const params = useParams();
   const userUid = useAppSelector((state) => state.user.value);
   const adminNow = useAppSelector((state) => state.user.adminReal);
-
-  // console.log('uid', userUid);
-  // console.log('adminNow', adminNow);
   const loginNow: any = userUid;
   // 작성
   const askSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -55,24 +52,6 @@ function Ask() {
       toast.error('후기 등록 실패');
     }
   };
-
-  // 후기 작성글 불러오기
-  useEffect(() => {
-    const fetchCommentData = async () => {
-      const askDB = query(collection(db, 'ask'), where('productId', '==', params.id), orderBy('createdAt', 'desc'));
-      const querySnapshot = await getDocs(askDB);
-
-      const initialData: any = [];
-
-      querySnapshot.forEach((doc) => {
-        initialData.push({ askId: doc.id, ...doc.data() });
-      });
-
-      setAsk([...initialData]);
-    };
-
-    fetchCommentData();
-  }, [content]);
 
   // 삭제
   const askDelete = async (askId: string) => {
@@ -103,7 +82,6 @@ function Ask() {
   // 수정취소
   const askChangeCancel = () => {
     setChangeNow(false);
-    setChangeContent('');
     setNowId('');
   };
 
@@ -169,6 +147,24 @@ function Ask() {
       }
     }
   };
+
+  // 후기 작성글 불러오기
+  useEffect(() => {
+    const fetchCommentData = async () => {
+      const askDB = query(collection(db, 'ask'), where('productId', '==', params.id), orderBy('createdAt', 'desc'));
+      const querySnapshot = await getDocs(askDB);
+
+      const initialData: any = [];
+
+      querySnapshot.forEach((doc) => {
+        initialData.push({ askId: doc.id, ...doc.data() });
+      });
+
+      setAsk([...initialData]);
+    };
+
+    fetchCommentData();
+  }, [content]);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -272,7 +268,7 @@ function Ask() {
                       }}
                     />
                   </>
-                ) : adminNow || userUid === prev.writerId ? (
+                ) : !prev.secret || adminNow || userUid === prev.writerId ? (
                   <div className="text-3xl">{prev.answer}</div>
                 ) : (
                   <></>
