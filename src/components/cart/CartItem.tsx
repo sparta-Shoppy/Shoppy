@@ -27,19 +27,19 @@ export default function CartItem({ product }: ProductProps) {
   const handleMinus = async () => {
     if (quantity < 2) return;
     try {
-      await addOrUpdateToCart({ userId: userId ?? '', productId: productId ?? '', quantity: quantity - 1 });
+      await addOrUpdateToCart({ userId, productId: productId ?? '', quantity: quantity - 1 });
     } catch (error: any) {
       console.log('faild to addOrUpdateToCart', error.messege);
     }
   };
 
   const handlePlus = async () => {
-    await addOrUpdateToCart({ userId: userId ?? '', productId: productId ?? '', quantity: quantity + 1 });
+    await addOrUpdateToCart({ userId, productId: productId ?? '', quantity: quantity + 1 });
   };
 
   const handleDelete = async (productId: string) => {
     try {
-      const cartRef = doc(db, 'carts', userId!);
+      const cartRef = doc(db, 'carts', userId);
       const cartSnap = await getDoc(cartRef);
       const products = cartSnap.data()?.products;
 

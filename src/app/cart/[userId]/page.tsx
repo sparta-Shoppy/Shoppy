@@ -8,9 +8,6 @@ import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
 import { TiShoppingCart } from 'react-icons/ti';
-import { FaPlusCircle } from 'react-icons/fa';
-import { FaMinusCircle } from 'react-icons/fa';
-import { current } from '@reduxjs/toolkit';
 import CartItem from '@/components/cart/CartItem';
 import { useAppSelector } from '@/utill/hooks/useRedux';
 import { userState } from '@/store/modules/user';
@@ -20,7 +17,6 @@ export default function CartPage() {
   const [userCarts, setUserCart] = useState<ProductType[]>([]);
   const { userId } = useAppSelector(userState);
 
-  console.log(userId);
   useEffect(() => {
     const fetchCartData = async () => {
       const cartRef = doc(db, 'carts', userId);
@@ -42,7 +38,7 @@ export default function CartPage() {
 
   const deliveryprice = 3000;
   const hasProducts = userCarts && userCarts.length > 0;
-  const total = userCarts && userCarts.reduce((prev, current) => prev + current.price * current.quantity, 1);
+  const total = userCarts && userCarts.reduce((prev, current) => prev + current.price * current.quantity, 0);
   const totalPrice = total + deliveryprice;
   return (
     <div className="w-full h-lvh">

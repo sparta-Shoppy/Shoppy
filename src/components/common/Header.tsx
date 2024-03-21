@@ -2,14 +2,11 @@
 
 import { app } from '@/api/fiebaseApi';
 import { getAuth, signOut } from 'firebase/auth';
-
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Join from '../main/Join';
 import Login from '../main/Login';
-
 import { onUserStateChange } from '@/api/login';
-
 import { deleteAdminCookie } from '@/api/cookie';
 import { userAction, userState } from '@/store/modules/user';
 import { useAppDispatch, useAppSelector } from '@/utill/hooks/useRedux';
@@ -58,7 +55,11 @@ const Header = () => {
     <>
       <header className="flex items-center m-auto w-11/12  justify-between">
         <Link href={'/'}>
-          <img src="../../../assets/logo.png" alt="logo" className="mt-2 w-24" />
+          <img
+            src="https://github.com/sparta-Shoppy/Shoppy/blob/dev/public/assets/logo.png?raw=true"
+            alt="logo"
+            className="mt-2 w-24"
+          />
         </Link>
         {/*로그인된 상태*/}
         {isUser ? (
