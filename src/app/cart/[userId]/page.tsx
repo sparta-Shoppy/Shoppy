@@ -14,17 +14,16 @@ import { current } from '@reduxjs/toolkit';
 import CartItem from '@/components/cart/CartItem';
 import { useAppSelector } from '@/utill/hooks/useRedux';
 import { userState } from '@/store/modules/user';
+// import { userId } from '@/api/user';
 
 export default function CartPage() {
   const [userCarts, setUserCart] = useState<ProductType[]>([]);
   const { userId } = useAppSelector(userState);
-  console.log('유저카트', userCarts);
 
+  console.log(userId);
   useEffect(() => {
     const fetchCartData = async () => {
       const cartRef = doc(db, 'carts', userId);
-
-      console.log('cartRef', cartRef);
 
       try {
         const cartSnap = await getDoc(cartRef);
@@ -40,8 +39,6 @@ export default function CartPage() {
 
     fetchCartData();
   }, []);
-
-  console.log('userCart', userCarts);
 
   const deliveryprice = 3000;
   const hasProducts = userCarts && userCarts.length > 0;

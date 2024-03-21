@@ -36,6 +36,7 @@ const Header = () => {
       if (user) {
         setIsAdmin(user.isAdmins ?? false);
         setIsUser(true);
+
         //store에 user 정보 저장
         dispatch(userAction({ userId: user.uid, nickname: user.displayName }));
       } else {

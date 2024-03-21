@@ -3,13 +3,14 @@
 import { cookies } from 'next/headers';
 
 //관리자일 경우
-export async function setAdminCookie({ uid }: any) {
+export async function setAdminCookie(uid: any) {
   const cookieStore = cookies();
+
   cookieStore.set('admin', uid);
 }
 
 //사용자일 경우
-export async function setUserCookie({ uid }: any) {
+export async function setUserCookie(uid: any) {
   const cookieStore = cookies();
   cookieStore.set('user', uid);
 }

@@ -9,6 +9,12 @@ export async function onUserStateChange(auth: Auth, call: any) {
     // 로그인 여부 확인
     const updatedUser = user ? await admins(user) : null;
 
+    if (updatedUser) {
+      // 로컬스토리지에 user 저장
+      const userString = JSON.stringify(updatedUser);
+      window.localStorage.setItem('user', userString);
+    }
+
     call(updatedUser);
   });
 }
@@ -22,6 +28,7 @@ async function admins(user: any) {
     if (checkRef.exists()) {
       const admins = checkRef.val();
       const isAdmins = admins.includes(user.uid);
+
       isAdmins ? setAdminCookie(user.uid) : setUserCookie(user.uid);
       return { ...user, isAdmins };
     }
