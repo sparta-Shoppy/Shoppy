@@ -3,12 +3,15 @@ export interface ProductType {
   image: string;
   category: string;
   title: string;
+  info: string;
   delivery: string;
   seller: string;
   price: number;
-  weight: number;
+  weight: string;
   createdAt: string;
+  quantity: number;
 }
+
 export interface NewReviewType {
   reviewId: string;
   writerId: string;
