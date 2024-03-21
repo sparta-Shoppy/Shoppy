@@ -4,8 +4,10 @@ import ProductItems from '@/components/ProductItems';
 import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
 import { ProductType } from '@/types/product-type';
+
 import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { useSearchParams } from 'next/navigation';
+
 import { useEffect, useState } from 'react';
 
 export default function ProductPage() {
@@ -26,15 +28,12 @@ export default function ProductPage() {
             where('category', '==', category),
             selectedTab ? orderBy('price', 'desc') : orderBy('price', 'asc')
           )
-
-          // selectedTab
-          //   ? query(collection(db, 'product'), where('category', '==', category), orderBy('price', 'desc'))
-          //   : query(collection(db, 'product'), where('category', '==', category), orderBy('price', 'asc'))
         );
         const fetchedProducts: any[] = [];
 
         querySnapshot.forEach((doc) => {
           const products = doc.data();
+
           fetchedProducts.push({ ...products, id: doc.id, products });
         });
 
@@ -50,6 +49,7 @@ export default function ProductPage() {
   return (
     <div>
       <Header />
+
       <SearchProduct />
       <div className="w-11/12 flex justify-end ">
         <span

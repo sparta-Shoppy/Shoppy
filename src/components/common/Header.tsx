@@ -12,6 +12,13 @@ import { useAppDispatch } from '@/hooks/useRedux';
 import { userAction } from '@/store/modules/user';
 import { useRouter } from 'next/navigation';
 
+import { TiShoppingCart } from 'react-icons/ti';
+import { FaUserMinus } from 'react-icons/fa';
+import { FaUserCog } from 'react-icons/fa';
+import { FaUserCheck } from 'react-icons/fa';
+import { userId } from '@/api/user';
+import { cookies } from 'next/headers';
+
 const Header = () => {
   const auth = getAuth(app);
 
@@ -55,13 +62,25 @@ const Header = () => {
         {/*로그인된 상태*/}
         {isUser ? (
           <div className="flex flex-row">
-            <button onClick={onLogOutClickEventHandler} className="text-xl">
-              로그아웃
+            <Link href={`/cart/${userId}`} className="text-xl">
+              <div className="flex flex-row">
+                장바구니
+                <TiShoppingCart className="text-2xl ml-1 mr-1" />
+              </div>
+            </Link>
+            <button onClick={onLogOutClickEventHandler} className="ml-4 text-xl">
+              <div className="flex flex-row">
+                로그아웃
+                <FaUserMinus className="text-2xl ml-1 mr-1" />
+              </div>
             </button>
-            {/* 관리자 상태 */}
+            {/* 관리자 상태 */}{' '}
             {isAdmin && (
-              <Link href={'/admin'}>
-                <h1 className="ml-4 text-xl">관리자창</h1>
+              <Link href={'/admin'} className="text-xl">
+                <div className="flex flex-row ml-3">
+                  관리자창
+                  <FaUserCog className="text-2xl ml-1 mr-1" />
+                </div>
               </Link>
             )}
           </div>
