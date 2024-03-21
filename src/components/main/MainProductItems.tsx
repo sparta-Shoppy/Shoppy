@@ -1,8 +1,9 @@
+import { userId } from '@/api/user';
 import { stringTransform } from '@/hooks/transform';
 import { ProductType } from '@/types/product-type';
+import Cartbutton from '@/utill/hooks/Cart';
 import { useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
-import { LiaCartArrowDownSolid } from 'react-icons/lia';
 
 function MainProductItems({ item }: { item: ProductType }) {
   const [heart, setHeart] = useState(false);
@@ -29,7 +30,7 @@ function MainProductItems({ item }: { item: ProductType }) {
           <button onClick={handleHeart}>
             <IoHeartSharp className={`${heart ? 'text-3xl text-rose-500' : 'text-3xl hover:text-rose-500'}`} />
           </button>
-          <LiaCartArrowDownSolid className="text-4xl hover:text-stone-300 cursor-pointer" />
+          <Cartbutton item={item} userId={userId} />
         </div>
       </div>
     </div>

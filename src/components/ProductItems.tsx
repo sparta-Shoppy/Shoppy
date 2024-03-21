@@ -1,5 +1,7 @@
+import { userId } from '@/api/user';
 import { stringTransform } from '@/hooks/transform';
 import { ProductType } from '@/types/product-type';
+import Cartbutton from '@/utill/hooks/Cart';
 import { useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
@@ -22,7 +24,7 @@ function ProductItems({ item }: { item: ProductType }) {
           className="w-4/5 h-80 object-cover rounded-md hover:scale-95 transition-all duration-300 cursor-pointer"
         />
         <button className="w-4/5 mt-3 bg-slate-100 flex justify-center items-center text-black py-2 px-4 hover:bg-white rounded-md">
-          <span className="text-xl">담기</span> <LiaCartArrowDownSolid className="ml-2 text-3xl" />
+          <span className="text-xl">담기</span> <Cartbutton item={item} userId={userId} />
         </button>
         <div className="pt-2 w-4/5">
           <p className="text-lg font-semibold">{item.title}</p>

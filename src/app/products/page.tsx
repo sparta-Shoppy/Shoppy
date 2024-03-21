@@ -49,7 +49,6 @@ export default function ProductPage() {
   return (
     <div>
       <Header />
-
       <SearchProduct />
       <div className="w-11/12 flex justify-end ">
         <span
@@ -66,7 +65,6 @@ export default function ProductPage() {
           낮은 가격순
         </span>
       </div>
-
       <div className="m-auto w-full flex flex-wrap justify-center">
         {products?.map((item) => {
           return <ProductItems key={item.productId} item={item} />;
