@@ -1,17 +1,30 @@
 'use client';
-
-import { app, db } from '@/api/fiebaseApi';
-import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
-import { joinModalAction, joinState } from '@/store/modules/isModalToggle';
-import { NewUserType } from '@/types/product-type';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { query } from 'firebase/database';
-import { addDoc, collection, getDocs, where } from 'firebase/firestore';
 import { FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
 
+import { app, db } from '@/api/fiebaseApi';
+import { User, createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
+
+import useInput from '@/hooks/useInput';
+import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
+
+import { joinModalAction, joinState } from '@/store/modules/isModalToggle';
+
+import { SetUser, userValidate } from '@/types/user-type';
+
 const Join = () => {
   const auth = getAuth(app);
+
+  const [isIdCheck, setIsIdCheck] = useState(false);
+  const { value, onChangeHandler, reset } = useInput({
+    email: '',
+    password: '',
+    passwordCheck: '',
+    nickname: ''
+  });
+
+  const { email, password, passwordCheck, nickname } = value;
 
   //회원가입 모달창 Toggle
   const dispatch = useAppDispatch();
@@ -30,62 +43,37 @@ const Join = () => {
   const onJoinSubmitEventHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
-    //input태그의 값
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const nickname = formData.get('nickname') as string;
-
     //유효성 검사
-    if (validation({ email, password, nickname })) {
+    if (validation({ email, password, passwordCheck, nickname, isIdCheck })) {
       try {
         // auth 저장
         await createUserWithEmailAndPassword(auth, email, password);
 
         //firebase 저장
-        setDatabase({ email, password, nickname });
+        setDatabase({ auth, email, password, nickname, createdAt });
 
         toast.success('회원가입에 성공했습니다.');
         dispatch(joinModalAction(false));
-        (e.target as HTMLFormElement).reset();
-      } catch (error: any) {
-        toast.success('중복된 아이디 입니다.');
+        reset();
+      } catch (error) {
+        toast.success('중복된 아이디입니다.');
       }
     }
   };
 
-  const setDatabase = async ({ email, password, nickname }: NewUserType) => {
-    const userId = auth.currentUser?.uid;
-    const newUser = {
-      userId,
-      email,
-      password,
-      nickname,
-      createdAt
-    };
+  //중복 확인
+  const onIdCheckEventHandler = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'user'));
+      const users = querySnapshot.docs.map((doc) => ({
+        ...doc.data()
+      }));
 
-    await addDoc(collection(db, 'user'), newUser);
+      setIsIdCheck(idValidation({ users, email }));
+    } catch (error) {
+      console.log('중복확인 기능에서 발생', error);
+    }
   };
-
-  //중복 확인 기능
-  // const onIdCheckEventHandler = async () => {
-  //   try {
-  //     // const q = query(collection(db, 'user'), where('email', '==', true));
-
-  //     const fetchedProducts: any = [];
-  //     querySnapshot.forEach((doc) => {
-  //       const user = doc.data();
-  //       console.log('user', user);
-  //       // fetchedProducts.push({ ...products, id: doc.id, products });
-  //     });
-  //     console.log('fetchedProducts', fetchedProducts);
-  //     if (fetchedProducts.length != null) {
-  //     }
-  //     // setProducts(fetchedProducts);
-  //   } catch (error) {
-  //     console.log('상품 데이터 가져오기 실패', error);
-  //   }
-  // };
 
   return (
     <>
@@ -114,6 +102,8 @@ const Join = () => {
                 className="p-1 w-full border-b border-slate-300 mb-3"
                 type="text"
                 name="nickname"
+                value={nickname}
+                onChange={onChangeHandler}
                 required
                 placeholder="닉네임을 입력해주세요"
               ></input>
@@ -122,6 +112,8 @@ const Join = () => {
                   className="p-1 w-full border-b border-slate-300 mb-3"
                   type="email"
                   name="email"
+                  value={email}
+                  onChange={onChangeHandler}
                   required
                   placeholder="이메일를 입력해주세요"
                   autoComplete="username"
@@ -134,13 +126,19 @@ const Join = () => {
                 className="p-1 w-full border-b border-slate-300 mb-3"
                 type="password"
                 name="password"
+                value={password}
+                required
+                onChange={onChangeHandler}
                 placeholder="비밀번호를 입력해주세요"
                 autoComplete="new-password"
               ></input>
               <input
                 className="p-1 w-full border-b border-slate-300 mb-3"
                 type="password"
-                name="password"
+                name="passwordCheck"
+                required
+                value={passwordCheck}
+                onChange={onChangeHandler}
                 placeholder="비밀번호 확인"
                 autoComplete="new-password"
               ></input>
@@ -166,21 +164,63 @@ const Join = () => {
 
 export default Join;
 
-const validation = ({ email, password, nickname }: NewUserType) => {
-  const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_'{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9]+)*$/;
-  if (!email.match(validRegex)) {
-    alert('이메일 형식이 올바르지 않습니다.');
-    return false;
-  }
+//유효성 검사
+const validation = ({ password, passwordCheck, nickname, isIdCheck }: userValidate) => {
   if (password.length < 6) {
-    alert('비밀번호는 6자리 이상 입력해주세요.');
+    toast.success('비밀번호는 6자리 이상 입력해주세요.');
     return false;
   }
 
   if (nickname.length < 3) {
-    alert('닉네임은 3자리 이상 입력해주세요.');
+    toast.success('닉네임은 3자리 이상 입력해주세요.');
+    return false;
+  }
+
+  if (password !== passwordCheck) {
+    toast.success('비밀번호가 일치하지 않습니다.');
+    return false;
+  }
+  if (isIdCheck === false) {
+    toast.success('중복확인을 클릭해주세요');
     return false;
   }
 
   return true;
+};
+
+const idValidation = ({ users, email }: { users: any; email: string }) => {
+  const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_'{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9]+)*$/;
+
+  const isIdCheck = users?.find((item: User) => (item.email == email ? true : false));
+
+  if (email === '') {
+    toast.success('아이디를 입력해주세요');
+    return false;
+  }
+
+  if (!email.match(validRegex)) {
+    toast.success('이메일 형식이 올바르지 않습니다.');
+    return false;
+  }
+
+  if (isIdCheck) {
+    toast.success('존재하는 아이디입니다.');
+    return false;
+  } else {
+    toast.success('사용가능한 아이디입니다.');
+    return true;
+  }
+};
+
+const setDatabase = async ({ auth, email, password, nickname, createdAt }: SetUser): Promise<void> => {
+  const userId = auth.currentUser?.uid;
+  const newUser = {
+    userId,
+    email,
+    password,
+    nickname,
+    createdAt
+  };
+
+  await addDoc(collection(db, 'user'), newUser);
 };
