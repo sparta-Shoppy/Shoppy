@@ -67,11 +67,11 @@ export default function CartPage() {
             <article className="flex flex-col w-1/4 mt-20 m-10 text-xl">
               <div className="flex flex-row justify-between">
                 <p>상품금액</p>
-                <p>{total}원</p>
+                {!hasProducts ? <p> 원</p> : <p>{total}원</p>}
               </div>
               <div className="flex flex-row justify-between mt-3 text-[#ccc]">
                 <p>배송비</p>
-                <p>3,000 원</p>
+                {!hasProducts ? <p> 원</p> : <p> 3000원</p>}
               </div>
 
               <div className="flex flex-row justify-between text-2xl mt-5 border-t-2 border-[#B4B4B8]-500">
