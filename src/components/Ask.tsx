@@ -15,6 +15,7 @@ function Ask() {
   const [content, setContent] = useState<string>('');
   const [changeContent, setChangeContent] = useState<string>('');
   const [nowId, setNowId] = useState<string>('');
+  const [adminContent, setAdminContent] = useState<string>('');
   const [askSecret, setAskSecret] = useState<boolean>(false);
   const [changeNow, setChangeNow] = useState<boolean>(false);
   const [adminChangeNow, setAdminChangeNow] = useState<boolean>(false);
@@ -42,7 +43,8 @@ function Ask() {
         hour12: true
       }),
       productId: params.id,
-      secret: askSecret
+      secret: askSecret,
+      answer: '답변이 아직 없습니다.'
     };
     try {
       await addDoc(collection(db, 'ask'), newAsk);
@@ -140,6 +142,34 @@ function Ask() {
     }
   };
 
+  const adminAnswer = async (prev: NewAskType) => {
+    const askRef = doc(db, 'ask', prev.askId);
+    if (adminContent === prev.answer) {
+      toast.warning('바뀐 게 없어요!');
+      return;
+    } else {
+      const real = window.confirm('작성하시겠습니까?');
+      if (real) {
+        try {
+          await updateDoc(askRef, { ...prev, answer: adminContent });
+          setAdminChangeNow(!adminChangeNow);
+          setAsk((item) => {
+            return item?.map((element) => {
+              if (element.askId === prev.askId) {
+                return { ...element, answer: adminContent };
+              } else {
+                return element;
+              }
+            });
+          });
+          toast.success('수정 완료!');
+        } catch (error) {
+          toast.error('수정 실패!');
+        }
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center items-center">
       <form onSubmit={askSubmit}>
@@ -179,8 +209,11 @@ function Ask() {
               <div className="flex gap-1">
                 <span className="text-xl font-bold">{prev.writerId}</span>
                 <span className="text-sm text-gray-400 mt-1.5">{prev.createdAt}</span>
-                <GrCheckbox className="mt-1.5" />
-                <FiCheckSquare className="mt-1.5" />
+                {prev.answer === '답변이 아직 없습니다.' ? (
+                  <GrCheckbox className="mt-1.5" />
+                ) : (
+                  <FiCheckSquare className="mt-1.5" />
+                )}
               </div>
               <div className="flex justify-between items-center p-2">
                 {changeNow && nowId === prev.askId ? (
@@ -198,25 +231,6 @@ function Ask() {
                   </>
                 ) : (
                   <div className="text-3xl">{prev.content}</div>
-                )}
-                {adminNow ? (
-                  <button
-                    className="review__button-field"
-                    onClick={() => {
-                      setAdminChangeNow(!adminChangeNow);
-                    }}
-                  >
-                    답변작성
-                  </button>
-                ) : (
-                  <></>
-                )}
-                {adminChangeNow ? (
-                  <>
-                    <input className="admin__input-field" />
-                  </>
-                ) : (
-                  <></>
                 )}
                 {loginNow === prev.writerId ? (
                   <div className="flex gap-2">
@@ -236,6 +250,59 @@ function Ask() {
                         </button>
                         <button className="review__button-field" onClick={() => askDelete(prev.askId)}>
                           삭제
+                        </button>
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
+              <div className="flex justify-between items-center p-2">
+                {adminChangeNow ? (
+                  <>
+                    <input
+                      className="admin__input-field"
+                      type="text"
+                      required
+                      maxLength={20}
+                      value={adminContent}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setAdminContent(e.target.value);
+                      }}
+                    />
+                  </>
+                ) : adminNow || userUid === prev.writerId ? (
+                  <div className="text-3xl">{prev.answer}</div>
+                ) : (
+                  <></>
+                )}
+                {adminNow ? (
+                  <div className="flex gap-2">
+                    {adminChangeNow ? (
+                      <>
+                        <button className="review__button-field" onClick={() => adminAnswer(prev)}>
+                          완료
+                        </button>
+                        <button
+                          className="review__button-field"
+                          onClick={() => {
+                            setAdminChangeNow(!adminChangeNow);
+                          }}
+                        >
+                          취소
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          className="review__button-field"
+                          onClick={() => {
+                            setAdminChangeNow(!adminChangeNow);
+                            setAdminContent(prev.answer);
+                          }}
+                        >
+                          답변작성
                         </button>
                       </>
                     )}

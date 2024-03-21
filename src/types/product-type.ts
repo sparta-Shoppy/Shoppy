@@ -24,6 +24,7 @@ export interface NewAskType {
   createdAt: string;
   productId: string;
   secret: boolean;
+  answer: string;
 }
 
 export type CategoryType = '과일/채소' | '고기' | '가공식품' | '해산물';
