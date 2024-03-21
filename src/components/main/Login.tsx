@@ -8,6 +8,8 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
 import { loginModalAction, loginState } from '@/store/modules/isModalToggle';
 
+import { FaUserCheck } from 'react-icons/fa';
+
 const Login = () => {
   const auth = getAuth(app);
 
@@ -89,7 +91,10 @@ const Login = () => {
           className="cursor-pointer hover:text-slate-300 font-bold"
           onClick={() => dispatch(loginModalAction(true))}
         >
-          로그인
+          <div className="flex flex-row ml-3">
+            로그인
+            <FaUserCheck className="text-2xl ml-1 mr-1" />
+          </div>
         </button>
       )}
     </>
