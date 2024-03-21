@@ -1,11 +1,18 @@
 // Import the functions you need from the SDKs you need
 
 import { FirebaseApp, getApp, initializeApp } from 'firebase/app';
-import { getDatabase } from 'firebase/database';
-import { getFirestore } from 'firebase/firestore';
+import { getDatabase, ref, remove, set } from 'firebase/database';
+import { doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 //지역변수로 사용하기
+
+interface AddOrUpdateToCartProps {
+  userId: string;
+  productId: string;
+  quantity: number;
+}
+
 export let app: FirebaseApp;
 
 const firebaseConfig = {
@@ -31,5 +38,29 @@ const firebaseApp = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 
 export const db = getFirestore(app);
+
+//쇼핑카트에 필요한 파이어베이스 3가지
+
+// // 2. 특정한 사용자의 쇼핑카트에 제품을 추가하는것
+
+export const addOrUpdateToCart = async ({ userId, productId, quantity }: AddOrUpdateToCartProps) => {
+  try {
+    const cartRef = doc(db, 'carts', userId);
+
+    const cartSnap = await getDoc(cartRef);
+    const products = cartSnap.data()?.products;
+
+    const updatedProducts = products.map((item: ProductType) => {
+      if (item.productId === productId) {
+        return { ...item, quantity: quantity };
+      }
+      return item;
+    });
+
+    await updateDoc(cartRef, { products: updatedProducts });
+  } catch (error: any) {
+    console.error('failed to addOrUpdateToCart', error.message);
+  }
+};
 
 export default firebaseApp;

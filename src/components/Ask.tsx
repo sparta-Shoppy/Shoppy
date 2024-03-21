@@ -255,7 +255,7 @@ function Ask() {
                 )}
               </div>
               <div className="flex justify-between items-center p-2">
-                {adminChangeNow ? (
+                {adminChangeNow && nowId === prev.askId ? (
                   <>
                     <input
                       className="admin__input-field"
@@ -275,7 +275,7 @@ function Ask() {
                 )}
                 {adminNow ? (
                   <div className="flex gap-2">
-                    {adminChangeNow ? (
+                    {adminChangeNow && nowId === prev.askId ? (
                       <>
                         <button className="review__button-field" onClick={() => adminAnswer(prev)}>
                           완료
@@ -284,6 +284,7 @@ function Ask() {
                           className="review__button-field"
                           onClick={() => {
                             setAdminChangeNow(!adminChangeNow);
+                            setNowId('');
                           }}
                         >
                           취소
@@ -296,6 +297,7 @@ function Ask() {
                           onClick={() => {
                             setAdminChangeNow(!adminChangeNow);
                             setAdminContent(prev.answer);
+                            setNowId(prev.askId);
                           }}
                         >
                           답변작성
