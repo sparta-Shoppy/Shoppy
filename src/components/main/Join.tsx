@@ -3,7 +3,7 @@ import { FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { app, db } from '@/api/fiebaseApi';
-import { User, createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { User, createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 
 import useInput from '@/utill/hooks/useInput';
@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '@/utill/hooks/useRedux';
 
 import { joinModalAction, joinState } from '@/store/modules/isModalToggle';
 
-import { SetUser, userValidate } from '@/types/user-type';
+import { setUserJoin, userValidate } from '@/types/user-type';
 import { FaUserAstronaut } from 'react-icons/fa';
 
 const Join = () => {
@@ -40,10 +40,16 @@ const Join = () => {
     if (validation({ email, password, passwordCheck, nickname, isIdCheck })) {
       try {
         // auth 저장
-        await createUserWithEmailAndPassword(auth, email, password);
+        const userCreate = await createUserWithEmailAndPassword(auth, email, password);
+        const user = await userCreate.user;
+        await updateProfile(user, {
+          displayName: user.displayName
+        });
+
+        const userId = auth.currentUser?.uid;
 
         //firebase 저장
-        setDatabase({ auth, email, password, nickname });
+        setDatabase({ userId, email, password, nickname });
 
         toast.success('회원가입에 성공했습니다.');
         dispatch(joinModalAction(false));
@@ -202,17 +208,15 @@ const idValidation = ({ users, email }: { users: any; email: string }) => {
     toast.error('존재하는 아이디입니다.');
     return false;
   } else {
-    toast.error('사용가능한 아이디입니다.');
+    toast.success('사용가능한 아이디입니다.');
     return true;
   }
 };
 
 //FireStore에 저장
-const setDatabase = async ({ auth, email, password, nickname }: SetUser): Promise<void> => {
+const setDatabase = async ({ userId, email, password, nickname }: setUserJoin): Promise<void> => {
   //여기에 선언한 이유
   //fireAuth에 저장한 후 ==> auth에 저장된 uid값을 불러와야한다.
-
-  const userId = auth.currentUser?.uid;
 
   const createdAt = new Date().toLocaleString('ko', {
     year: '2-digit',

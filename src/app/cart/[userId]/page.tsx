@@ -1,7 +1,7 @@
 'use client';
 
 import { db } from '@/api/fiebaseApi';
-import { userId } from '@/api/user';
+
 import Header from '@/components/common/Header';
 import { ProductType } from '@/types/product-type';
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
@@ -12,10 +12,12 @@ import { FaPlusCircle } from 'react-icons/fa';
 import { FaMinusCircle } from 'react-icons/fa';
 import { current } from '@reduxjs/toolkit';
 import CartItem from '@/components/cart/CartItem';
+import { useAppSelector } from '@/utill/hooks/useRedux';
+import { userState } from '@/store/modules/user';
 
 export default function CartPage() {
   const [userCarts, setUserCart] = useState<ProductType[]>([]);
-
+  const { userId } = useAppSelector(userState);
   console.log('유저카트', userCarts);
 
   useEffect(() => {

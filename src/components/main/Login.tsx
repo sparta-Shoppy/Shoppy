@@ -2,16 +2,25 @@
 import { FormEvent } from 'react';
 import { toast } from 'react-toastify';
 
-import { app } from '@/api/fiebaseApi';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { app, db } from '@/api/fiebaseApi';
+import {
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup
+} from 'firebase/auth';
+import { collection, doc, setDoc } from 'firebase/firestore';
 
-import { useAppDispatch, useAppSelector } from '@/utill/hooks/useRedux';
 import { loginModalAction, loginState } from '@/store/modules/isModalToggle';
 
+import { setUserLogin } from '@/types/user-type';
+import { useAppDispatch, useAppSelector } from '@/utill/hooks/useRedux';
 import { FaUserCheck } from 'react-icons/fa';
 
 const Login = () => {
   const auth = getAuth(app);
+  const collectionRef = collection(db, 'user');
 
   //로그인 모달창 Toggle
   const dispatch = useAppDispatch();
@@ -34,6 +43,43 @@ const Login = () => {
       } catch (error: any) {
         toast.error('아이디와 비밀번호를 확인해주세요');
       }
+    }
+  };
+
+  // 구글 로그인 버튼
+  const onGoogleLoginHandler = async () => {
+    try {
+      const googleProvider = new GoogleAuthProvider();
+      const googleResult = await signInWithPopup(auth, googleProvider);
+      const googleUser = googleResult.user;
+      const { uid, displayName, email } = googleUser;
+
+      setDatabase({ uid, displayName, email });
+    } catch (error) {
+      toast.error('이미 있는 이메일 입니다!');
+      console.log('google error', error);
+    }
+  };
+
+  // 깃허브 로그인 버튼
+  const onGitHubLoginHandler = async () => {
+    try {
+      const gitHubProvider = new GithubAuthProvider();
+      const result = await signInWithPopup(auth, gitHubProvider);
+      const user = result.user;
+      const newData = {
+        nickname: user.displayName,
+        email: user.email,
+        user_img: user.photoURL,
+        user_id: user.uid
+      };
+
+      const docRef = doc(collectionRef, user.uid);
+      await setDoc(docRef, newData);
+      // navigate('/');
+    } catch (error) {
+      toast.error('이미 있는 이메일 입니다!');
+      console.log(error);
     }
   };
 
@@ -81,6 +127,20 @@ const Login = () => {
               <button type="submit" className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white mt-8">
                 로그인
               </button>
+              <button
+                type="button"
+                onClick={onGoogleLoginHandler}
+                className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white mt-8"
+              >
+                구글
+              </button>
+              <button
+                type="button"
+                onClick={onGitHubLoginHandler}
+                className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white mt-8"
+              >
+                깃허브
+              </button>
             </form>
           </div>
         </div>
@@ -113,4 +173,26 @@ const validation = ({ email, password }: { email: string; password: string }) =>
   }
 
   return true;
+};
+
+const setDatabase = async ({ uid, displayName, email }: setUserLogin): Promise<void> => {
+  const collectionRef = collection(db, 'user');
+  const createdAt = new Date().toLocaleString('ko', {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  });
+
+  const newData = {
+    userId: uid,
+    nickname: displayName,
+    email,
+    createdAt
+  };
+
+  const docRef = doc(collectionRef, uid);
+  await setDoc(docRef, newData);
 };

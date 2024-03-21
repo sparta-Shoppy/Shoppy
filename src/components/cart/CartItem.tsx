@@ -1,7 +1,6 @@
 'use client';
 
 import { db } from '@/api/fiebaseApi';
-import { userId } from '@/api/user';
 import Header from '@/components/common/Header';
 
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
@@ -12,6 +11,8 @@ import { FaPlusCircle } from 'react-icons/fa';
 import { FaMinusCircle } from 'react-icons/fa';
 import { current } from '@reduxjs/toolkit';
 import { ProductType } from '@/types/product-type';
+import { useAppSelector } from '@/utill/hooks/useRedux';
+import { userState } from '@/store/modules/user';
 
 interface ProductProps {
   product: ProductType;
@@ -19,6 +20,7 @@ interface ProductProps {
 
 export default function CartItem({ product }: ProductProps) {
   const { productId, image, title, price, quantity } = product;
+  const { userId } = useAppSelector(userState);
 
   const productPrice = price * quantity;
 

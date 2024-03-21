@@ -1,6 +1,6 @@
 'use client';
 import { db } from '@/api/fiebaseApi';
-import { userId } from '@/api/user';
+
 import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
 import { stringTransform } from '@/utill/hooks/transform';
@@ -13,10 +13,13 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';
 import { SlHeart } from 'react-icons/sl';
+import { useAppSelector } from '@/utill/hooks/useRedux';
+import { userState } from '@/store/modules/user';
 
 export default function ProductPage() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [selectedTab, setSelectedTab] = useState('높은 가격순');
+  const { userId } = useAppSelector(userState);
 
   const params = useSearchParams();
   console.log('params', params.get('category'));

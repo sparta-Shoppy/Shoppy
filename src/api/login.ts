@@ -1,5 +1,5 @@
 import { database } from '@/api/fiebaseApi';
-import { Auth, User, onAuthStateChanged } from 'firebase/auth';
+import { Auth, onAuthStateChanged } from 'firebase/auth';
 import { get, ref } from 'firebase/database';
 import { setAdminCookie, setUserCookie } from './cookie';
 
@@ -21,13 +21,12 @@ async function admins(user: any) {
     const checkRef = await get(ref(database, 'admins'));
     if (checkRef.exists()) {
       const admins = checkRef.val();
-      const isAdmins = admins.includes(user.uid); //로그인된 user가 관리자일 경우 isAdmins= true, 사용자일 경우 isAdmins= false
+      const isAdmins = admins.includes(user.uid);
       isAdmins ? setAdminCookie(user.uid) : setUserCookie(user.uid);
       return { ...user, isAdmins };
     }
     return user;
   } catch (error) {
-    alert('에러발생했습니다.');
-    return null;
+    console.log('login.ts', error);
   }
 }

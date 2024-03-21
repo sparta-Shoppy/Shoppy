@@ -11,30 +11,33 @@ import Login from '../main/Login';
 import { onUserStateChange } from '@/api/login';
 
 import { deleteAdminCookie } from '@/api/cookie';
-import { userAction } from '@/store/modules/user';
-import { useAppDispatch } from '@/utill/hooks/useRedux';
+import { userAction, userState } from '@/store/modules/user';
+import { useAppDispatch, useAppSelector } from '@/utill/hooks/useRedux';
 import { useRouter } from 'next/navigation';
 
-import { userId } from '@/api/user';
 import { FaUserCog, FaUserMinus } from 'react-icons/fa';
 import { TiShoppingCart } from 'react-icons/ti';
 
+//userId 사용
 const Header = () => {
   const auth = getAuth(app);
 
   const [isAdmin, setIsAdmin] = useState(false);
   const [isUser, setIsUser] = useState(false);
 
+  const { userId } = useAppSelector(userState);
+
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  //로그인 및 비로그인 여부 확인
   useEffect(() => {
+    //로그인 및 비로그인 여부 확인
     onUserStateChange(auth, (user: any) => {
       if (user) {
         setIsAdmin(user.isAdmins ?? false);
         setIsUser(true);
-        dispatch(userAction(user.uid));
+        //store에 user 정보 저장
+        dispatch(userAction({ userId: user.uid, nickname: user.displayName }));
       } else {
         setIsAdmin(false);
       }

@@ -8,9 +8,15 @@ export interface userValidate {
   isIdCheck?: boolean;
 }
 
-export interface SetUser {
-  auth: Auth;
-  email: string;
+export interface setUserJoin {
+  userId: string | undefined;
+  email: string | null;
   password: string;
   nickname: string;
+}
+
+export interface setUserLogin {
+  uid: string;
+  displayName: string | null;
+  email: string | null;
 }

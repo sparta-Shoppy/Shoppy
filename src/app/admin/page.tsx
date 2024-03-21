@@ -45,7 +45,7 @@ export default function Admin() {
     const info = formData.get('info') as string;
     const delivery = formData.get('delivery') as string;
     const seller = formData.get('seller') as string;
-    const price = formData.get('price') as number | null;
+    const price = formData.get('price') as string;
     const weight = formData.get('weight') as string;
 
     try {
@@ -63,9 +63,9 @@ export default function Admin() {
         info,
         delivery,
         seller,
-        price,
+        price: Number(price),
         weight,
-        createdAt: new Date()?.toLocaleString(),
+        createdAt: new Date(),
         quantity: 1
       };
 
