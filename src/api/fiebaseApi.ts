@@ -9,13 +9,13 @@ import { getStorage } from 'firebase/storage';
 export let app: FirebaseApp;
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_APP_ID,
-  databaseURL: process.env.NEXT_PUBLIC_DATABASE_URL
+  apiKey: 'AIzaSyApzJmIoQIh6CHvVxlJQkIvdJCuv2L_R7c',
+  authDomain: 'gabaedo-7fda6.firebaseapp.com',
+  databaseURL: 'https://gabaedo-7fda6-default-rtdb.asia-southeast1.firebasedatabase.app',
+  projectId: 'gabaedo-7fda6',
+  storageBucket: 'gabaedo-7fda6.appspot.com',
+  messagingSenderId: '816387183671',
+  appId: '1:816387183671:web:cfe441af3943655e7a9bb2'
 };
 
 try {

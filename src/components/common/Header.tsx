@@ -29,13 +29,15 @@ const Header = () => {
         setIsAdmin(user.isAdmins ?? false);
         setIsUser(true);
         dispatch(userAction(user.uid));
-        dispatch(userAdmin(true));
       } else {
         setIsAdmin(false); //1) false로 준 이유?
-        dispatch(userAdmin(false));
       }
     });
   }, []);
+
+  useEffect(() => {
+    dispatch(userAdmin(isAdmin));
+  }, [isAdmin]);
 
   //로그아웃 기능
   const onLogOutClickEventHandler = () => {

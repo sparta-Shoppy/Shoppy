@@ -150,10 +150,7 @@ function Review() {
           className="admin__input-field"
         />
 
-        <button
-          type="submit"
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-        >
+        <button type="submit" className="review__button-field">
           등록
         </button>
       </form>
@@ -183,31 +180,19 @@ function Review() {
                   <div className="flex gap-2">
                     {changeNow && nowId === prev.reviewId ? (
                       <>
-                        <button
-                          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                          onClick={() => reviewChange(prev)}
-                        >
+                        <button className="review__button-field" onClick={() => reviewChange(prev)}>
                           수정완료
                         </button>
-                        <button
-                          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                          onClick={reviewChangeCancel}
-                        >
+                        <button className="review__button-field" onClick={reviewChangeCancel}>
                           취소
                         </button>
                       </>
                     ) : (
                       <>
-                        <button
-                          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                          onClick={() => reviewChangeBtn(prev)}
-                        >
+                        <button className="review__button-field" onClick={() => reviewChangeBtn(prev)}>
                           수정
                         </button>
-                        <button
-                          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                          onClick={() => reviewDelete(prev.reviewId)}
-                        >
+                        <button className="review__button-field" onClick={() => reviewDelete(prev.reviewId)}>
                           삭제
                         </button>
                       </>

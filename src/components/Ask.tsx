@@ -17,12 +17,15 @@ function Ask() {
   const [nowId, setNowId] = useState<string>('');
   const [askSecret, setAskSecret] = useState<boolean>(false);
   const [changeNow, setChangeNow] = useState<boolean>(false);
+  const [adminChangeNow, setAdminChangeNow] = useState<boolean>(false);
   const [ask, setAsk] = useState<NewAskType[]>();
 
   const params = useParams();
   const userUid = useAppSelector((state) => state.user.value);
   const adminNow = useAppSelector((state) => state.user.adminReal);
 
+  // console.log('uid', userUid);
+  // console.log('adminNow', adminNow);
   const loginNow: any = userUid;
   // 작성
   const askSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -164,10 +167,7 @@ function Ask() {
           비밀 글
         </label>
 
-        <button
-          type="submit"
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-        >
+        <button type="submit" className="review__button-field">
           등록
         </button>
       </form>
@@ -199,35 +199,42 @@ function Ask() {
                 ) : (
                   <div className="text-3xl">{prev.content}</div>
                 )}
+                {adminNow ? (
+                  <button
+                    className="review__button-field"
+                    onClick={() => {
+                      setAdminChangeNow(!adminChangeNow);
+                    }}
+                  >
+                    답변작성
+                  </button>
+                ) : (
+                  <></>
+                )}
+                {adminChangeNow ? (
+                  <>
+                    <input className="admin__input-field" />
+                  </>
+                ) : (
+                  <></>
+                )}
                 {loginNow === prev.writerId ? (
                   <div className="flex gap-2">
                     {changeNow && nowId === prev.askId ? (
                       <>
-                        <button
-                          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                          onClick={() => askChange(prev)}
-                        >
+                        <button className="review__button-field" onClick={() => askChange(prev)}>
                           수정완료
                         </button>
-                        <button
-                          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                          onClick={askChangeCancel}
-                        >
+                        <button className="review__button-field" onClick={askChangeCancel}>
                           취소
                         </button>
                       </>
                     ) : (
                       <>
-                        <button
-                          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                          onClick={() => askChangeBtn(prev)}
-                        >
+                        <button className="review__button-field" onClick={() => askChangeBtn(prev)}>
                           수정
                         </button>
-                        <button
-                          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                          onClick={() => askDelete(prev.askId)}
-                        >
+                        <button className="review__button-field" onClick={() => askDelete(prev.askId)}>
                           삭제
                         </button>
                       </>
