@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '@/utill/hooks/useRedux';
 import { joinModalAction, joinState } from '@/store/modules/isModalToggle';
 
 import { SetUser, userValidate } from '@/types/user-type';
+import { FaUserAstronaut } from 'react-icons/fa';
 
 const Join = () => {
   const auth = getAuth(app);
@@ -143,10 +144,13 @@ const Join = () => {
       ) : (
         // false일 경우 회원가입 버튼만 등장
         <button
-          className={`cursor-pointer hover:text-slate-300 font-bold ${'body' + (isJoinToggle ? 'active' : '')}`}
+          className={`cursor-pointer hover:text-slate-300  ${'body' + (isJoinToggle ? 'active' : '')}`}
           onClick={() => dispatch(joinModalAction(true))}
         >
-          회원가입
+          <div className="flex flex-row ml-3">
+            <FaUserAstronaut className="text-2xl ml-1 mr-1" />
+            회원가입
+          </div>
         </button>
       )}
     </>

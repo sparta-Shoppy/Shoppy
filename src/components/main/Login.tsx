@@ -28,7 +28,6 @@ const Login = () => {
     if (validation({ email, password })) {
       try {
         await signInWithEmailAndPassword(auth, email, password);
-
         toast.success('로그인에 성공하였습니다.');
         (e.target as HTMLFormElement).reset();
         dispatch(loginModalAction(false));
@@ -87,10 +86,7 @@ const Login = () => {
         </div>
       ) : (
         // false일 경우 로그인 버튼만 등장
-        <button
-          className="cursor-pointer hover:text-slate-300 font-bold"
-          onClick={() => dispatch(loginModalAction(true))}
-        >
+        <button className="cursor-pointer hover:text-slate-300 " onClick={() => dispatch(loginModalAction(true))}>
           <div className="flex flex-row ml-3">
             로그인
             <FaUserCheck className="text-2xl ml-1 mr-1" />
@@ -108,11 +104,11 @@ const validation = ({ email, password }: { email: string; password: string }) =>
   const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_'{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9]+)*$/;
 
   if (!email.match(validRegex)) {
-    toast.error;
+    toast.error('이메일 형식이 올바르지 않습니다.');
     return false;
   }
   if (password?.length < 6) {
-    toast.error;
+    toast.error('비밀번호는 6자리 이상 입력해주세요.');
     return false;
   }
 

@@ -11,16 +11,13 @@ import Login from '../main/Login';
 import { onUserStateChange } from '@/api/login';
 
 import { deleteAdminCookie } from '@/api/cookie';
-import { useAppDispatch } from '@/utill/hooks/useRedux';
 import { userAction } from '@/store/modules/user';
+import { useAppDispatch } from '@/utill/hooks/useRedux';
 import { useRouter } from 'next/navigation';
 
-import { TiShoppingCart } from 'react-icons/ti';
-import { FaUserMinus } from 'react-icons/fa';
-import { FaUserCog } from 'react-icons/fa';
-import { FaUserCheck } from 'react-icons/fa';
 import { userId } from '@/api/user';
-import { cookies } from 'next/headers';
+import { FaUserCog, FaUserMinus } from 'react-icons/fa';
+import { TiShoppingCart } from 'react-icons/ti';
 
 const Header = () => {
   const auth = getAuth(app);
@@ -31,6 +28,7 @@ const Header = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
+  //로그인 및 비로그인 여부 확인
   useEffect(() => {
     onUserStateChange(auth, (user: any) => {
       if (user) {
@@ -62,13 +60,13 @@ const Header = () => {
         {isUser ? (
           <div className="flex flex-row">
             <Link href={`/cart/${userId}`} className="text-xl">
-              <div className="flex flex-row">
+              <div className="flex flex-row hover:text-slate-300 ">
                 장바구니
                 <TiShoppingCart className="text-2xl ml-1 mr-1" />
               </div>
             </Link>
             <button onClick={onLogOutClickEventHandler} className="ml-4 text-xl">
-              <div className="flex flex-row">
+              <div className="flex flex-row hover:text-slate-300 ">
                 로그아웃
                 <FaUserMinus className="text-2xl ml-1 mr-1" />
               </div>
@@ -76,7 +74,7 @@ const Header = () => {
             {/* 관리자 상태 */}{' '}
             {isAdmin && (
               <Link href={'/admin'} className="text-xl">
-                <div className="flex flex-row ml-3">
+                <div className="flex flex-row ml-3 hover:text-slate-300 ">
                   관리자창
                   <FaUserCog className="text-2xl ml-1 mr-1" />
                 </div>
