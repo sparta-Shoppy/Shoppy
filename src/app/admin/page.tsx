@@ -45,8 +45,10 @@ export default function Admin() {
     const info = formData.get('info') as string;
     const delivery = formData.get('delivery') as string;
     const seller = formData.get('seller') as string;
-    const price = formData.get('price') as number | null;
+    const price = formData.get('price') as string;
     const weight = formData.get('weight') as string;
+
+    console.log('확인', typeof price);
 
     try {
       let image = '';
@@ -54,18 +56,19 @@ export default function Admin() {
         const data = await uploadString(storageRef, imageUrl, 'data_url');
         image = await getDownloadURL(data?.ref);
       }
-
+      const keyword = title.split(' ');
       const newProduct = {
         productId: uuidv4(),
+        keyword,
         image,
         category,
         title,
         info,
         delivery,
         seller,
-        price,
+        price: Number(price),
         weight,
-        createdAt: new Date()?.toLocaleString(),
+        createdAt: new Date(),
         quantity: 1
       };
 
