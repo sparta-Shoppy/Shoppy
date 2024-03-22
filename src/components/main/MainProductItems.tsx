@@ -1,5 +1,5 @@
 import { userId } from '@/api/user';
-import { stringTransform } from '@/hooks/transform';
+import { stringTransform } from '@/utill/hooks/transform';
 import { ProductType } from '@/types/product-type';
 import Cartbutton from '@/utill/hooks/Cart';
 import { useState } from 'react';
@@ -24,7 +24,7 @@ function MainProductItems({ item }: { item: ProductType }) {
       <div className="w-full flex justify-between p-3">
         <div>
           <p>{item.title}</p>
-          <p>{stringTransform(item.price)}</p>
+          {/* <p>{stringTransform(item.price)}</p> */}
         </div>
         <div className="flex justify-between gap-2 items-center pl-5">
           <button onClick={handleHeart}>

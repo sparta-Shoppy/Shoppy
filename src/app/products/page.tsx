@@ -1,8 +1,8 @@
 'use client';
 import { db } from '@/api/fiebaseApi';
-import ProductItems from '@/components/products/ProductItems';
 import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
+import ProductItems from '@/components/products/ProductItems';
 import { ProductType } from '@/types/product-type';
 import { useQuery } from '@tanstack/react-query';
 import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';

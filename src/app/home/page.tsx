@@ -2,6 +2,7 @@
 import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
+import { stringTransform } from '@/utill/hooks/transform';
 import MainProductItems from '@/components/main/MainProductItems';
 import { ProductType } from '@/types/product-type';
 import { useQuery } from '@tanstack/react-query';
@@ -59,7 +60,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="h-screen">
+    <div className="h-screen ">
       <Header />
       <SearchProduct />
       <div className="carousel w-full h-80  overflow-hidden relative">

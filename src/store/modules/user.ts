@@ -3,13 +3,15 @@ import { RootState } from '../config/configStore';
 
 //인터페이스 정의
 interface UserState {
-  value: object | null;
+  userId: string;
+  nickname: string;
 }
 
 //초기 상태 값
 
 const initialState: UserState = {
-  value: null
+  userId: '',
+  nickname: ''
 };
 
 //slice 설정
@@ -18,11 +20,12 @@ export const UserSlice = createSlice({
   initialState,
   reducers: {
     userAction: (state, action: PayloadAction<UserState>) => {
-      state.value = action.payload;
+      state.userId = action.payload.userId;
+      state.nickname = action.payload.nickname;
     }
   }
 });
 
 export const { userAction } = UserSlice.actions;
-export const userState = (state: RootState) => state.user.value;
+export const userState = (state: RootState) => state.user;
 export default UserSlice.reducer;
