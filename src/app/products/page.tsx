@@ -1,6 +1,6 @@
 'use client';
 import { db } from '@/api/fiebaseApi';
-import ProductItems from '@/components/ProductItems';
+import ProductItems from '@/components/products/ProductItems';
 import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
 import { ProductType } from '@/types/product-type';
