@@ -42,6 +42,7 @@ const Login = () => {
       try {
         await signInWithEmailAndPassword(auth, email, password);
         toast.success('로그인에 성공하였습니다.');
+        location.reload();
         (e.target as HTMLFormElement).reset();
         dispatch(loginModalAction(false));
       } catch (error: any) {

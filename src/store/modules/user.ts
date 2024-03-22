@@ -27,5 +27,6 @@ export const UserSlice = createSlice({
 });
 
 export const { userAction } = UserSlice.actions;
-export const userState = (state: RootState) => state.user;
+export const userState = (state: RootState) => state.user.userId;
+export const nicknameState = (state: RootState) => state.user.nickname;
 export default UserSlice.reducer;
