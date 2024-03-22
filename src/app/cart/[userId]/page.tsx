@@ -5,9 +5,13 @@ import Header from '@/components/common/Header';
 import { TiShoppingCart } from 'react-icons/ti';
 import CartItem from '@/components/cart/CartItem';
 import { useReadCartData } from '@/utill/hooks/cart/useCart';
+import { useAppSelector } from '@/utill/hooks/useRedux';
+import { userState } from '@/store/modules/user';
 
 export default function CartPage() {
-  const { data: carts } = useReadCartData();
+  const userId = useAppSelector(userState);
+
+  const { data: carts } = useReadCartData(userId);
 
   const formatter = new Intl.NumberFormat('ko-KR');
 

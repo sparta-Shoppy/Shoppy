@@ -9,14 +9,17 @@ import { collection, getDocs, where, query } from 'firebase/firestore';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
-import { userId } from '@/api/user';
 import { stringTransform } from '@/utill/hooks/transform';
 import Cartbutton from '@/components/cart/CartButton';
+import { userState } from '@/store/modules/user';
+import { useAppSelector } from '@/utill/hooks/useRedux';
 
 export default function ProductDetailPage() {
   const [nowItem, setNowItem] = useState<ProductType[]>();
   const [heart, setHeart] = useState(false);
   const [selectedTab, setSelectedTab] = useState(true);
+
+  const userId = useAppSelector(userState);
 
   // 하트 클릭 시 색상 변경
   const handleHeart = () => {
