@@ -68,14 +68,18 @@ export default function CartItem({ product }: ProductProps) {
         >
           &times;
         </button>
-        <div className="flex gap-10 items-center text-2xl">
-          <button onClick={handleMinus}>
-            <FaMinusCircle />
-          </button>
+        <div className="flex gap-10 items-center text-2xl transition-all">
+          <FaMinusCircle
+            className={`transition-all cursor-pointer ${
+              quantity <= 1 ? 'text-gray-300 cursor-not-allowed' : 'hover:text-black'
+            }`}
+            onClick={handleMinus}
+            style={{ pointerEvents: quantity <= 1 ? 'none' : 'auto' }}
+          />
+
           <p>{quantity}</p>
-          <button onClick={handlePlus}>
-            <FaPlusCircle />
-          </button>
+
+          <FaPlusCircle className="transition-all cursor-pointer hover:" onClick={handlePlus} />
         </div>
         <div className="absolute right-5 top-20 text-xl whitespace-nowrap">
           <span className="text-2xl">{productPrice}</span> 원

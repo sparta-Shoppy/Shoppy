@@ -10,6 +10,8 @@ interface CartButtonProps {
 }
 
 export default function Cartbutton({ item, userId }: CartButtonProps) {
+  // mutation 생성
+
   const onClickCart = async () => {
     const cartRef = doc(db, 'carts', userId);
 
@@ -51,6 +53,7 @@ export default function Cartbutton({ item, userId }: CartButtonProps) {
           ]
         });
       }
+
       toast.success('장바구니에 추가되었습니다.');
     } catch (error) {
       toast.error('장바구니에 추가하지 못했습니다.');

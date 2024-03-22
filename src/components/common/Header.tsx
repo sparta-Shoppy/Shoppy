@@ -12,12 +12,12 @@ import { useAppDispatch } from '@/hooks/useRedux';
 import { userAction } from '@/store/modules/user';
 import { useRouter } from 'next/navigation';
 
-import { TiShoppingCart } from 'react-icons/ti';
 import { FaUserMinus } from 'react-icons/fa';
 import { FaUserCog } from 'react-icons/fa';
 import { FaUserCheck } from 'react-icons/fa';
 import { userId } from '@/api/user';
 import { cookies } from 'next/headers';
+import CartStatus from '../cart/CartStatus';
 
 const Header = () => {
   const auth = getAuth(app);
@@ -63,10 +63,7 @@ const Header = () => {
         {isUser ? (
           <div className="flex flex-row">
             <Link href={`/cart/${userId}`} className="text-xl">
-              <div className="flex flex-row">
-                장바구니
-                <TiShoppingCart className="text-2xl ml-1 mr-1" />
-              </div>
+              <CartStatus />
             </Link>
             <button onClick={onLogOutClickEventHandler} className="ml-4 text-xl">
               <div className="flex flex-row">

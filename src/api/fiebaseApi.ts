@@ -9,7 +9,7 @@ import { getStorage } from 'firebase/storage';
 
 //지역변수로 사용하기
 
-interface AddOrUpdateToCartProps {
+export interface AddOrUpdateToCartProps {
   userId: string;
   productId: string;
   quantity: number;

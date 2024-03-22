@@ -9,33 +9,20 @@ import { useEffect, useState } from 'react';
 
 import { TiShoppingCart } from 'react-icons/ti';
 import CartItem from '@/components/cart/CartItem';
+import { useReadCartData } from '@/utill/hooks/cart/useCart';
 
 export default function CartPage() {
-  const [userCarts, setUserCart] = useState<ProductType[]>([]);
+  const { data: carts, isLoading, error } = useReadCartData();
 
-  useEffect(() => {
-    const fetchCartData = async () => {
-      const cartRef = doc(db, 'carts', userId);
+  console.log('내가 카트', carts);
 
-      try {
-        const cartSnap = await getDoc(cartRef);
-        if (cartSnap.exists()) {
-          const cartData = cartSnap.data();
-
-          if (cartData.products && Array.isArray(cartData.products)) {
-            setUserCart(cartData.products);
-          }
-        }
-      } catch {}
-    };
-
-    fetchCartData();
-  }, []);
+  if (error) return console.log(error.message);
 
   const deliveryprice = 3000;
-  const hasProducts = userCarts && userCarts.length > 0;
-  const total = userCarts && userCarts.reduce((prev, current) => prev + current.price * current.quantity, 0);
-  const totalPrice = total + deliveryprice;
+  const hasProducts = carts && carts.length > 0;
+  const total = carts && carts.reduce((prev, current) => prev + current.price * current.quantity, 0);
+  const totalPrice = total;
+
   return (
     <div className="w-full h-lvh">
       <Header />
@@ -57,9 +44,7 @@ export default function CartPage() {
                 {!hasProducts && <p>장바구니에 상품이 없습니다. 열심히 쇼핑해주세요!</p>}
                 {hasProducts && (
                   <>
-                    <ul>
-                      {userCarts && userCarts.map((product) => <CartItem key={product.productId} product={product} />)}
-                    </ul>
+                    <ul>{carts && carts.map((product) => <CartItem key={product.productId} product={product} />)}</ul>
                   </>
                 )}
               </div>
