@@ -13,7 +13,6 @@ import { collection, doc, setDoc } from 'firebase/firestore';
 import { loginModalAction, loginState } from '@/store/modules/isModalToggle';
 import { setUserLogin } from '@/types/user-type';
 import { useAppDispatch, useAppSelector } from '@/utill/hooks/redux/useRedux';
-
 import { FaUserCheck } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { IoLogoGithub } from 'react-icons/io';

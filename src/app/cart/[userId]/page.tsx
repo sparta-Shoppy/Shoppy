@@ -23,7 +23,7 @@ export default function CartPage() {
   return (
     <div className="w-full h-lvh">
       <Header />
-      <article className="flex flex-col w-full items-center h-full">
+      <article className="flex flex-col w-full items-center h-full pt-40">
         <div className="w-4/5 h-4/5 items-center">
           <section className="flex flex-col items-center bg-10">
             <h1 className="flex flex-row text-5xl mb-10">
