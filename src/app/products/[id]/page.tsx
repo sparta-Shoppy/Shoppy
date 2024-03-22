@@ -12,7 +12,7 @@ import { IoHeartSharp } from 'react-icons/io5';
 import { stringTransform } from '@/utill/hooks/transform';
 import Cartbutton from '@/components/cart/CartButton';
 import { userState } from '@/store/modules/user';
-import { useAppSelector } from '@/utill/hooks/useRedux';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 
 export default function ProductDetailPage() {
   const [nowItem, setNowItem] = useState<ProductType[]>();

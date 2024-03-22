@@ -9,9 +9,9 @@ import { toast } from 'react-toastify';
 import { GrCheckbox } from 'react-icons/gr';
 import { FiCheckSquare } from 'react-icons/fi';
 import { HiLockClosed } from 'react-icons/hi2';
-import { useAppSelector } from '@/utill/hooks/useRedux';
 import { isAdminState, nicknameState, userState } from '@/store/modules/user';
 import askInput from '@/utill/hooks/detail/askInput';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 
 function Ask() {
   const [nowId, setNowId] = useState<string>('');

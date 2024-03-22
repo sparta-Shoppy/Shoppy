@@ -5,7 +5,7 @@ import { FaMinusCircle } from 'react-icons/fa';
 import { ProductType } from '@/types/product-type';
 
 import { useDeleteCartData, useUpdateCartData } from '@/utill/hooks/cart/useCart';
-import { useAppSelector } from '@/utill/hooks/useRedux';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { userState } from '@/store/modules/user';
 
 interface ProductProps {

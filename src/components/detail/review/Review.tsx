@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore';
 import { db } from '../../../api/fiebaseApi';
 import { NewReviewType } from '@/types/product-type';
-import { useAppSelector } from '@/utill/hooks/useRedux';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { nicknameState, userState } from '@/store/modules/user';
 import reviewInput from '@/utill/hooks/detail/reviewInput';
 
