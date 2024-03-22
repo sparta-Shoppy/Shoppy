@@ -4,10 +4,10 @@ import { toast } from 'react-toastify';
 import { app, db } from '@/api/fiebaseApi';
 import { User, createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { useAppDispatch, useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { joinModalAction, joinState } from '@/store/modules/isModalToggle';
 import { setUserJoin, userValidate } from '@/types/user-type';
 import { FaUserAstronaut } from 'react-icons/fa';
-import { useAppDispatch, useAppSelector } from '@/utill/hooks/redux/useRedux';
 import useInput from '@/utill/hooks/input/useInput';
 
 const Join = () => {
@@ -39,7 +39,7 @@ const Join = () => {
         const userCreate = await createUserWithEmailAndPassword(auth, email, password);
         const user = await userCreate.user;
         await updateProfile(user, {
-          displayName: user.displayName
+          displayName: nickname
         });
 
         const userId = auth.currentUser?.uid;

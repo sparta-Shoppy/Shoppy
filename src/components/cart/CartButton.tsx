@@ -11,7 +11,7 @@ interface CartButtonProps {
 export default function Cartbutton({ item, userId }: CartButtonProps) {
   const { createCartMutate } = useCreateCartData();
 
-  console.log('카트버튼', userId);
+  // console.log('카트버튼', userId);
 
   const onClickCart = () => {
     createCartMutate(

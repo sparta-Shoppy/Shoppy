@@ -1,7 +1,7 @@
-import { ProductType } from '@/types/product-type';
-
 import { userState } from '@/store/modules/user';
+import { ProductType } from '@/types/product-type';
 import { useAppSelector } from '@/utill/hooks/redux/useRedux';
+import Link from 'next/link';
 import { useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
 import Cartbutton from '../cart/CartButton';
@@ -22,7 +22,9 @@ function MainProductItems({ item }: { item: ProductType }) {
       key={item.productId}
       className="w-1/4 h-96 flex flex-wrap justify-center cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300 pb-5"
     >
-      <img src={item.image} alt="상품" className="w-full h-4/5 object-cover rounded-md" />
+      <Link href={`/products/${item.productId}`} className="w-full h-4/5">
+        <img src={item.image} alt="상품" className="w-full h-full object-cover rounded-md" />
+      </Link>
       <div className="w-full flex justify-between p-3">
         <div>
           <p className="text-lg">{item.title}</p>

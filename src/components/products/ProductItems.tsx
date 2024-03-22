@@ -1,8 +1,9 @@
 import { ProductType } from '@/types/product-type';
+import Link from 'next/link';
 import Cartbutton from '@/components/cart/CartButton';
-import { userState } from '@/store/modules/user';
 import { useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
+import { userState } from '@/store/modules/user';
 import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 
 function ProductItems({ item }: { item: ProductType }) {
@@ -19,11 +20,13 @@ function ProductItems({ item }: { item: ProductType }) {
   return (
     <div key={item.productId} className="w-1/4 p-5">
       <div className="h-full flex flex-col justify-between items-center ">
-        <img
-          src={item.image}
-          alt="상품이미지"
-          className="w-4/5 h-80 object-cover rounded-md hover:scale-95 transition-all duration-300 cursor-pointer"
-        />
+        <Link href={`/products/${item.productId}`}>
+          <img
+            src={item.image}
+            alt="상품이미지"
+            className="w-4/5 h-80 object-cover rounded-md hover:scale-95 transition-all duration-300 cursor-pointer"
+          />
+        </Link>
         <div className="w-4/5 mt-3 bg-slate-100 flex justify-center items-center text-black py-2 px-4 hover:bg-white rounded-md">
           <span className="text-xl">담기</span> <Cartbutton item={item} userId={userId} />
         </div>
