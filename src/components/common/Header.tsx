@@ -60,7 +60,7 @@ const Header = () => {
   console.log('유저아이디', userId);
   return (
     <>
-      <header className=" flex items-center m-auto w-11/12  justify-between">
+      <header className=" flex items-center m-auto justify-between fixed z-50 bg-white w-full pr-20 pl-20">
         <Link href={'/'}>
           <img
             src="https://github.com/sparta-Shoppy/Shoppy/blob/dev/public/assets/logo.png?raw=true"

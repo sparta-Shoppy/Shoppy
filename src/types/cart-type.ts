@@ -10,3 +10,8 @@ export interface UpdateCartProps {
   productId: string;
   quantity: number;
 }
+
+export interface DeleteCartProps {
+  userId: string;
+  productId: string;
+}

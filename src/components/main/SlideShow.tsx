@@ -15,7 +15,7 @@ const SlideShow = ({ images }: { images: any }) => {
   }, [images.length]); // images 배열의 길이가 변경될 때마다 useEffect 재실행
 
   return (
-    <div className="carousel w-full h-80 overflow-hidden relative">
+    <div className="carousel w-full h-80 relative pt-24">
       {images.map((image: any, index: any) => (
         <div
           key={`slide${index + 1}`}

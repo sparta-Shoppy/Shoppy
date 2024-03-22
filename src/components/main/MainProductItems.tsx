@@ -26,7 +26,7 @@ function MainProductItems({ item }: { item: ProductType }) {
       <img src={item.image} alt="상품" className="w-full h-4/5 object-cover rounded-md" />
       <div className="w-full flex justify-between p-3">
         <div>
-          <p>{item.title}</p>
+          <p className="text-lg">{item.title}</p>
           <p>{stringTransform(item.price)}</p>
         </div>
         <div className="flex justify-between gap-2 items-center pl-5">
