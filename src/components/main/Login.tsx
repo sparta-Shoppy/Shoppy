@@ -17,6 +17,10 @@ import { loginModalAction, loginState } from '@/store/modules/isModalToggle';
 import { setUserLogin } from '@/types/user-type';
 import { useAppDispatch, useAppSelector } from '@/utill/hooks/useRedux';
 import { FaUserCheck } from 'react-icons/fa';
+import gitIcon from '../../../public/assets/logo.png';
+import { IoLogoGithub } from 'react-icons/io';
+import { FcGoogle } from 'react-icons/fc';
+import { SiCoinmarketcap } from 'react-icons/si';
 
 const Login = () => {
   const auth = getAuth(app);
@@ -124,23 +128,33 @@ const Login = () => {
                 placeholder="비밀번호를 입력해주세요"
                 autoComplete="new-password"
               ></input>
-              <button type="submit" className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white mt-8">
-                로그인
-              </button>
-              <button
-                type="button"
-                onClick={onGoogleLoginHandler}
-                className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white mt-8"
-              >
-                구글
-              </button>
-              <button
-                type="button"
-                onClick={onGitHubLoginHandler}
-                className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white mt-8"
-              >
-                깃허브
-              </button>
+
+              <div className="flex items-center gap-3">
+                <SiCoinmarketcap className="text-4xl" />
+                <button type="submit" className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white ">
+                  로그인
+                </button>
+              </div>
+              <div className="flex items-center gap-3">
+                <FcGoogle className="text-4xl " />
+                <button
+                  type="button"
+                  onClick={onGoogleLoginHandler}
+                  className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white "
+                >
+                  구글
+                </button>
+              </div>
+              <div className="flex items-center gap-3 mb-2">
+                <IoLogoGithub className="text-4xl" />
+                <button
+                  type="button"
+                  onClick={onGitHubLoginHandler}
+                  className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white "
+                >
+                  깃허브
+                </button>
+              </div>
             </form>
           </div>
         </div>
