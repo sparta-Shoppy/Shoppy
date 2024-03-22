@@ -1,6 +1,8 @@
 import { userId } from '@/api/user';
 import { ProductType } from '@/types/product-type';
-import Cartbutton from '@/utill/hooks/Cart';
+
+import Cartbutton from '@/components/cart/CartButton';
+
 import { stringTransform } from '@/utill/hooks/transform';
 
 import { useState } from 'react';
