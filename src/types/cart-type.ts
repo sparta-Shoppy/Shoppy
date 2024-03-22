@@ -1,12 +1,6 @@
-export interface CartType {
-  productId: string;
-  image: string;
-  title: string;
-  info: string;
-  price: string;
-  quantity: number;
-}
+import { ProductType } from './product-type';
+
 export interface CartButtonType {
-  item: CartType;
+  item: ProductType;
   userId: string;
 }

@@ -65,7 +65,7 @@ const Header = () => {
         </Link>
         {/*로그인된 상태*/}
         {isUser ? (
-          <div className="flex flex-row">
+          <div className="flex flex-row items-center">
             <Link href={`/cart/${userId}`} className="text-xl">
               <CartStatus />
             </Link>

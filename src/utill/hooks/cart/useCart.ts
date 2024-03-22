@@ -1,6 +1,6 @@
 import { createCartData, readCartData } from '@/api/cartFirebaseApi';
 import { userId } from '@/api/user';
-import { CartButtonType, CartType } from '@/types/cart-type';
+import { CartButtonType } from '@/types/cart-type';
 import { ProductType } from '@/types/product-type';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 

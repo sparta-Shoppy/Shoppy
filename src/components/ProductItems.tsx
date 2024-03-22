@@ -1,12 +1,10 @@
 import { userId } from '@/api/user';
 import { ProductType } from '@/types/product-type';
-<<<<<<< HEAD
+
 import Cartbutton from '@/components/cart/CartButton';
-=======
-import Cartbutton from '@/utill/hooks/Cart';
+
 import { stringTransform } from '@/utill/hooks/transform';
 
->>>>>>> 049f49ab3d39c12a28913c5b63f010c1f84bc911
 import { useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
 import { LiaCartArrowDownSolid } from 'react-icons/lia';

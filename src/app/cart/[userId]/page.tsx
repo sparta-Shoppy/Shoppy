@@ -30,8 +30,8 @@ export default function CartPage() {
         <div className="w-4/5 h-4/5 items-center">
           <section className="flex flex-col items-center bg-10">
             <h1 className="flex flex-row text-5xl mb-10">
+              <TiShoppingCart className=" text-6xl -translate-y-3 mr-2" />
               장바구니
-              <TiShoppingCart className="ml-2" />
             </h1>
           </section>
           <div className="flex flex-row w-full mt-30 mb-5 text-2xl">
@@ -49,7 +49,7 @@ export default function CartPage() {
                 )}
               </div>
             </article>
-            <article className="flex flex-col w-1/4 mt-20 m-10 text-xl">
+            <article className="flex flex-col w-1/4  m-10 text-xl border p-9 h-52">
               <div className="flex flex-row justify-between">
                 <p>상품금액</p>
                 {!hasProducts ? <p> 원</p> : <p>{total}원</p>}
