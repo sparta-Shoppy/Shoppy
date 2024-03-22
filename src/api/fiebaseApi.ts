@@ -8,7 +8,7 @@ import { getStorage } from 'firebase/storage';
 
 //지역변수로 사용하기
 
-interface AddOrUpdateToCartProps {
+export interface AddOrUpdateToCartProps {
   userId: string;
   productId: string;
   quantity: number;
@@ -39,10 +39,6 @@ const firebaseApp = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 
 export const db = getFirestore(app);
-
-//쇼핑카트에 필요한 파이어베이스 3가지
-
-// // 2. 특정한 사용자의 쇼핑카트에 제품을 추가하는것
 
 export const addOrUpdateToCart = async ({ userId, productId, quantity }: AddOrUpdateToCartProps) => {
   try {
