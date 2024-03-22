@@ -41,7 +41,7 @@ export default function Cartbutton({ item, userId }: CartButtonProps) {
 
   return (
     <button onClick={onClickCart}>
-      <TiShoppingCart className="text-2xl ml-1 mr-1 hover:text-zinc-400" />
+      <TiShoppingCart className="text-3xl ml-1 mr-1 hover:text-zinc-400" />
     </button>
   );
 }
