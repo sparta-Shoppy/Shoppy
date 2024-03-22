@@ -1,11 +1,11 @@
 import { ProductType } from '@/types/product-type';
-
 import { stringTransform } from '@/utill/hooks/transform';
 import { useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
 import Cartbutton from '../cart/CartButton';
 import { userState } from '@/store/modules/user';
-import { useAppSelector } from '@/utill/hooks/useRedux';
+import Link from 'next/link';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 
 function MainProductItems({ item }: { item: ProductType }) {
   const [heart, setHeart] = useState(false);
@@ -23,7 +23,9 @@ function MainProductItems({ item }: { item: ProductType }) {
       key={item.productId}
       className="w-1/4 h-96 flex flex-wrap justify-center cursor-pointer rounded-md hover:shadow-lg hover:shadow hover:scale-110 transition-all duration-300 pb-5"
     >
-      <img src={item.image} alt="상품" className="w-full h-4/5 object-cover rounded-md" />
+      <Link href={`/products/${item.productId}`}>
+        <img src={item.image} alt="상품" className="w-full h-4/5 object-cover rounded-md" />
+      </Link>
       <div className="w-full flex justify-between p-3">
         <div>
           <p className="text-lg">{item.title}</p>
