@@ -10,12 +10,9 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Join from '../main/Join';
 import Login from '../main/Login';
-
 import CartStatus from '../cart/CartStatus';
-
 import { FaUserMinus } from 'react-icons/fa';
 import { FaUserCog } from 'react-icons/fa';
-
 import { useAppDispatch, useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { userState } from '@/store/modules/user';
 
