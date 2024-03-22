@@ -1,5 +1,5 @@
 import { userId } from '@/api/user';
-import { stringTransform } from '@/hooks/transform';
+import { stringTransform } from '@/utill/hooks/transform';
 import { ProductType } from '@/types/product-type';
 import Cartbutton from '@/utill/hooks/Cart';
 import Link from 'next/link';
@@ -27,7 +27,7 @@ function MainProductItems({ item }: { item: ProductType }) {
       <div className="flex justify-between p-3">
         <div>
           <p>{item.title}</p>
-          <p>{stringTransform(item.price)}</p>
+          {/* <p>{stringTransform(item.price)}</p> */}
         </div>
         <div className="flex justify-end gap-2 items-center pl-5">
           <button onClick={handleHeart}>

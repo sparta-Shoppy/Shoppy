@@ -4,9 +4,10 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'next/navigation';
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore';
-import { db } from '../api/fiebaseApi';
+import { db } from '../../../api/fiebaseApi';
 import { NewReviewType } from '@/types/product-type';
-import { useAppSelector } from '@/hooks/useRedux';
+import { useAppSelector } from '@/utill/hooks/useRedux';
+import { nicknameState, userState } from '@/store/modules/user';
 
 function Review() {
   const [content, setContent] = useState<string>('');
@@ -16,7 +17,8 @@ function Review() {
   const [review, setReview] = useState<NewReviewType[]>();
 
   const params = useParams();
-  const userUid = useAppSelector((state) => state.user.value);
+  const userUid = useAppSelector(userState);
+  const nickname = useAppSelector(nicknameState);
   const loginNow: any = userUid;
 
   // 작성
@@ -24,6 +26,7 @@ function Review() {
     e.preventDefault();
     const newReview = {
       writerId: userUid,
+      nickname,
       content,
       createdAt: new Date().toLocaleString('ko', {
         year: '2-digit',
@@ -152,7 +155,7 @@ function Review() {
           return (
             <div className="m-4" key={prev.reviewId}>
               <div>
-                <span className="text-xl font-bold mr-2">{prev.writerId}</span>
+                <span className="text-xl font-bold mr-2">{prev.nickname}</span>
                 <span className="text-sm text-gray-400">{prev.createdAt}</span>
               </div>
               <div className="flex justify-between items-center p-2">

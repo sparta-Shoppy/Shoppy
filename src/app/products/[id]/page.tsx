@@ -1,8 +1,8 @@
 'use client';
 
 import { db } from '@/api/fiebaseApi';
-import Ask from '@/components/Ask';
-import Review from '@/components/Review';
+import Ask from '@/components/detail/ask/Ask';
+import Review from '@/components/detail/review/Review';
 import Header from '@/components/common/Header';
 import { ProductType } from '@/types/product-type';
 import Cartbutton from '@/utill/hooks/Cart';
@@ -11,7 +11,7 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
 import { userId } from '@/api/user';
-import { stringTransform } from '@/hooks/transform';
+import { stringTransform } from '@/utill/hooks/transform';
 
 export default function ProductDetailPage() {
   const [nowItem, setNowItem] = useState<ProductType[]>();

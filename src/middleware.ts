@@ -6,7 +6,6 @@ import { NextRequest, NextResponse } from 'next/server';
 //현재 구조에선 클라이언트 컴포넌트에서 사용할 수 있게 별도의 쿠키 생성 및 삭제 로직 구현
 export function middleware(request: NextRequest, response: NextResponse) {
   const cookieStore = cookies();
-
   const cookie = cookieStore.getAll();
 
   const adminCookie = cookie.find((item) => item.name === 'admin');

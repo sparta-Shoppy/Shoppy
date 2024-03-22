@@ -1,24 +1,21 @@
 'use client';
 
+import { deleteAdminCookie } from '@/api/cookie';
 import { app } from '@/api/fiebaseApi';
+import { onUserStateChange } from '@/api/login';
+import { userAction } from '@/store/modules/user';
+import { useAppDispatch } from '@/utill/hooks/useRedux';
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Join from '../main/Join';
 import Login from '../main/Login';
-import { onUserStateChange } from '@/api/login';
-import { deleteAdminCookie } from '@/api/cookie';
-import { useAppDispatch } from '@/hooks/useRedux';
-import { userAction, userAdmin } from '@/store/modules/user';
-import { useRouter } from 'next/navigation';
-
-import { TiShoppingCart } from 'react-icons/ti';
-import { FaUserMinus } from 'react-icons/fa';
-import { FaUserCog } from 'react-icons/fa';
-import { FaUserCheck } from 'react-icons/fa';
 import { userId } from '@/api/user';
-import { cookies } from 'next/headers';
+import { FaUserCog, FaUserMinus } from 'react-icons/fa';
+import { TiShoppingCart } from 'react-icons/ti';
 
+//userId 사용
 const Header = () => {
   const auth = getAuth(app);
 
@@ -29,25 +26,25 @@ const Header = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    //로그인 및 비로그인 여부 확인
     onUserStateChange(auth, (user: any) => {
       if (user) {
         setIsAdmin(user.isAdmins ?? false);
         setIsUser(true);
-        dispatch(userAction(user.uid));
+        console.log('user.displayName', user.displayName);
+        //store에 user 정보 저장
+        dispatch(userAction({ userId: user.uid, nickname: user.displayName, adminReal: isAdmin }));
       } else {
-        setIsAdmin(false); //1) false로 준 이유?
+        setIsAdmin(false);
       }
     });
   }, []);
-
-  useEffect(() => {
-    dispatch(userAdmin(isAdmin));
-  }, [isAdmin]);
 
   //로그아웃 기능
   const onLogOutClickEventHandler = () => {
     signOut(auth);
     deleteAdminCookie();
+    window.localStorage.removeItem('user');
 
     router.replace('/');
     setIsUser(false);
@@ -55,7 +52,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex items-center m-auto w-11/12  justify-between">
+      <header className="flex items-center m-auto w-11/12  justify-between">
         <Link href={'/'}>
           <img
             src="https://github.com/sparta-Shoppy/Shoppy/blob/dev/public/assets/logo.png?raw=true"
@@ -67,13 +64,13 @@ const Header = () => {
         {isUser ? (
           <div className="flex flex-row">
             <Link href={`/cart/${userId}`} className="text-xl">
-              <div className="flex flex-row">
+              <div className="flex flex-row hover:text-slate-300 ">
                 장바구니
                 <TiShoppingCart className="text-2xl ml-1 mr-1" />
               </div>
             </Link>
             <button onClick={onLogOutClickEventHandler} className="ml-4 text-xl">
-              <div className="flex flex-row">
+              <div className="flex flex-row hover:text-slate-300 ">
                 로그아웃
                 <FaUserMinus className="text-2xl ml-1 mr-1" />
               </div>
@@ -81,7 +78,7 @@ const Header = () => {
             {/* 관리자 상태 */}{' '}
             {isAdmin && (
               <Link href={'/admin'} className="text-xl">
-                <div className="flex flex-row ml-3">
+                <div className="flex flex-row ml-3 hover:text-slate-300 ">
                   관리자창
                   <FaUserCog className="text-2xl ml-1 mr-1" />
                 </div>
@@ -89,13 +86,12 @@ const Header = () => {
             )}
           </div>
         ) : (
-          //  비로그인 상태
           <div className="w-72 flex justify-evenly items-center text-l">
             <Join />
             <Login />
           </div>
         )}
-      </div>
+      </header>
     </>
   );
 };

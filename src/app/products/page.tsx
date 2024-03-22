@@ -5,8 +5,7 @@ import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
 import { ProductType } from '@/types/product-type';
 
-import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
-import Link from 'next/link';
+import { collection, doc, getDoc, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { useSearchParams } from 'next/navigation';
 
 import { useEffect, useState } from 'react';
@@ -23,6 +22,11 @@ export default function ProductPage() {
   useEffect(() => {
     const fetchProductsData = async () => {
       try {
+        const docRef = doc(db, 'user');
+        const docSnap = await getDoc(docRef);
+
+        console.log(docSnap);
+
         const querySnapshot = await getDocs(
           query(
             collection(db, 'product'),

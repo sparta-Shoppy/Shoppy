@@ -3,13 +3,14 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore';
-import { db } from '../api/fiebaseApi';
+import { db } from '../../../api/fiebaseApi';
 import { NewAskType } from '@/types/product-type';
 import { toast } from 'react-toastify';
-import { useAppSelector } from '@/hooks/useRedux';
 import { GrCheckbox } from 'react-icons/gr';
 import { FiCheckSquare } from 'react-icons/fi';
 import { HiLockClosed } from 'react-icons/hi2';
+import { useAppSelector } from '@/utill/hooks/useRedux';
+import { isAdminState, nicknameState, userState } from '@/store/modules/user';
 
 function Ask() {
   const [content, setContent] = useState<string>('');
@@ -22,8 +23,9 @@ function Ask() {
   const [ask, setAsk] = useState<NewAskType[]>();
 
   const params = useParams();
-  const userUid = useAppSelector((state) => state.user.value);
-  const adminNow = useAppSelector((state) => state.user.adminReal);
+  const userUid = useAppSelector(userState);
+  const adminNow = useAppSelector(isAdminState);
+  const nickname = useAppSelector(nicknameState);
   const loginNow: any = userUid;
 
   // 작성
@@ -32,6 +34,7 @@ function Ask() {
     const newAsk = {
       writerId: userUid,
       content,
+      nickname,
       createdAt: new Date().toLocaleString('ko', {
         year: '2-digit',
         month: '2-digit',
@@ -211,7 +214,7 @@ function Ask() {
           return (
             <div className="m-4" key={prev.askId}>
               <div className="flex gap-1">
-                <span className="text-xl font-bold">{prev.writerId}</span>
+                <span className="text-xl font-bold">{prev.nickname}</span>
                 <span className="text-sm text-gray-400 mt-1.5">{prev.createdAt}</span>
                 {prev.answer === '답변이 아직 없습니다.' ? (
                   <GrCheckbox className="mt-1.5" />

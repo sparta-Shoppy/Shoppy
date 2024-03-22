@@ -18,6 +18,7 @@ export interface NewReviewType {
   content: string;
   createdAt: string;
   productId: string;
+  nickname: string;
 }
 
 export interface NewAskType {
@@ -28,6 +29,7 @@ export interface NewAskType {
   productId: string;
   secret: boolean;
   answer: string;
+  nickname: string;
 }
 
 export type CategoryType = '과일/채소' | '고기' | '가공식품' | '해산물';

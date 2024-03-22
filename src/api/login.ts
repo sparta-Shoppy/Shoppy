@@ -1,5 +1,5 @@
 import { database } from '@/api/fiebaseApi';
-import { Auth, User, onAuthStateChanged } from 'firebase/auth';
+import { Auth, onAuthStateChanged } from 'firebase/auth';
 import { get, ref } from 'firebase/database';
 import { setAdminCookie, setUserCookie } from './cookie';
 
@@ -8,6 +8,12 @@ export async function onUserStateChange(auth: Auth, call: any) {
   onAuthStateChanged(auth, async (user) => {
     // 로그인 여부 확인
     const updatedUser = user ? await admins(user) : null;
+
+    if (updatedUser) {
+      // 로컬스토리지에 user 저장
+      const userString = JSON.stringify(user);
+      window.localStorage.setItem('user', userString);
+    }
 
     call(updatedUser);
   });
@@ -21,13 +27,13 @@ async function admins(user: any) {
     const checkRef = await get(ref(database, 'admins'));
     if (checkRef.exists()) {
       const admins = checkRef.val();
-      const isAdmins = admins.includes(user.uid); //로그인된 user가 관리자일 경우 isAdmins= true, 사용자일 경우 isAdmins= false
+      const isAdmins = admins.includes(user.uid);
+
       isAdmins ? setAdminCookie(user.uid) : setUserCookie(user.uid);
       return { ...user, isAdmins };
     }
     return user;
   } catch (error) {
-    alert('에러발생했습니다.');
-    return null;
+    console.log('login.ts', error);
   }
 }
