@@ -28,6 +28,7 @@ function MainProductItems({ item }: { item: ProductType }) {
       <div className="w-full flex justify-between p-3">
         <div>
           <p className="text-lg">{item.title}</p>
+          <p className="text-lg">{item.info}</p>
           <p>{new Intl.NumberFormat('ko-KR').format(item.price)} 원</p>
         </div>
         <div className="flex justify-between gap-2 items-center pl-5">

@@ -20,11 +20,11 @@ function ProductItems({ item }: { item: ProductType }) {
   return (
     <div key={item.productId} className="w-1/4 p-5">
       <div className="h-full flex flex-col justify-between items-center ">
-        <Link href={`/products/${item.productId}`}>
+        <Link href={`/products/${item.productId}`} className="w-4/5 h-80">
           <img
             src={item.image}
             alt="상품이미지"
-            className="w-4/5 h-80 object-cover rounded-md hover:scale-95 transition-all duration-300 cursor-pointer"
+            className="w-full h-80 object-cover rounded-md hover:scale-95 transition-all duration-300 cursor-pointer"
           />
         </Link>
         <div className="w-4/5 mt-3 bg-slate-100 flex justify-center items-center text-black py-2 px-4 hover:bg-white rounded-md">
@@ -32,6 +32,7 @@ function ProductItems({ item }: { item: ProductType }) {
         </div>
         <div className="pt-2 w-4/5">
           <p className="text-lg font-semibold">{item.title}</p>
+          <p className="text-lg font-semibold">{item.info}</p>
           <div className="flex justify-between items-center">
             <div>
               <p className="text-lg font-semibold">{new Intl.NumberFormat('ko-KR').format(item.price)} 원</p>
