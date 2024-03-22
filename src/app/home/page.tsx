@@ -1,7 +1,6 @@
 'use client';
 import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
-import SearchProduct from '@/components/common/SearchProduct';
 import MainProductItems from '@/components/main/MainProductItems';
 import SlideShow from '@/components/main/SlideShow';
 import { ProductType } from '@/types/product-type';
@@ -44,7 +43,7 @@ export default function HomePage() {
 
   useEffect(() => {
     refetch();
-  }, [data]);
+  }, [selectedTab, refetch]);
 
   if (isLoading) {
     return (
@@ -62,7 +61,6 @@ export default function HomePage() {
   return (
     <div className="h-screen ">
       <Header />
-      <SearchProduct />
       <SlideShow images={images} />
       <div className="flex justify-evenly w-4/5 p-10 m-auto text-xl">
         <Link href={'/products?category=과일/채소'} className="main__tabs-field">

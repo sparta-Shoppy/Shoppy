@@ -22,20 +22,6 @@ const SlideShow = ({ images }: { images: any }) => {
           className={`carousel-item relative w-full ${index === currentIndex ? '' : 'hidden'}`}
         >
           <img src={image} className="w-full h-80" alt={`Slide ${index + 1}`} />
-          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a
-              href={`#slide${index === 0 ? images.length : index}`}
-              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
-            >
-              ❮
-            </a>
-            <a
-              href={`#slide${index === images.length - 1 ? 1 : index + 2}`}
-              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
-            >
-              ❯
-            </a>
-          </div>
         </div>
       ))}
     </div>

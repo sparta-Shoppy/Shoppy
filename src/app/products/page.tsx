@@ -1,7 +1,6 @@
 'use client';
 import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
-import SearchProduct from '@/components/common/SearchProduct';
 import ProductItems from '@/components/products/ProductItems';
 import { ProductType } from '@/types/product-type';
 import { useQuery } from '@tanstack/react-query';
@@ -65,7 +64,6 @@ export default function ProductPage() {
   return (
     <div>
       <Header />
-      <SearchProduct />
       <div className="w-11/12 flex justify-end ">
         <span
           className={`cursor-pointer mr-2 ${selectedTab ? 'text-zinc-400' : 'text-black hover:text-zinc-400'}`}
