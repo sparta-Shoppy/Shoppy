@@ -218,39 +218,6 @@ function Ask() {
         </div>
       </form>
 
-      {/* <form onSubmit={askSubmit} className="w-2/6 flex">
-        <div className="w-full flex flex-col ">
-          <input
-            type="text"
-            name="content"
-            value={content}
-            onChange={onChangeHandler}
-            placeholder="내용을 입력해 주세요"
-            maxLength={20}
-            required
-            className="w-4/5 border rounded-md p-1 ml-2"
-          />
-
-          <div className="w-full flex ">
-            <label htmlFor="secretCheck">
-              <input
-                id="secretCheck"
-                type="checkbox"
-                checked={askSecret}
-                onChange={(e) => {
-                  setAskSecret(e.target.checked);
-                }}
-              />
-              비밀 글 등록
-            </label>
-          </div>
-        </div>
-
-        <button type="submit" className="w-28 p-1 bg-white hover:bg-gray-100 text-gray-800  border rounded">
-          등록
-        </button>
-      </form> */}
-
       <div>
         {ask?.map((prev) => {
           return (

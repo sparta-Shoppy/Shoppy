@@ -9,6 +9,7 @@ import { NewReviewType } from '@/types/product-type';
 import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { nicknameState, userState } from '@/store/modules/user';
 import reviewInput from '@/utill/hooks/detail/reviewInput';
+import { IoChatbubblesOutline } from 'react-icons/io5';
 
 function Review() {
   const [nowId, setNowId] = useState<string>('');
@@ -154,15 +155,63 @@ function Review() {
         </button>
       </form>
 
-      <div>
-        {review?.map((prev) => {
-          return (
-            <div className="m-4" key={prev.reviewId}>
+      <div className="w-2/5 flex flex-col gap-2 pt-16 p-5">
+        {review?.map((prev) => (
+          <div key={prev.reviewId} className="flex flex-col items-start gap-2">
+            <div className="flex gap-2 items-center">
+              <IoChatbubblesOutline className="text-2xl" />
+              <span className="text-xl">{prev.nickname}</span>
+            </div>
+            <div className="flex items-center gap-3 mb-10">
+              {changeNow && nowId === prev.reviewId ? (
+                <input
+                  type="text"
+                  name="changeContent"
+                  value={changeContent}
+                  maxLength={20}
+                  onChange={onChangeHandler}
+                  required
+                  className="border p-1 rounded-md"
+                />
+              ) : (
+                <div className="text-3xl">{prev.content}</div>
+              )}
+              <span className="text-sm text-gray-400">{prev.createdAt}</span>
+              {userUid === prev.writerId && !changeNow ? (
+                <div className="ml-16 flex gap-8">
+                  <button className="review__button-field" onClick={() => reviewChangeBtn(prev)}>
+                    수정
+                  </button>
+                  <button className="review__button-field" onClick={() => reviewDelete(prev.reviewId)}>
+                    삭제
+                  </button>
+                </div>
+              ) : null}
+              {changeNow && nowId === prev.reviewId ? (
+                <div className="ml-16 flex gap-8">
+                  <button className="review__button-field" onClick={() => reviewChange(prev)}>
+                    수정완료
+                  </button>
+                  <button className="review__button-field" onClick={reviewChangeCancel}>
+                    취소
+                  </button>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* <div className="w-2/5 flex flex-col gap-2 pt-16 p-5">
+        {review?.map((prev) => (
+          <div key={prev.reviewId} className="flex flex-row items-start gap-2">
+            <IoChatbubblesOutline className="text-3xl p-1" />
+            <span className="text-xl">{prev.nickname}</span>
+            <div className="flex flex-col">
               <div>
-                <span className="text-xl font-bold mr-2">{prev.nickname}</span>
-                <span className="text-sm text-gray-400">{prev.createdAt}</span>
+                <div className="text-3xl">{prev.content}</div>
               </div>
-              <div className="flex justify-between items-center p-2">
+              <div className="flex gap-2 items-center">
                 {changeNow && nowId === prev.reviewId ? (
                   <input
                     type="text"
@@ -173,39 +222,33 @@ function Review() {
                     required
                     className="admin__input-field"
                   />
-                ) : (
-                  <div className="text-3xl">{prev.content}</div>
-                )}
-                {userUid === prev.writerId ? (
-                  <div className="flex gap-2">
-                    {changeNow && nowId === prev.reviewId ? (
-                      <>
-                        <button className="review__button-field" onClick={() => reviewChange(prev)}>
-                          수정완료
-                        </button>
-                        <button className="review__button-field" onClick={reviewChangeCancel}>
-                          취소
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button className="review__button-field" onClick={() => reviewChangeBtn(prev)}>
-                          수정
-                        </button>
-                        <button className="review__button-field" onClick={() => reviewDelete(prev.reviewId)}>
-                          삭제
-                        </button>
-                      </>
-                    )}
-                  </div>
-                ) : (
-                  <></>
-                )}
+                ) : null}
+                <span className="text-sm text-gray-400">{prev.createdAt}</span>
               </div>
             </div>
-          );
-        })}
-      </div>
+            {userUid === prev.writerId && !changeNow ? (
+              <div className="flex gap-2">
+                <button className="review__button-field" onClick={() => reviewChangeBtn(prev)}>
+                  수정
+                </button>
+                <button className="review__button-field" onClick={() => reviewDelete(prev.reviewId)}>
+                  삭제
+                </button>
+              </div>
+            ) : null}
+            {changeNow && nowId === prev.reviewId ? (
+              <div className="flex gap-2">
+                <button className="review__button-field" onClick={() => reviewChange(prev)}>
+                  수정완료
+                </button>
+                <button className="review__button-field" onClick={reviewChangeCancel}>
+                  취소
+                </button>
+              </div>
+            ) : null}
+          </div>
+        ))}
+      </div> */}
     </div>
   );
 }

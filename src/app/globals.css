@@ -57,5 +57,5 @@ body {
 }
 
 .review__button-field {
-  @apply bg-white hover:bg-gray-100 text-gray-800 py-2 px-4  rounded;
+  @apply bg-white hover:text-zinc-500 text-gray-800 rounded;
 }
