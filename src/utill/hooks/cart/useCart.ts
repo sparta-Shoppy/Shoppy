@@ -2,9 +2,8 @@ import { createCartData, readCartData } from '@/api/cartFirebaseApi';
 import { userId } from '@/api/user';
 import { CartButtonType } from '@/types/cart-type';
 import { ProductType } from '@/types/product-type';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-/** useQuery 모음 */
 export function useReadCartData() {
   return useQuery<ProductType[], Error>({
     queryKey: ['carts', userId],
@@ -23,10 +22,3 @@ export function useCreateCartData() {
   });
   return { createCartMutate };
 }
-
-// /** useMutation 모음 */
-// export function useAddCartMutation () {
-//   return useMutation({
-//     mutationFn: updateDoc(); //~~~~
-//   })
-// }

@@ -7,7 +7,6 @@ import { stringTransform } from '@/utill/hooks/transform';
 
 import { useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
-import { LiaCartArrowDownSolid } from 'react-icons/lia';
 
 function ProductItems({ item }: { item: ProductType }) {
   const [heart, setHeart] = useState(false);
@@ -33,13 +32,13 @@ function ProductItems({ item }: { item: ProductType }) {
         </button>
         <div className="pt-2 w-4/5">
           <p className="text-lg font-semibold">{item.title}</p>
-          <div className="flex justify-between items-center mt-2">
+          <div className="flex justify-between items-center">
             <div>
               <p className="text-lg font-semibold">{item.price ? stringTransform(item.price) : null} 원</p>
             </div>
             <div className="flex gap-2 items-center">
               <button onClick={handleHeart}>
-                <IoHeartSharp className={`${heart ? 'text-3xl text-rose-500' : 'text-3xl hover:text-rose-500'}`} />
+                <IoHeartSharp className={`text-4xl${heart ? ' text-rose-500' : ' hover:text-rose-500'}`} />
               </button>
             </div>
           </div>
