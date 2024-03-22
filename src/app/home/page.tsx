@@ -2,8 +2,8 @@
 import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
 import SearchProduct from '@/components/common/SearchProduct';
-import { stringTransform } from '@/utill/hooks/transform';
 import MainProductItems from '@/components/main/MainProductItems';
+import SlideShow from '@/components/main/SlideShow';
 import { ProductType } from '@/types/product-type';
 import { useQuery } from '@tanstack/react-query';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
@@ -58,81 +58,12 @@ export default function HomePage() {
   if (isError) {
     toast.error('데이터를 가져올 수 없습니다');
   }
-
+  const images = ['assets/main1.PNG', 'assets/main2.PNG', 'assets/main3.PNG', 'assets/main4.PNG'];
   return (
     <div className="h-screen ">
       <Header />
       <SearchProduct />
-      <div className="carousel w-full h-80  overflow-hidden relative">
-        <div id="slide1" className="carousel-item relative w-full">
-          <img src="assets/main1.PNG" className="w-full h-80" />
-          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a
-              href="#slide4"
-              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
-            >
-              ❮
-            </a>
-            <a
-              href="#slide2"
-              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
-            >
-              ❯
-            </a>
-          </div>
-        </div>
-        <div id="slide2" className="carousel-item relative w-full">
-          <img src="assets/main2.PNG" className="w-full h-80" />
-          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a
-              href="#slide1"
-              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
-            >
-              ❮
-            </a>
-            <a
-              href="#slide3"
-              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
-            >
-              ❯
-            </a>
-          </div>
-        </div>
-        <div id="slide3" className="carousel-item relative w-full">
-          <img src="assets/main3.PNG" className="w-full h-80" />
-          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a
-              href="#slide2"
-              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
-            >
-              ❮
-            </a>
-            <a
-              href="#slide4"
-              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
-            >
-              ❯
-            </a>
-          </div>
-        </div>
-        <div id="slide4" className="carousel-item relative w-full">
-          <img src="assets/main4.PNG" className="w-full h-80" />
-          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a
-              href="#slide3"
-              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
-            >
-              ❮
-            </a>
-            <a
-              href="#slide1"
-              className="btn btn-circle bg-opacity-35 bg-white rounded-full p-3 hover:scale-125 transition-transform"
-            >
-              ❯
-            </a>
-          </div>
-        </div>
-      </div>
+      <SlideShow images={images} />
       <div className="flex justify-evenly w-4/5 p-10 m-auto text-xl">
         <Link href={'/products?category=과일/채소'} className="main__tabs-field">
           <GiFruitBowl /> 과일/채소
