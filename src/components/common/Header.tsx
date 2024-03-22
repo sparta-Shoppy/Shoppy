@@ -11,19 +11,11 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Join from '../main/Join';
 import Login from '../main/Login';
+import { userId } from '@/api/user';
+import CartStatus from '../cart/CartStatus';
 
-<<<<<<< HEAD
 import { FaUserMinus } from 'react-icons/fa';
 import { FaUserCog } from 'react-icons/fa';
-import { FaUserCheck } from 'react-icons/fa';
-import { userId } from '@/api/user';
-import { cookies } from 'next/headers';
-import CartStatus from '../cart/CartStatus';
-=======
-import { userId } from '@/api/user';
-import { FaUserCog, FaUserMinus } from 'react-icons/fa';
-import { TiShoppingCart } from 'react-icons/ti';
->>>>>>> 049f49ab3d39c12a28913c5b63f010c1f84bc911
 
 //userId 사용
 const Header = () => {
@@ -60,6 +52,7 @@ const Header = () => {
     setIsUser(false);
   };
 
+  console.log('유저아이디', userId);
   return (
     <>
       <header className="flex items-center m-auto w-11/12  justify-between">
@@ -74,14 +67,7 @@ const Header = () => {
         {isUser ? (
           <div className="flex flex-row">
             <Link href={`/cart/${userId}`} className="text-xl">
-<<<<<<< HEAD
               <CartStatus />
-=======
-              <div className="flex flex-row hover:text-slate-300 ">
-                장바구니
-                <TiShoppingCart className="text-2xl ml-1 mr-1" />
-              </div>
->>>>>>> 049f49ab3d39c12a28913c5b63f010c1f84bc911
             </Link>
             <button onClick={onLogOutClickEventHandler} className="ml-4 text-xl">
               <div className="flex flex-row hover:text-slate-300 ">
