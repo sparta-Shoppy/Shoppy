@@ -46,7 +46,7 @@ export default function ProductPage() {
 
   useEffect(() => {
     refetch();
-  }, [data]);
+  }, [selectedTab, refetch]);
 
   if (isLoading) {
     return (

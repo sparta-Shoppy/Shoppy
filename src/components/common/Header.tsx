@@ -11,14 +11,19 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Join from '../main/Join';
 import Login from '../main/Login';
-import { userId } from '@/api/user';
+
 import CartStatus from '../cart/CartStatus';
 
 import { FaUserMinus } from 'react-icons/fa';
 import { FaUserCog } from 'react-icons/fa';
 
+import { useAppSelector } from '@/utill/hooks/useRedux';
+import { userState } from '@/store/modules/user';
+
 //userId 사용
 const Header = () => {
+  const userId = useAppSelector(userState);
+
   const auth = getAuth(app);
 
   const [isAdmin, setIsAdmin] = useState(false);
@@ -55,7 +60,7 @@ const Header = () => {
   console.log('유저아이디', userId);
   return (
     <>
-      <header className="flex items-center m-auto w-11/12  justify-between">
+      <header className=" flex items-center m-auto w-11/12  justify-between">
         <Link href={'/'}>
           <img
             src="https://github.com/sparta-Shoppy/Shoppy/blob/dev/public/assets/logo.png?raw=true"
