@@ -1,9 +1,5 @@
-import { db } from '@/api/fiebaseApi';
-
 import { ProductType } from '@/types/product-type';
 import { useCreateCartData } from '@/utill/hooks/cart/useCart';
-
-import { doc, getDoc, updateDoc, setDoc, arrayUnion } from 'firebase/firestore';
 import { TiShoppingCart } from 'react-icons/ti';
 import { toast } from 'react-toastify';
 
@@ -14,6 +10,8 @@ interface CartButtonProps {
 
 export default function Cartbutton({ item, userId }: CartButtonProps) {
   const { createCartMutate } = useCreateCartData();
+
+  // console.log('카트버튼', userId);
 
   const onClickCart = () => {
     createCartMutate(
@@ -34,13 +32,6 @@ export default function Cartbutton({ item, userId }: CartButtonProps) {
         userId: userId
       },
       {
-        onSuccess: () => {
-          if (item === item) {
-            toast.success('장바구니에 담겨있는 상품입니다.');
-          } else {
-            toast.success('장바구니에 추가되었습니다.');
-          }
-        },
         onError: () => {
           toast.error('장바구니에 추가하지 못했습니다.');
         }

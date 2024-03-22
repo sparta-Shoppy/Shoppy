@@ -1,27 +1,20 @@
 'use client';
 
-import { db } from '@/api/fiebaseApi';
-import { userId } from '@/api/user';
 import Header from '@/components/common/Header';
-import { ProductType } from '@/types/product-type';
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
 
 import { TiShoppingCart } from 'react-icons/ti';
 import CartItem from '@/components/cart/CartItem';
 import { useReadCartData } from '@/utill/hooks/cart/useCart';
 
 export default function CartPage() {
-  const { data: carts, isLoading, error } = useReadCartData();
+  const { data: carts } = useReadCartData();
 
-  console.log('내가 카트', carts);
-
-  if (error) return console.log(error.message);
+  const formatter = new Intl.NumberFormat('ko-KR');
 
   const deliveryprice = 3000;
   const hasProducts = carts && carts.length > 0;
   const total = carts && carts.reduce((prev, current) => prev + current.price * current.quantity, 0);
-  const totalPrice = total;
+  const totalPrice = formatter.format(total! + deliveryprice);
 
   return (
     <div className="w-full h-lvh">
@@ -52,18 +45,18 @@ export default function CartPage() {
             <article className="flex flex-col w-1/4  m-10 text-xl border p-9 h-52">
               <div className="flex flex-row justify-between">
                 <p>상품금액</p>
-                {!hasProducts ? <p> 원</p> : <p>{total}원</p>}
+                {!hasProducts ? <p> 원</p> : <p>{formatter.format(total!)}원</p>}
               </div>
               <div className="flex flex-row justify-between mt-3 text-[#ccc]">
                 <p>배송비</p>
-                {!hasProducts ? <p> 원</p> : <p> 3000원</p>}
+                {!hasProducts ? <p> 원</p> : <p> 3,000원</p>}
               </div>
 
               <div className="flex flex-row justify-between text-2xl mt-5 border-t-2 border-[#B4B4B8]-500">
                 <p className="mt-5">결제예정금액</p>
-                <p className="mt-5">
-                  <span className="text-3xl">{totalPrice}</span>원
-                </p>
+                <div className="mt-5">
+                  {!hasProducts ? <p>원</p> : <span className="text-3xl">{totalPrice}원</span>}
+                </div>
               </div>
             </article>
           </section>

@@ -1,4 +1,3 @@
-import { userId } from '@/api/user';
 import { ProductType } from '@/types/product-type';
 import Link from 'next/link';
 import Cartbutton from '@/components/cart/CartButton';
@@ -7,9 +6,13 @@ import { stringTransform } from '@/utill/hooks/transform';
 
 import { useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
+import { userState } from '@/store/modules/user';
+import { useAppSelector } from '@/utill/hooks/useRedux';
 
 function ProductItems({ item }: { item: ProductType }) {
   const [heart, setHeart] = useState(false);
+
+  const userId = useAppSelector(userState);
 
   // 하트 클릭 시 색상 변경
   const handleHeart = () => {

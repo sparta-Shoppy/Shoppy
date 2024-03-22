@@ -1,8 +1,7 @@
 import { ProductType } from '@/types/product-type';
-import { arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from './fiebaseApi';
-import { CartType } from '@/types/cart-type';
-import { userId } from './user';
+import { UpdateCartProps } from '@/types/cart-type';
 
 export async function readCartData(userId: string): Promise<ProductType[]> {
   const cartRef = doc(db, 'carts', userId);
@@ -17,7 +16,7 @@ export async function readCartData(userId: string): Promise<ProductType[]> {
   return [];
 }
 
-export async function createCartData(item: CartType, userId: string): Promise<void> {
+export async function createCartData(item: ProductType, userId: string): Promise<void> {
   //void로 해준 이유는 생성만 하고 별도의 값을 반환하지 않기 때문
   const cartRef = doc(db, 'carts', userId);
   const cartSnapshot = await getDoc(cartRef);
@@ -33,5 +32,31 @@ export async function createCartData(item: CartType, userId: string): Promise<vo
     await setDoc(cartRef, {
       products: [item]
     });
+  }
+}
+
+export async function updateCartData({ userId, productId, quantity }: UpdateCartProps): Promise<void> {
+  const cartRef = doc(db, 'carts', userId);
+  const cartSnap = await getDoc(cartRef);
+  const products = cartSnap.data()?.products;
+
+  const updateProducts = products.map((item: ProductType) => {
+    if (item.productId === productId) {
+      return { ...item, quantity: quantity };
+    }
+    return item;
+  });
+
+  await updateDoc(cartRef, { products: updateProducts });
+}
+
+export async function deleteCartData(productId: string, userId: string): Promise<void> {
+  const cartRef = doc(db, 'carts', userId);
+  const cartSnap = await getDoc(cartRef);
+  const products = cartSnap.data()?.products;
+  const productToRemove = products?.find((p: ProductType) => p.productId === productId);
+
+  if (productToRemove) {
+    await updateDoc(cartRef, { products: arrayRemove(productToRemove) });
   }
 }
