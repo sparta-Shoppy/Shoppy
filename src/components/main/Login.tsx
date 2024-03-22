@@ -127,7 +127,7 @@ const Login = () => {
 
               <div className="flex items-center gap-3">
                 <SiCoinmarketcap className="text-4xl" />
-                <button type="submit" className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white ">
+                <button type="submit" className="w-80 bg-slate-200 p-1 rounded-md hover:bg-white ">
                   로그인
                 </button>
               </div>
@@ -136,7 +136,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={onGoogleLoginHandler}
-                  className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white "
+                  className="w-80 bg-slate-200 p-1 rounded-md hover:bg-white "
                 >
                   구글
                 </button>
@@ -146,7 +146,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={onGitHubLoginHandler}
-                  className="w-52 bg-slate-200 p-1 rounded-md hover:bg-white "
+                  className="w-80 bg-slate-200 p-1 rounded-md hover:bg-white "
                 >
                   깃허브
                 </button>
