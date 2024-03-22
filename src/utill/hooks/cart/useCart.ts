@@ -1,10 +1,10 @@
-import { createCartData, readCartData } from '@/api/cartFirebaseApi';
+import { createCartData, deleteCartData, readCartData, updateCartData } from '@/api/cartFirebaseApi';
 import { userId } from '@/api/user';
-import { CartButtonType } from '@/types/cart-type';
+import { CartButtonType, UpdateCartProps } from '@/types/cart-type';
 import { ProductType } from '@/types/product-type';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import exp from 'constants';
 
-/** useQuery 모음 */
 export function useReadCartData() {
   return useQuery<ProductType[], Error>({
     queryKey: ['carts', userId],
@@ -24,9 +24,27 @@ export function useCreateCartData() {
   return { createCartMutate };
 }
 
-// /** useMutation 모음 */
-// export function useAddCartMutation () {
-//   return useMutation({
-//     mutationFn: updateDoc(); //~~~~
-//   })
-// }
+export function useDeleteCartData() {
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteCartMutate } = useMutation<void, Error, string>({
+    mutationFn: (productId) => deleteCartData(productId, userId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['carts'] });
+    }
+  });
+  return { deleteCartMutate };
+}
+
+export function useUpdateCartData() {
+  const queryClient = useQueryClient();
+
+  const { mutate: updateCartMutate } = useMutation<void, Error, UpdateCartProps>({
+    mutationFn: ({ userId, productId, quantity }) => updateCartData({ userId, productId, quantity }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['carts'] });
+    }
+  });
+
+  return { updateCartMutate };
+}

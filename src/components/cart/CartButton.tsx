@@ -34,13 +34,6 @@ export default function Cartbutton({ item, userId }: CartButtonProps) {
         userId: userId
       },
       {
-        onSuccess: () => {
-          if (item === item) {
-            toast.success('장바구니에 담겨있는 상품입니다.');
-          } else {
-            toast.success('장바구니에 추가되었습니다.');
-          }
-        },
         onError: () => {
           toast.error('장바구니에 추가하지 못했습니다.');
         }

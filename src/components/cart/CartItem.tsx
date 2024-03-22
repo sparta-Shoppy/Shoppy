@@ -1,14 +1,12 @@
 'use client';
 
-import { addOrUpdateToCart, db } from '@/api/fiebaseApi';
 import { userId } from '@/api/user';
 
 import { FaPlusCircle } from 'react-icons/fa';
 import { FaMinusCircle } from 'react-icons/fa';
 import { ProductType } from '@/types/product-type';
-import { arrayRemove, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { update } from 'firebase/database';
-import { toast } from 'react-toastify';
+
+import { useDeleteCartData, useUpdateCartData } from '@/utill/hooks/cart/useCart';
 
 interface ProductProps {
   product: ProductType;
@@ -16,37 +14,32 @@ interface ProductProps {
 
 export default function CartItem({ product }: ProductProps) {
   const { productId, image, title, price, quantity } = product;
+  const { deleteCartMutate } = useDeleteCartData();
+  const { updateCartMutate } = useUpdateCartData();
 
   const productPrice = price * quantity;
 
   const onClickCheckBox = () => {};
-  const handleMinus = async () => {
+  // const handleMinus = async () => {
+  //   if (quantity < 2) return;
+  //   try {
+  //     await updateCartData({ userId, productId: productId ?? '', quantity: quantity - 1 });
+  //   } catch (error: any) {
+  //     console.log('faild to addOrUpdateToCart', error.messege);
+  //   }
+  // };
+
+  const handleMinus = async (userId: string, productId: string, quantity: number) => {
     if (quantity < 2) return;
-    try {
-      await addOrUpdateToCart({ userId, productId: productId ?? '', quantity: quantity - 1 });
-    } catch (error: any) {
-      console.log('faild to addOrUpdateToCart', error.messege);
-    }
+    updateCartMutate({ userId, productId, quantity: quantity - 1 });
   };
 
-  const handlePlus = async () => {
-    await addOrUpdateToCart({ userId, productId: productId ?? '', quantity: quantity + 1 });
+  const handlePlus = async (userId: string, productId: string, quantity: number) => {
+    updateCartMutate({ userId, productId, quantity: quantity + 1 });
   };
 
   const handleDelete = async (productId: string) => {
-    try {
-      const cartRef = doc(db, 'carts', userId);
-      const cartSnap = await getDoc(cartRef);
-      const products = cartSnap.data()?.products;
-
-      const productToRemove = products?.find((p: ProductType) => p.productId === productId);
-
-      if (productToRemove) {
-        await updateDoc(cartRef, { products: arrayRemove(productToRemove) });
-      }
-    } catch (error: any) {
-      toast.error('삭제에 실패했습니다.', error.messege);
-    }
+    deleteCartMutate(productId);
   };
 
   return (
@@ -73,16 +66,19 @@ export default function CartItem({ product }: ProductProps) {
             className={`transition-all cursor-pointer ${
               quantity <= 1 ? 'text-gray-300 cursor-not-allowed' : 'hover:text-black'
             }`}
-            onClick={handleMinus}
+            onClick={() => handleMinus(userId, productId!, quantity)}
             style={{ pointerEvents: quantity <= 1 ? 'none' : 'auto' }}
           />
 
           <p>{quantity}</p>
 
-          <FaPlusCircle className="transition-all cursor-pointer hover:" onClick={handlePlus} />
+          <FaPlusCircle
+            className="transition-all cursor-pointer hover:"
+            onClick={() => handlePlus(userId, productId!, quantity)}
+          />
         </div>
         <div className="absolute right-5 top-20 text-xl whitespace-nowrap">
-          <span className="text-2xl">{productPrice}</span> 원
+          <span className="text-2xl"> {new Intl.NumberFormat('ko-KR').format(productPrice)}</span> 원
         </div>
       </div>
     </li>
