@@ -56,10 +56,8 @@ export default function Admin() {
         const data = await uploadString(storageRef, imageUrl, 'data_url');
         image = await getDownloadURL(data?.ref);
       }
-      const keyword = title.split(' ');
       const newProduct = {
         productId: uuidv4(),
-        keyword,
         image,
         category,
         title,
