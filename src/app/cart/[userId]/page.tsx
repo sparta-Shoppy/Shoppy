@@ -5,8 +5,9 @@ import Header from '@/components/common/Header';
 import { TiShoppingCart } from 'react-icons/ti';
 import CartItem from '@/components/cart/CartItem';
 import { useReadCartData } from '@/utill/hooks/cart/useCart';
-import { useAppSelector } from '@/utill/hooks/useRedux';
+
 import { userState } from '@/store/modules/user';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 
 export default function CartPage() {
   const userId = useAppSelector(userState);
@@ -23,7 +24,7 @@ export default function CartPage() {
   return (
     <div className="w-full h-lvh">
       <Header />
-      <article className="flex flex-col w-full items-center h-full">
+      <article className="flex flex-col w-full items-center h-full pt-40">
         <div className="w-4/5 h-4/5 items-center">
           <section className="flex flex-col items-center bg-10">
             <h1 className="flex flex-row text-5xl mb-10">

@@ -1,6 +1,7 @@
 import { userState } from '@/store/modules/user';
 import { useReadCartData } from '@/utill/hooks/cart/useCart';
-import { useAppSelector } from '@/utill/hooks/useRedux';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
+
 import { TiShoppingCart } from 'react-icons/ti';
 
 export default function CartStatus() {

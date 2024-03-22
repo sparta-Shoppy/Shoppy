@@ -19,7 +19,7 @@ export default function ProductPage() {
   // useSearchParams - ? 기준으로 전달
 
   const { isLoading, isError, data, refetch } = useQuery({
-    queryKey: ['productData'],
+    queryKey: ['productData', category, selectedTab],
     queryFn: () => {
       const response = getDocs(
         query(
@@ -64,7 +64,7 @@ export default function ProductPage() {
   return (
     <div>
       <Header />
-      <div className="w-11/12 flex justify-end ">
+      <div className="w-11/12 flex justify-end pt-40">
         <span
           className={`cursor-pointer mr-2 ${selectedTab ? 'text-zinc-400' : 'text-black hover:text-zinc-400'}`}
           onClick={() => setSelectedTab(true)}

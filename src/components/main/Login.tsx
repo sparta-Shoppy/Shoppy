@@ -15,12 +15,13 @@ import { collection, doc, setDoc } from 'firebase/firestore';
 import { loginModalAction, loginState } from '@/store/modules/isModalToggle';
 
 import { setUserLogin } from '@/types/user-type';
-import { useAppDispatch, useAppSelector } from '@/utill/hooks/useRedux';
+
 import { FaUserCheck } from 'react-icons/fa';
 import gitIcon from '../../../public/assets/logo.png';
 import { IoLogoGithub } from 'react-icons/io';
 import { FcGoogle } from 'react-icons/fc';
 import { SiCoinmarketcap } from 'react-icons/si';
+import { useAppDispatch, useAppSelector } from '@/utill/hooks/redux/useRedux';
 
 const Login = () => {
   const auth = getAuth(app);

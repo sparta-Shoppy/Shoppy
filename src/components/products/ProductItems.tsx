@@ -7,7 +7,7 @@ import { stringTransform } from '@/utill/hooks/transform';
 import { useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
 import { userState } from '@/store/modules/user';
-import { useAppSelector } from '@/utill/hooks/useRedux';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 
 function ProductItems({ item }: { item: ProductType }) {
   const [heart, setHeart] = useState(false);

@@ -1,8 +1,8 @@
 'use client';
 
-import { useAppSelector } from '@/utill/hooks/useRedux';
 import { joinState } from '@/store/modules/isModalToggle';
 import HomePage from './home/page';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 
 export default function Home() {
   const isJoinToggle = useAppSelector(joinState);
