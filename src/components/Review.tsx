@@ -1,11 +1,11 @@
 'use client';
 
 import React, { FormEvent, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useParams } from 'next/navigation';
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore';
 import { db } from '../api/fiebaseApi';
 import { NewReviewType } from '@/types/product-type';
-import { toast } from 'react-toastify';
 import { useAppSelector } from '@/hooks/useRedux';
 
 function Review() {
@@ -44,28 +44,6 @@ function Review() {
     }
   };
 
-  // 후기 작성글 불러오기
-  useEffect(() => {
-    const fetchCommentData = async () => {
-      const reviewDB = query(
-        collection(db, 'review'),
-        where('productId', '==', params.id),
-        orderBy('createdAt', 'desc')
-      );
-      const querySnapshot = await getDocs(reviewDB);
-
-      const initialData: any = [];
-
-      querySnapshot.forEach((doc) => {
-        initialData.push({ reviewId: doc.id, ...doc.data() });
-      });
-
-      setReview([...initialData]);
-    };
-
-    fetchCommentData();
-  }, [content]);
-
   // 삭제
   const reviewDelete = async (reviewId: string) => {
     const real = window.confirm('삭제하시겠습니까?');
@@ -99,11 +77,6 @@ function Review() {
     setNowId('');
   };
 
-  // 수정된 input 값
-  const reviewChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChangeContent(e.target.value);
-  };
-
   // 수정
   const reviewChange = async (prev: NewReviewType) => {
     const reviewRef = doc(db, 'review', prev.reviewId);
@@ -115,8 +88,6 @@ function Review() {
       if (real) {
         try {
           await updateDoc(reviewRef, { ...prev, content: changeContent });
-          setChangeContent('');
-          setChangeNow(false);
           setReview((item) => {
             return item?.map((element) => {
               if (element.reviewId === prev.reviewId) {
@@ -126,6 +97,7 @@ function Review() {
               }
             });
           });
+          setChangeNow(false);
           toast.success('수정 완료!');
         } catch (error) {
           toast.error('수정 실패!');
@@ -133,6 +105,28 @@ function Review() {
       }
     }
   };
+
+  // 후기 작성글 불러오기
+  useEffect(() => {
+    const fetchCommentData = async () => {
+      const reviewDB = query(
+        collection(db, 'review'),
+        where('productId', '==', params.id),
+        orderBy('createdAt', 'desc')
+      );
+      const querySnapshot = await getDocs(reviewDB);
+
+      const initialData: any = [];
+
+      querySnapshot.forEach((doc) => {
+        initialData.push({ reviewId: doc.id, ...doc.data() });
+      });
+
+      setReview([...initialData]);
+    };
+
+    fetchCommentData();
+  }, [content]);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -148,7 +142,6 @@ function Review() {
           required
           className="admin__input-field"
         />
-
         <button type="submit" className="review__button-field">
           등록
         </button>
@@ -169,7 +162,9 @@ function Review() {
                     required
                     maxLength={20}
                     value={changeContent}
-                    onChange={reviewChangeInput}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setChangeContent(e.target.value);
+                    }}
                     className="admin__input-field"
                   />
                 ) : (

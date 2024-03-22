@@ -25,6 +25,7 @@ function Ask() {
   const userUid = useAppSelector((state) => state.user.value);
   const adminNow = useAppSelector((state) => state.user.adminReal);
   const loginNow: any = userUid;
+
   // 작성
   const askSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -85,11 +86,6 @@ function Ask() {
     setNowId('');
   };
 
-  // 수정된 input 값
-  const askChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChangeContent(e.target.value);
-  };
-
   // 수정
   const askChange = async (prev: NewAskType) => {
     const askRef = doc(db, 'ask', prev.askId);
@@ -101,8 +97,6 @@ function Ask() {
       if (real) {
         try {
           await updateDoc(askRef, { ...prev, content: changeContent });
-          setChangeContent('');
-          setChangeNow(false);
           setAsk((item) => {
             return item?.map((element) => {
               if (element.askId === prev.askId) {
@@ -112,6 +106,7 @@ function Ask() {
               }
             });
           });
+          setChangeNow(false);
           toast.success('수정 완료!');
         } catch (error) {
           toast.error('수정 실패!');
@@ -146,6 +141,19 @@ function Ask() {
         }
       }
     }
+  };
+
+  // 답변 완료버튼 불러오기
+  const adminChangeBtn = (prev: NewAskType) => {
+    setAdminChangeNow(!adminChangeNow);
+    setAdminContent(prev.answer);
+    setNowId(prev.askId);
+  };
+
+  // 관리자 답변 취소
+  const adminContentCancel = () => {
+    setAdminChangeNow(!adminChangeNow);
+    setNowId('');
   };
 
   // 후기 작성글 불러오기
@@ -218,7 +226,9 @@ function Ask() {
                     required
                     maxLength={20}
                     value={changeContent}
-                    onChange={askChangeInput}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setChangeContent(e.target.value);
+                    }}
                     className="admin__input-field"
                   />
                 ) : prev.secret && loginNow !== prev.writerId && !adminNow ? (
@@ -280,26 +290,13 @@ function Ask() {
                         <button className="review__button-field" onClick={() => adminAnswer(prev)}>
                           완료
                         </button>
-                        <button
-                          className="review__button-field"
-                          onClick={() => {
-                            setAdminChangeNow(!adminChangeNow);
-                            setNowId('');
-                          }}
-                        >
+                        <button className="review__button-field" onClick={adminContentCancel}>
                           취소
                         </button>
                       </>
                     ) : (
                       <>
-                        <button
-                          className="review__button-field"
-                          onClick={() => {
-                            setAdminChangeNow(!adminChangeNow);
-                            setAdminContent(prev.answer);
-                            setNowId(prev.askId);
-                          }}
-                        >
+                        <button className="review__button-field" onClick={() => adminChangeBtn(prev)}>
                           답변작성
                         </button>
                       </>

@@ -11,10 +11,12 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
 import { userId } from '@/api/user';
+import { stringTransform } from '@/hooks/transform';
 
 export default function ProductDetailPage() {
   const [nowItem, setNowItem] = useState<ProductType[]>();
   const [heart, setHeart] = useState(false);
+  const [selectedTab, setSelectedTab] = useState(true);
 
   // 하트 클릭 시 색상 변경
   const handleHeart = () => {
@@ -47,45 +49,45 @@ export default function ProductDetailPage() {
       <Header />
       {nowItem?.map((prev) => {
         return (
-          <div className="flex justify-center items-center" key={prev.productId}>
-            <img src={prev.image} />
-            <div className="pl-5">
-              <div>상품명 {prev.title}</div>
-              <div>배송 {prev.delivery}</div>
-              <div>판매자 {prev.seller}</div>
-              <div>판매단위 {prev.price}</div>
-              <div>중량 {prev.weight}</div>
+          <div className="flex justify-center items-center m-5" key={prev.productId}>
+            <img className="w-1/3 h-1/4" src={prev.image} alt="상품이미지" />
+            <div className="flex flex-col gap-10 pl-10 text-xl">
+              <div>상품명 : {prev.title}</div>
+              <div>배송 : {prev.delivery}</div>
+              <div>판매자 : {prev.seller}</div>
+              <div>판매단위 : {stringTransform(prev.price)}</div>
+              <div>중량 : {prev.weight}</div>
               <div className="flex gap-2 items-center">
                 <button onClick={handleHeart}>
                   <IoHeartSharp className={`${heart ? 'text-3xl text-rose-500' : 'text-3xl hover:text-rose-500'}`} />
                 </button>
                 <Cartbutton item={prev} userId={userId} />
+                <button className="bg-slate-100 w-80 hover:bg-white text-gray-800 font-semibold py-2 px-4 rounded-md">
+                  구매
+                </button>
               </div>
             </div>
           </div>
         );
       })}
-      {/* <div className="w-4/5 flex justify-end mb-5">
+      <div className="flex justify-center items-center m-4 text-2xl m-14">
         <span
-          className={`cursor-pointer mr-2 ${
-            selectedTab === '후기' ? 'text-cyan-400' : 'text-black hover:text-cyan-400'
-          }`}
-          onClick={() => setSelectedTab('후기')}
+          className={`cursor-pointer mr-2 ${selectedTab === true ? 'text-zinc-400' : 'text-black hover:text-zinc-400'}`}
+          onClick={() => setSelectedTab(true)}
         >
-          신상품
+          후기
         </span>
         ||
         <span
           className={`cursor-pointer mx-2 ${
-            selectedTab === '문의' ? 'text-pink-300' : 'text-black hover:text-pink-300'
+            selectedTab === false ? 'text-zinc-400' : 'text-black hover:text-zinc-400'
           }`}
-          onClick={() => setSelectedTab('문의')}
+          onClick={() => setSelectedTab(false)}
         >
-          베스트
+          문의
         </span>
-      </div> */}
-      <Review />
-      <Ask />
+      </div>
+      {selectedTab ? <Review /> : <Ask />}
     </div>
   );
 }
