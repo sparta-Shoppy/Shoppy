@@ -3,7 +3,6 @@ import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
 import MainProductItems from '@/components/main/MainProductItems';
 import SlideShow from '@/components/main/SlideShow';
-import { ProductType } from '@/types/product-type';
 import { useQuery } from '@tanstack/react-query';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import Link from 'next/link';
@@ -15,31 +14,26 @@ import { toast } from 'react-toastify';
 
 export default function HomePage() {
   const [selectedTab, setSelectedTab] = useState(true);
-  const [products, setProducts] = useState<ProductType[]>([]);
+  // const [products, setProducts] = useState<ProductType[]>([]);
 
   const { isLoading, isError, data, refetch } = useQuery({
     queryKey: ['mainProductData'],
-    queryFn: () => {
-      const response = getDocs(
+    queryFn: async () => {
+      const response = await getDocs(
         selectedTab
           ? query(collection(db, 'product'), orderBy('createdAt', 'desc'))
           : query(collection(db, 'product'), orderBy('createdAt', 'asc'))
       );
-      return response;
-    }
-  });
-
-  useEffect(() => {
-    const query = (data: any) => {
       const fetchedProducts: any = [];
-      data?.forEach((doc: any) => {
+
+      response?.forEach((doc: any) => {
         const products = doc.data();
         fetchedProducts.push({ ...products, id: doc.id, products });
       });
-      setProducts(fetchedProducts);
-    };
-    query(data);
-  }, [data]);
+
+      return fetchedProducts;
+    }
+  });
 
   useEffect(() => {
     refetch();
@@ -57,7 +51,12 @@ export default function HomePage() {
   if (isError) {
     toast.error('데이터를 가져올 수 없습니다');
   }
-  const images = ['assets/main1.PNG', 'assets/main2.PNG', 'assets/main3.PNG', 'assets/main4.PNG'];
+  const images = [
+    'https://github.com/sparta-Shoppy/Shoppy/blob/dev/public/assets/main1.PNG?raw=true',
+    'https://github.com/sparta-Shoppy/Shoppy/blob/dev/public/assets/main2.PNG?raw=true',
+    'https://github.com/sparta-Shoppy/Shoppy/blob/dev/public/assets/main3.PNG?raw=true',
+    'https://github.com/sparta-Shoppy/Shoppy/blob/dev/public/assets/main4.PNG?raw=true'
+  ];
   return (
     <div className="h-screen ">
       <Header />
@@ -92,7 +91,7 @@ export default function HomePage() {
         </span>
       </div>
       <div className="flex justify-center w-4/5 m-auto gap-20 flex-wrap">
-        {products?.map((item) => {
+        {data?.map((item: any) => {
           return <MainProductItems key={item.productId} item={item} />;
         })}
       </div>

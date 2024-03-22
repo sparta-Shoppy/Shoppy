@@ -1,9 +1,6 @@
 import { ProductType } from '@/types/product-type';
 import Link from 'next/link';
 import Cartbutton from '@/components/cart/CartButton';
-
-import { stringTransform } from '@/utill/hooks/transform';
-
 import { useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
 import { userState } from '@/store/modules/user';
@@ -23,21 +20,22 @@ function ProductItems({ item }: { item: ProductType }) {
   return (
     <div key={item.productId} className="w-1/4 p-5">
       <div className="h-full flex flex-col justify-between items-center ">
-        <Link href={`/products/${item.productId}`}>
+        <Link href={`/products/${item.productId}`} className="w-4/5 h-80">
           <img
             src={item.image}
             alt="상품이미지"
-            className="w-4/5 h-80 object-cover rounded-md hover:scale-95 transition-all duration-300 cursor-pointer"
+            className="w-full h-80 object-cover rounded-md hover:scale-95 transition-all duration-300 cursor-pointer"
           />
         </Link>
-        <button className="w-4/5 mt-3 bg-slate-100 flex justify-center items-center text-black py-2 px-4 hover:bg-white rounded-md">
+        <div className="w-4/5 mt-3 bg-slate-100 flex justify-center items-center text-black py-2 px-4 hover:bg-white rounded-md">
           <span className="text-xl">담기</span> <Cartbutton item={item} userId={userId} />
-        </button>
+        </div>
         <div className="pt-2 w-4/5">
           <p className="text-lg font-semibold">{item.title}</p>
+          <p className="text-lg font-semibold">{item.info}</p>
           <div className="flex justify-between items-center">
             <div>
-              <p className="text-lg font-semibold">{item.price ? stringTransform(item.price) : null} 원</p>
+              <p className="text-lg font-semibold">{new Intl.NumberFormat('ko-KR').format(item.price)} 원</p>
             </div>
             <div className="flex gap-2 items-center">
               <button onClick={handleHeart}>

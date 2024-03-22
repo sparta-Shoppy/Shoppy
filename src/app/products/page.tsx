@@ -2,7 +2,6 @@
 import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
 import ProductItems from '@/components/products/ProductItems';
-import { ProductType } from '@/types/product-type';
 import { useQuery } from '@tanstack/react-query';
 import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { useSearchParams } from 'next/navigation';
@@ -10,39 +9,38 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 export default function ProductPage() {
-  const [products, setProducts] = useState<ProductType[]>([]);
+  // const [products, setProducts] = useState<ProductType[]>([]);
   const [selectedTab, setSelectedTab] = useState(true);
 
   const params = useSearchParams();
   const category = params.get('category');
+  console.log('category', category);
+  console.log('category????', typeof category);
   // params - / 기준으로 전달
   // useSearchParams - ? 기준으로 전달
 
   const { isLoading, isError, data, refetch } = useQuery({
     queryKey: ['productData'],
-    queryFn: () => {
-      const response = getDocs(
+    queryFn: async () => {
+      const response = await getDocs(
         query(
           collection(db, 'product'),
           where('category', '==', category),
           selectedTab ? orderBy('price', 'desc') : orderBy('price', 'asc')
         )
       );
-      return response;
-    }
-  });
-
-  useEffect(() => {
-    const query = (data: any) => {
       const fetchedProducts: any = [];
-      data?.forEach((doc: any) => {
+
+      response?.forEach((doc: any) => {
         const products = doc.data();
+        console.log('products', products);
+
         fetchedProducts.push({ ...products, id: doc.id, products });
       });
-      setProducts(fetchedProducts);
-    };
-    query(data);
-  }, [data]);
+      return fetchedProducts;
+    }
+  });
+  console.log('data', data);
 
   useEffect(() => {
     refetch();
@@ -64,7 +62,7 @@ export default function ProductPage() {
   return (
     <div>
       <Header />
-      <div className="w-11/12 flex justify-end ">
+      <div className="w-11/12 flex justify-end pt-24">
         <span
           className={`cursor-pointer mr-2 ${selectedTab ? 'text-zinc-400' : 'text-black hover:text-zinc-400'}`}
           onClick={() => setSelectedTab(true)}
@@ -80,7 +78,7 @@ export default function ProductPage() {
         </span>
       </div>
       <div className="m-auto w-full flex flex-wrap justify-center">
-        {products?.map((item) => {
+        {data?.map((item: any) => {
           return <ProductItems key={item.productId} item={item} />;
         })}
       </div>
