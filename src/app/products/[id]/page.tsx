@@ -9,7 +9,6 @@ import { collection, getDocs, where, query } from 'firebase/firestore';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
-import { stringTransform } from '@/utill/hooks/transform';
 import Cartbutton from '@/components/cart/CartButton';
 import { userState } from '@/store/modules/user';
 import { useAppSelector } from '@/utill/hooks/redux/useRedux';
@@ -58,7 +57,7 @@ export default function ProductDetailPage() {
               <div>상품명 : {prev.title}</div>
               <div>배송 : {prev.delivery}</div>
               <div>판매자 : {prev.seller}</div>
-              <div>판매단위 : {stringTransform(prev.price)}</div>
+              <div>판매단위 : {new Intl.NumberFormat('ko-KR').format(prev.price)}</div>
               <div>중량 : {prev.weight}</div>
               <div className="flex gap-2 items-center">
                 <button onClick={handleHeart}>
