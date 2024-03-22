@@ -8,10 +8,9 @@ import { db } from '../../../api/fiebaseApi';
 import { NewReviewType } from '@/types/product-type';
 import { useAppSelector } from '@/utill/hooks/useRedux';
 import { nicknameState, userState } from '@/store/modules/user';
+import reviewInput from '@/utill/hooks/detail/reviewInput';
 
 function Review() {
-  const [content, setContent] = useState<string>('');
-  const [changeContent, setChangeContent] = useState<string>('');
   const [nowId, setNowId] = useState<string>('');
   const [changeNow, setChangeNow] = useState<boolean>(false);
   const [review, setReview] = useState<NewReviewType[]>();
@@ -19,7 +18,13 @@ function Review() {
   const params = useParams();
   const userUid = useAppSelector(userState);
   const nickname = useAppSelector(nicknameState);
-  const loginNow: any = userUid;
+
+  const { value, onChangeHandler, reset, dataLoad } = reviewInput({
+    content: '',
+    changeContent: ''
+  });
+
+  const { content, changeContent } = value;
 
   // 작성
   const reviewSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -41,7 +46,7 @@ function Review() {
     try {
       await addDoc(collection(db, 'review'), newReview);
       toast.success('후기 등록 완료!');
-      setContent('');
+      reset();
     } catch (error) {
       toast.error('후기 등록 실패');
     }
@@ -70,13 +75,13 @@ function Review() {
   const reviewChangeBtn = (prev: NewReviewType) => {
     setChangeNow(true);
     setNowId(prev.reviewId);
-    setChangeContent(prev.content);
+    dataLoad(prev.content);
   };
 
   // 수정취소
   const reviewChangeCancel = () => {
     setChangeNow(false);
-    setChangeContent('');
+    reset();
     setNowId('');
   };
 
@@ -136,10 +141,9 @@ function Review() {
       <form onSubmit={reviewSubmit}>
         <input
           type="text"
+          name="content"
           value={content}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setContent(e.target.value);
-          }}
+          onChange={onChangeHandler}
           placeholder="내용을 입력해 주세요"
           maxLength={20}
           required
@@ -162,18 +166,17 @@ function Review() {
                 {changeNow && nowId === prev.reviewId ? (
                   <input
                     type="text"
-                    required
-                    maxLength={20}
+                    name="changeContent"
                     value={changeContent}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setChangeContent(e.target.value);
-                    }}
+                    maxLength={20}
+                    onChange={onChangeHandler}
+                    required
                     className="admin__input-field"
                   />
                 ) : (
                   <div className="text-3xl">{prev.content}</div>
                 )}
-                {loginNow === prev.writerId ? (
+                {userUid === prev.writerId ? (
                   <div className="flex gap-2">
                     {changeNow && nowId === prev.reviewId ? (
                       <>

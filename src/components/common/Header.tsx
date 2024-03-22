@@ -31,7 +31,6 @@ const Header = () => {
       if (user) {
         setIsAdmin(user.isAdmins ?? false);
         setIsUser(true);
-        console.log('user.displayName', user.displayName);
         //store에 user 정보 저장
         dispatch(userAction({ userId: user.uid, nickname: user.displayName, adminReal: isAdmin }));
       } else {

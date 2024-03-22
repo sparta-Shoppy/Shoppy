@@ -21,6 +21,11 @@ export interface NewReviewType {
   nickname: string;
 }
 
+export interface ReviewInputType {
+  content: string;
+  changeContent: string;
+}
+
 export interface NewAskType {
   askId: string;
   writerId: string;
@@ -30,6 +35,12 @@ export interface NewAskType {
   secret: boolean;
   answer: string;
   nickname: string;
+}
+
+export interface AskInputType {
+  content: string;
+  changeContent: string;
+  adminContent: string;
 }
 
 export type CategoryType = '과일/채소' | '고기' | '가공식품' | '해산물';

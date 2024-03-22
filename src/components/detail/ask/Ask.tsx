@@ -11,12 +11,10 @@ import { FiCheckSquare } from 'react-icons/fi';
 import { HiLockClosed } from 'react-icons/hi2';
 import { useAppSelector } from '@/utill/hooks/useRedux';
 import { isAdminState, nicknameState, userState } from '@/store/modules/user';
+import askInput from '@/utill/hooks/detail/askInput';
 
 function Ask() {
-  const [content, setContent] = useState<string>('');
-  const [changeContent, setChangeContent] = useState<string>('');
   const [nowId, setNowId] = useState<string>('');
-  const [adminContent, setAdminContent] = useState<string>('');
   const [askSecret, setAskSecret] = useState<boolean>(false);
   const [changeNow, setChangeNow] = useState<boolean>(false);
   const [adminChangeNow, setAdminChangeNow] = useState<boolean>(false);
@@ -26,7 +24,16 @@ function Ask() {
   const userUid = useAppSelector(userState);
   const adminNow = useAppSelector(isAdminState);
   const nickname = useAppSelector(nicknameState);
-  const loginNow: any = userUid;
+
+  console.log('adminNow', adminNow);
+
+  const { value, onChangeHandler, reset, dataLoad, adminDataLoad } = askInput({
+    content: '',
+    changeContent: '',
+    adminContent: ''
+  });
+
+  const { content, changeContent, adminContent } = value;
 
   // 작성
   const askSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -50,7 +57,7 @@ function Ask() {
     try {
       await addDoc(collection(db, 'ask'), newAsk);
       toast.success('후기 등록 완료!');
-      setContent('');
+      reset();
       setAskSecret(false);
     } catch (error) {
       toast.error('후기 등록 실패');
@@ -80,7 +87,7 @@ function Ask() {
   const askChangeBtn = (prev: NewAskType) => {
     setChangeNow(true);
     setNowId(prev.askId);
-    setChangeContent(prev.content);
+    dataLoad(prev.content);
   };
 
   // 수정취소
@@ -149,7 +156,7 @@ function Ask() {
   // 답변 완료버튼 불러오기
   const adminChangeBtn = (prev: NewAskType) => {
     setAdminChangeNow(!adminChangeNow);
-    setAdminContent(prev.answer);
+    adminDataLoad(prev.answer);
     setNowId(prev.askId);
   };
 
@@ -182,10 +189,9 @@ function Ask() {
       <form onSubmit={askSubmit}>
         <input
           type="text"
+          name="content"
           value={content}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setContent(e.target.value);
-          }}
+          onChange={onChangeHandler}
           placeholder="내용을 입력해 주세요"
           maxLength={20}
           required
@@ -228,20 +234,19 @@ function Ask() {
                     type="text"
                     required
                     maxLength={20}
+                    name="changeContent"
                     value={changeContent}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setChangeContent(e.target.value);
-                    }}
+                    onChange={onChangeHandler}
                     className="admin__input-field"
                   />
-                ) : prev.secret && loginNow !== prev.writerId && !adminNow ? (
+                ) : prev.secret && userUid !== prev.writerId && !adminNow ? (
                   <>
                     비밀글입니다. <HiLockClosed />
                   </>
                 ) : (
                   <div className="text-3xl">{prev.content}</div>
                 )}
-                {loginNow === prev.writerId ? (
+                {userUid === prev.writerId ? (
                   <div className="flex gap-2">
                     {changeNow && nowId === prev.askId ? (
                       <>
@@ -275,10 +280,9 @@ function Ask() {
                       type="text"
                       required
                       maxLength={20}
+                      name="adminContent"
                       value={adminContent}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        setAdminContent(e.target.value);
-                      }}
+                      onChange={onChangeHandler}
                     />
                   </>
                 ) : !prev.secret || adminNow || userUid === prev.writerId ? (
