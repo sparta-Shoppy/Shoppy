@@ -3,7 +3,6 @@ import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
 import MainProductItems from '@/components/main/MainProductItems';
 import SlideShow from '@/components/main/SlideShow';
-import { ProductType } from '@/types/product-type';
 import { useQuery } from '@tanstack/react-query';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import Link from 'next/link';

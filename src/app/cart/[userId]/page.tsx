@@ -5,8 +5,8 @@ import Header from '@/components/common/Header';
 import { TiShoppingCart } from 'react-icons/ti';
 import CartItem from '@/components/cart/CartItem';
 import { useReadCartData } from '@/utill/hooks/cart/useCart';
-import { useAppSelector } from '@/utill/hooks/useRedux';
 import { userState } from '@/store/modules/user';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 
 export default function CartPage() {
   const userId = useAppSelector(userState);

@@ -1,7 +1,7 @@
 import { ProductType } from '@/types/product-type';
 
 import { userState } from '@/store/modules/user';
-import { useAppSelector } from '@/utill/hooks/useRedux';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
 import Cartbutton from '../cart/CartButton';

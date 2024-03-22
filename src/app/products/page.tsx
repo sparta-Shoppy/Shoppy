@@ -15,6 +15,7 @@ export default function ProductPage() {
   const params = useSearchParams();
   const category = params.get('category');
   console.log('category', category);
+  console.log('category????', typeof category);
   // params - / 기준으로 전달
   // useSearchParams - ? 기준으로 전달
 
@@ -24,7 +25,7 @@ export default function ProductPage() {
       const response = await getDocs(
         query(
           collection(db, 'product'),
-          // where('category', '==', category),
+          where('category', '==', category),
           selectedTab ? orderBy('price', 'desc') : orderBy('price', 'asc')
         )
       );
@@ -32,6 +33,8 @@ export default function ProductPage() {
 
       response?.forEach((doc: any) => {
         const products = doc.data();
+        console.log('products', products);
+
         fetchedProducts.push({ ...products, id: doc.id, products });
       });
       return fetchedProducts;
@@ -59,7 +62,7 @@ export default function ProductPage() {
   return (
     <div>
       <Header />
-      <div className="w-11/12 flex justify-end ">
+      <div className="w-11/12 flex justify-end pt-24">
         <span
           className={`cursor-pointer mr-2 ${selectedTab ? 'text-zinc-400' : 'text-black hover:text-zinc-400'}`}
           onClick={() => setSelectedTab(true)}
