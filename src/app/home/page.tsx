@@ -62,7 +62,7 @@ export default function HomePage() {
     <div className="h-screen ">
       <Header />
       <SlideShow images={images} />
-      <div className="flex justify-evenly w-4/5 p-10 m-auto text-xl">
+      <div className="flex justify-evenly w-4/5 p-10 m-auto text-xl pt-36">
         <Link href={'/products?category=과일/채소'} className="main__tabs-field">
           <GiFruitBowl /> 과일/채소
         </Link>
