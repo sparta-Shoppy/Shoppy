@@ -1,11 +1,10 @@
 import { ProductType } from '@/types/product-type';
 
-import { stringTransform } from '@/utill/hooks/transform';
+import { userState } from '@/store/modules/user';
+import { useAppSelector } from '@/utill/hooks/useRedux';
 import { useState } from 'react';
 import { IoHeartSharp } from 'react-icons/io5';
 import Cartbutton from '../cart/CartButton';
-import { userState } from '@/store/modules/user';
-import { useAppSelector } from '@/utill/hooks/useRedux';
 
 function MainProductItems({ item }: { item: ProductType }) {
   const [heart, setHeart] = useState(false);
@@ -27,7 +26,7 @@ function MainProductItems({ item }: { item: ProductType }) {
       <div className="w-full flex justify-between p-3">
         <div>
           <p className="text-lg">{item.title}</p>
-          <p>{stringTransform(item.price)}</p>
+          <p>{new Intl.NumberFormat('ko-KR').format(item.price)} 원</p>
         </div>
         <div className="flex justify-between gap-2 items-center pl-5">
           <button onClick={handleHeart}>

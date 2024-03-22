@@ -24,7 +24,7 @@ export default function ProductPage() {
       const response = await getDocs(
         query(
           collection(db, 'product'),
-          where('category', '==', category),
+          // where('category', '==', category),
           selectedTab ? orderBy('price', 'desc') : orderBy('price', 'asc')
         )
       );
