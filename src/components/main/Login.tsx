@@ -15,7 +15,7 @@ import { collection, doc, setDoc } from 'firebase/firestore';
 import { loginModalAction, loginState } from '@/store/modules/isModalToggle';
 
 import { setUserLogin } from '@/types/user-type';
-import { useAppDispatch, useAppSelector } from '@/utill/hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { FaUserCheck } from 'react-icons/fa';
 import gitIcon from '../../../public/assets/logo.png';
 import { IoLogoGithub } from 'react-icons/io';

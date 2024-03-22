@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppSelector } from '@/utill/hooks/useRedux';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { joinState } from '@/store/modules/isModalToggle';
 import HomePage from './home/page';
 

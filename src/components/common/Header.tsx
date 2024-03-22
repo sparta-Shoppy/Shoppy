@@ -4,7 +4,7 @@ import { deleteAdminCookie } from '@/api/cookie';
 import { app } from '@/api/fiebaseApi';
 import { onUserStateChange } from '@/api/login';
 import { userAction } from '@/store/modules/user';
-import { useAppDispatch } from '@/utill/hooks/useRedux';
+import { useAppDispatch } from '@/utill/hooks/redux/useRedux';
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -17,7 +17,7 @@ import CartStatus from '../cart/CartStatus';
 import { FaUserMinus } from 'react-icons/fa';
 import { FaUserCog } from 'react-icons/fa';
 
-import { useAppSelector } from '@/utill/hooks/useRedux';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { userState } from '@/store/modules/user';
 
 //userId 사용
