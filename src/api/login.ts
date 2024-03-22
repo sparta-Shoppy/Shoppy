@@ -1,5 +1,5 @@
 import { database } from '@/api/fiebaseApi';
-import { Auth, onAuthStateChanged } from 'firebase/auth';
+import { Auth, User, onAuthStateChanged } from 'firebase/auth';
 import { get, ref } from 'firebase/database';
 import { setAdminCookie, setUserCookie } from './cookie';
 
@@ -21,7 +21,7 @@ export async function onUserStateChange(auth: Auth, call: any) {
 
 // 사용자 및 관리자 여부 확인
 // //true: 관리자, false: 사용자
-async function admins(user: any) {
+async function admins(user: User) {
   try {
     //Firebase의 RealTimeDataBase에 별도로 저장한 관리자 계정 가져오기
     const checkRef = await get(ref(database, 'admins'));
