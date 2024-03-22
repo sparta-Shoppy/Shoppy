@@ -40,8 +40,11 @@ export default function Cartbutton({ item, userId }: CartButtonProps) {
   };
 
   return (
-    <button onClick={onClickCart}>
+    <div>
       <TiShoppingCart className="text-2xl ml-1 mr-1" />
-    </button>
+    </div>
+    // <button onClick={onClickCart}>
+
+    // </button>
   );
 }
