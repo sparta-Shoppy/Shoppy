@@ -5,9 +5,13 @@ import Header from '@/components/common/Header';
 import { TiShoppingCart } from 'react-icons/ti';
 import CartItem from '@/components/cart/CartItem';
 import { useReadCartData } from '@/utill/hooks/cart/useCart';
+import { useAppSelector } from '@/utill/hooks/useRedux';
+import { userState } from '@/store/modules/user';
 
 export default function CartPage() {
-  const { data: carts } = useReadCartData();
+  const userId = useAppSelector(userState);
+
+  const { data: carts } = useReadCartData(userId);
 
   const formatter = new Intl.NumberFormat('ko-KR');
 
@@ -54,7 +58,9 @@ export default function CartPage() {
 
               <div className="flex flex-row justify-between text-2xl mt-5 border-t-2 border-[#B4B4B8]-500">
                 <p className="mt-5">결제예정금액</p>
-                <p className="mt-5">{!hasProducts ? <p>원</p> : <span className="text-3xl">{totalPrice}원</span>}</p>
+                <div className="mt-5">
+                  {!hasProducts ? <p>원</p> : <span className="text-3xl">{totalPrice}원</span>}
+                </div>
               </div>
             </article>
           </section>
