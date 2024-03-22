@@ -2,7 +2,6 @@ import { ProductType } from '@/types/product-type';
 import { arrayRemove, arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from './fiebaseApi';
 import { UpdateCartProps } from '@/types/cart-type';
-import { userId } from './user';
 
 export async function readCartData(userId: string): Promise<ProductType[]> {
   const cartRef = doc(db, 'carts', userId);

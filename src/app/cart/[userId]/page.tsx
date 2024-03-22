@@ -1,18 +1,13 @@
 'use client';
 
-import { db } from '@/api/fiebaseApi';
-import { userId } from '@/api/user';
 import Header from '@/components/common/Header';
-import { ProductType } from '@/types/product-type';
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
 
 import { TiShoppingCart } from 'react-icons/ti';
 import CartItem from '@/components/cart/CartItem';
 import { useReadCartData } from '@/utill/hooks/cart/useCart';
 
 export default function CartPage() {
-  const { data: carts, error } = useReadCartData();
+  const { data: carts } = useReadCartData();
 
   const formatter = new Intl.NumberFormat('ko-KR');
 
@@ -59,9 +54,7 @@ export default function CartPage() {
 
               <div className="flex flex-row justify-between text-2xl mt-5 border-t-2 border-[#B4B4B8]-500">
                 <p className="mt-5">결제예정금액</p>
-                <p className="mt-5">
-                  <span className="text-3xl">{totalPrice}</span>원
-                </p>
+                <p className="mt-5">{!hasProducts ? <p>원</p> : <span className="text-3xl">{totalPrice}원</span>}</p>
               </div>
             </article>
           </section>

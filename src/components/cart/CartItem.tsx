@@ -7,17 +7,20 @@ import { FaMinusCircle } from 'react-icons/fa';
 import { ProductType } from '@/types/product-type';
 
 import { useDeleteCartData, useUpdateCartData } from '@/utill/hooks/cart/useCart';
+import { useAppSelector } from '@/utill/hooks/useRedux';
+import { userState } from '@/store/modules/user';
 
 interface ProductProps {
   product: ProductType;
 }
-
 export default function CartItem({ product }: ProductProps) {
   const { productId, image, title, price, quantity } = product;
   const { deleteCartMutate } = useDeleteCartData();
   const { updateCartMutate } = useUpdateCartData();
 
   const productPrice = price * quantity;
+
+  const userId = useAppSelector(userState);
 
   const onClickCheckBox = () => {};
   // const handleMinus = async () => {

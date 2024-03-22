@@ -1,9 +1,12 @@
 import { createCartData, deleteCartData, readCartData, updateCartData } from '@/api/cartFirebaseApi';
-import { userId } from '@/api/user';
+
+import { userState } from '@/store/modules/user';
 import { CartButtonType, UpdateCartProps } from '@/types/cart-type';
 import { ProductType } from '@/types/product-type';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAppSelector } from '../useRedux';
+import { userId } from '@/api/user';
 
 export function useReadCartData() {
   return useQuery<ProductType[], Error>({

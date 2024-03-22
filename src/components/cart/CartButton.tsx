@@ -1,9 +1,5 @@
-import { db } from '@/api/fiebaseApi';
-
 import { ProductType } from '@/types/product-type';
 import { useCreateCartData } from '@/utill/hooks/cart/useCart';
-
-import { doc, getDoc, updateDoc, setDoc, arrayUnion } from 'firebase/firestore';
 import { TiShoppingCart } from 'react-icons/ti';
 import { toast } from 'react-toastify';
 
@@ -14,6 +10,8 @@ interface CartButtonProps {
 
 export default function Cartbutton({ item, userId }: CartButtonProps) {
   const { createCartMutate } = useCreateCartData();
+
+  console.log('카트버튼', userId);
 
   const onClickCart = () => {
     createCartMutate(
