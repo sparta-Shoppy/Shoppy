@@ -51,9 +51,9 @@ export default function ProductDetailPage() {
       <Header />
       {nowItem?.map((prev) => {
         return (
-          <div className="flex justify-center items-center m-5" key={prev.productId}>
-            <img className="w-1/3 h-1/4" src={prev.image} alt="상품이미지" />
-            <div className="flex flex-col gap-10 pl-10 text-xl">
+          <div className="w-3/5 m-auto h-full pt-24 flex justify-around items-center" key={prev.productId}>
+            <img className="w-1/4 h-1/4" src={prev.image} alt="상품이미지" />
+            <div className="flex flex-col gap-10 text-xl">
               <div>상품명 : {prev.title}</div>
               <div>배송 : {prev.delivery}</div>
               <div>판매자 : {prev.seller}</div>
@@ -72,18 +72,16 @@ export default function ProductDetailPage() {
           </div>
         );
       })}
-      <div className="flex justify-center items-center m-4 text-2xl m-14">
+      <div className="mt-24 m-auto w-3/5 flex justify-end gap-5 pt-8 pb-24 text-2xl border-t border-gray-300">
         <span
-          className={`cursor-pointer mr-2 ${selectedTab === true ? 'text-zinc-400' : 'text-black hover:text-zinc-400'}`}
+          className={` cursor-pointer  ${selectedTab === true ? 'text-zinc-400' : 'text-black hover:text-zinc-400'}`}
           onClick={() => setSelectedTab(true)}
         >
           후기
         </span>
         ||
         <span
-          className={`cursor-pointer mx-2 ${
-            selectedTab === false ? 'text-zinc-400' : 'text-black hover:text-zinc-400'
-          }`}
+          className={`cursor-pointer ${selectedTab === false ? 'text-zinc-400' : 'text-black hover:text-zinc-400'}`}
           onClick={() => setSelectedTab(false)}
         >
           문의
