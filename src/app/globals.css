@@ -36,6 +36,10 @@ body {
   }
 }
 
+.active {
+  position: fixed;
+}
+
 .admin__input-field {
   @apply outline-none h-10 border-b border-black mb-14 text-lg;
 }

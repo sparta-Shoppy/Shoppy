@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import user from '@/store/modules/user';
+import modal from '@/store/modules/isModalToggle';
 
 //store 생성
 const store = configureStore({
   reducer: {
-    user
+    user,
+    modal
   }
 });
 
