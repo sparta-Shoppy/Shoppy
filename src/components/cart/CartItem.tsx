@@ -1,7 +1,5 @@
 'use client';
 
-import { userId } from '@/api/user';
-
 import { FaPlusCircle } from 'react-icons/fa';
 import { FaMinusCircle } from 'react-icons/fa';
 import { ProductType } from '@/types/product-type';
@@ -42,7 +40,7 @@ export default function CartItem({ product }: ProductProps) {
   };
 
   const handleDelete = async (productId: string) => {
-    deleteCartMutate(productId);
+    deleteCartMutate({ productId, userId });
   };
 
   return (
