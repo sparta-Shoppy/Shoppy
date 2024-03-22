@@ -138,7 +138,7 @@ function Review() {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <form onSubmit={reviewSubmit}>
+      <form onSubmit={reviewSubmit} className="w-full flex justify-center gap-5">
         <input
           type="text"
           name="content"
@@ -147,9 +147,9 @@ function Review() {
           placeholder="내용을 입력해 주세요"
           maxLength={20}
           required
-          className="admin__input-field"
+          className="w-1/4 border rounded-md p-1 ml-2"
         />
-        <button type="submit" className="review__button-field">
+        <button type="submit" className="w-28 p-1 bg-white hover:bg-gray-100 text-gray-800 border rounded">
           등록
         </button>
       </form>

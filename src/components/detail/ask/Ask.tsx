@@ -185,35 +185,71 @@ function Ask() {
   }, [content]);
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <form onSubmit={askSubmit}>
-        <input
-          type="text"
-          name="content"
-          value={content}
-          onChange={onChangeHandler}
-          placeholder="내용을 입력해 주세요"
-          maxLength={20}
-          required
-          className="admin__input-field"
-        />
-
-        <label htmlFor="secretCheck">
+    <div className="flex flex-col  items-center">
+      <form onSubmit={askSubmit} className="w-2/6 flex flex-col gap-2">
+        <div className="w-full flex items-start gap-5">
           <input
-            id="secretCheck"
-            type="checkbox"
-            checked={askSecret}
-            onChange={(e) => {
-              setAskSecret(e.target.checked);
-            }}
+            type="text"
+            name="content"
+            value={content}
+            onChange={onChangeHandler}
+            placeholder="내용을 입력해 주세요"
+            maxLength={20}
+            required
+            className="w-4/5 border rounded-md p-1 ml-2"
           />
-          비밀 글
-        </label>
+          <button type="submit" className="w-28 p-1 bg-white hover:bg-gray-100 text-gray-800 border rounded">
+            등록
+          </button>
+        </div>
 
-        <button type="submit" className="review__button-field">
+        <div className="w-full flex">
+          <label htmlFor="secretCheck" className="flex gap-2">
+            <input
+              id="secretCheck"
+              type="checkbox"
+              checked={askSecret}
+              onChange={(e) => {
+                setAskSecret(e.target.checked);
+              }}
+            />
+            비밀 글 등록
+          </label>
+        </div>
+      </form>
+
+      {/* <form onSubmit={askSubmit} className="w-2/6 flex">
+        <div className="w-full flex flex-col ">
+          <input
+            type="text"
+            name="content"
+            value={content}
+            onChange={onChangeHandler}
+            placeholder="내용을 입력해 주세요"
+            maxLength={20}
+            required
+            className="w-4/5 border rounded-md p-1 ml-2"
+          />
+
+          <div className="w-full flex ">
+            <label htmlFor="secretCheck">
+              <input
+                id="secretCheck"
+                type="checkbox"
+                checked={askSecret}
+                onChange={(e) => {
+                  setAskSecret(e.target.checked);
+                }}
+              />
+              비밀 글 등록
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" className="w-28 p-1 bg-white hover:bg-gray-100 text-gray-800  border rounded">
           등록
         </button>
-      </form>
+      </form> */}
 
       <div>
         {ask?.map((prev) => {
