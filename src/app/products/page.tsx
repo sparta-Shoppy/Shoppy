@@ -42,6 +42,9 @@
 //   const handleHeart = () => {
 //     setHeart(!heart);
 //   };
+// useEffect(() => {
+//   refetch();
+// }, [selectedTab, refetch]);
 
 //   return (
 //     <div>
