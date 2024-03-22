@@ -1,14 +1,13 @@
 'use client';
 import { db } from '@/api/fiebaseApi';
-import ProductItems from '@/components/ProductItems';
 import Header from '@/components/common/Header';
-import SearchProduct from '@/components/common/SearchProduct';
+import ProductItems from '@/components/products/ProductItems';
 import { ProductType } from '@/types/product-type';
-
-import { collection, doc, getDoc, getDocs, orderBy, query, where } from 'firebase/firestore';
+import { useQuery } from '@tanstack/react-query';
+import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { useSearchParams } from 'next/navigation';
-
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function ProductPage() {
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -19,42 +18,52 @@ export default function ProductPage() {
   // params - / 기준으로 전달
   // useSearchParams - ? 기준으로 전달
 
+  const { isLoading, isError, data, refetch } = useQuery({
+    queryKey: ['productData'],
+    queryFn: () => {
+      const response = getDocs(
+        query(
+          collection(db, 'product'),
+          where('category', '==', category),
+          selectedTab ? orderBy('price', 'desc') : orderBy('price', 'asc')
+        )
+      );
+      return response;
+    }
+  });
+
   useEffect(() => {
-    const fetchProductsData = async () => {
-      try {
-        const docRef = doc(db, 'user');
-        const docSnap = await getDoc(docRef);
-
-        console.log(docSnap);
-
-        const querySnapshot = await getDocs(
-          query(
-            collection(db, 'product'),
-            where('category', '==', category),
-            selectedTab ? orderBy('price', 'desc') : orderBy('price', 'asc')
-          )
-        );
-        const fetchedProducts: any[] = [];
-
-        querySnapshot.forEach((doc) => {
-          const products = doc.data();
-
-          fetchedProducts.push({ ...products, id: doc.id, products });
-        });
-
-        setProducts(fetchedProducts);
-      } catch (error) {
-        console.log('상품 데이터 가져오기 실패', error);
-      }
+    const query = (data: any) => {
+      const fetchedProducts: any = [];
+      data?.forEach((doc: any) => {
+        const products = doc.data();
+        fetchedProducts.push({ ...products, id: doc.id, products });
+      });
+      setProducts(fetchedProducts);
     };
+    query(data);
+  }, [data]);
 
-    fetchProductsData();
-  }, [selectedTab]);
+  useEffect(() => {
+    refetch();
+  }, [selectedTab, refetch]);
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <div>잠시만 기다려 주세요</div>
+        <img src="../../../assets/bean.gif" alt="로딩중" />
+      </div>
+    );
+  }
+
+  if (isError) {
+    toast.error('데이터를 가져올 수 없습니다');
+  }
 
   return (
     <div>
       <Header />
-      <SearchProduct />
       <div className="w-11/12 flex justify-end ">
         <span
           className={`cursor-pointer mr-2 ${selectedTab ? 'text-zinc-400' : 'text-black hover:text-zinc-400'}`}

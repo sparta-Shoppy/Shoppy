@@ -2,8 +2,8 @@ import { createCartData, deleteCartData, readCartData, updateCartData } from '@/
 import { userId } from '@/api/user';
 import { CartButtonType, UpdateCartProps } from '@/types/cart-type';
 import { ProductType } from '@/types/product-type';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import exp from 'constants';
+
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export function useReadCartData() {
   return useQuery<ProductType[], Error>({
