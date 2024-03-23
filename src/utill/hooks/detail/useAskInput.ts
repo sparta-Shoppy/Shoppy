@@ -3,7 +3,7 @@
 import { AskInputType } from '@/types/product-type';
 import { useState, ChangeEvent } from 'react';
 
-const askInput = (initialValue: AskInputType) => {
+const useAskInput = (initialValue: AskInputType) => {
   const [value, setValue] = useState(initialValue);
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,4 +26,4 @@ const askInput = (initialValue: AskInputType) => {
   return { value, onChangeHandler, reset, dataLoad, adminDataLoad };
 };
 
-export default askInput;
+export default useAskInput;

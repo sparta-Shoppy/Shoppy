@@ -8,7 +8,7 @@ import { db } from '../../../api/fiebaseApi';
 import { NewReviewType } from '@/types/product-type';
 import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { nicknameState, userState } from '@/store/modules/user';
-import reviewInput from '@/utill/hooks/detail/useReviewInput';
+import UseReviewInput from '@/utill/hooks/detail/useReviewInput';
 import { IoChatbubblesOutline } from 'react-icons/io5';
 
 function Review() {
@@ -20,7 +20,7 @@ function Review() {
   const userUid = useAppSelector(userState);
   const nickname = useAppSelector(nicknameState);
 
-  const { value, onChangeHandler, reset, dataLoad } = reviewInput({
+  const { value, onChangeHandler, reset, dataLoad } = UseReviewInput({
     content: '',
     changeContent: ''
   });
