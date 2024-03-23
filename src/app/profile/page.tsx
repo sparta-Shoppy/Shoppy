@@ -24,24 +24,23 @@ export default function ProfilePage() {
             <IoHeartSharp className="w-80 h-40"></IoHeartSharp>
             {/* <img src={img} alt={title} className="w-60 h-60" /> */}
 
-            <p className="flex-col justify-items-center ">
-              <span className="block">제목</span>
-              <span className="block">가격</span>
-            </p>
+            <div className=" flex flex-col justify-center">
+              <h3>제목입니다.</h3>
+              <p>시간입니다.</p>
+            </div>
           </div>
           {/* user가 작성한 후기 내용 */}
-          <div className="flex items-center gap-5 mb-10">
+          <div className="flex items-center gap-5 mb-10 ">
             {/* {heart ? ' text-rose-500' : ' hover:text-rose-500'} */}
             <IoHeartSharp className={`text-6xl  text-rose-500`} />
             <p className="text-3xl">작성한 후기 개수</p>
           </div>
-          <div className="flex-col bg-white p-6 mb-10">
-            <p className="flex gap-40">
-              <span>제목입니다.</span>
-              <span>시간입니다.</span>
-            </p>
-
-            <p>내용</p>
+          <div className="  bg-white p-6 mb-10 border-b">
+            <div className="flex gap-40 pb-4">
+              <h3>제목입니다.</h3>
+              <p>시간입니다.</p>
+            </div>
+            <p className="text-2xl">내용</p>
           </div>
           {/* user가 작성한 문의 내용 */}
           <div className="flex items-center gap-5 mb-10">
@@ -50,12 +49,11 @@ export default function ProfilePage() {
             <p className="text-3xl">작성한 리뷰 개수</p>
           </div>
           <div className="flex-col bg-white p-6 mb-10">
-            <p className="flex gap-40">
-              <span>제목입니다.</span>
-              <span>시간입니다.</span>
-            </p>
-
-            <p>내용</p>
+            <div className="flex gap-40 pb-4">
+              <h3>제목입니다.</h3>
+              <p>시간입니다.</p>
+            </div>
+            <p className="text-2xl">내용</p>
           </div>
         </div>
       </div>
