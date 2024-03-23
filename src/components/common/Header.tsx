@@ -3,21 +3,16 @@
 import { deleteAdminCookie } from '@/api/cookie';
 import { app } from '@/api/fiebaseApi';
 import { onUserStateChange } from '@/api/login';
-import { userAction } from '@/store/modules/user';
+import { userAction, userState } from '@/store/modules/user';
+import { useAppDispatch, useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { FaHouseUser, FaUserCog, FaUserMinus } from 'react-icons/fa';
+import CartStatus from '../cart/CartStatus';
 import Join from '../main/Join';
 import Login from '../main/Login';
-import CartStatus from '../cart/CartStatus';
-import { FaUserMinus } from 'react-icons/fa';
-import { FaUserCog } from 'react-icons/fa';
-import { useAppDispatch, useAppSelector } from '@/utill/hooks/redux/useRedux';
-import { userState } from '@/store/modules/user';
-import { PiAddressBook, PiAddressBookBold } from 'react-icons/pi';
-import { AiOutlineProfile } from 'react-icons/ai';
-import { CgProfile } from 'react-icons/cg';
 
 //userId 사용
 const Header = () => {
@@ -69,9 +64,13 @@ const Header = () => {
         </Link>
         {/*로그인된 상태*/}
         {isUser ? (
-          <div className="flex flex-row items-center gap-2">
+          <div className="flex flex-row items-center ">
             <Link href={`/cart/${userId}`} className="text-xl">
               <CartStatus />
+            </Link>
+            <button onClick={onLogOutClickEventHandler} className="ml-4 text-xl"></button>
+            <Link href={'/profile'}>
+              <FaHouseUser className="text-4xl mb-2 mr-4 hover:text-slate-300" />
             </Link>
             <button onClick={onLogOutClickEventHandler} className="ml-4 text-xl">
               <div className="flex flex-row hover:text-slate-300 ">
@@ -79,9 +78,6 @@ const Header = () => {
                 <FaUserMinus className="text-2xl ml-1 mr-1" />
               </div>
             </button>
-            <Link href={'/profile'}>
-              <CgProfile className="text-5xl hover:text-slate-300" />
-            </Link>
             {/* 관리자 상태 */}{' '}
             {isAdmin && (
               <Link href={'/admin'} className="text-xl">

@@ -13,12 +13,13 @@ export interface ProductType {
 }
 
 export interface NewReviewType {
-  reviewId: string;
   writerId: string;
   content: string;
   createdAt: string;
   productId: string;
   nickname: string;
+  reviewId: string;
+  reviewUid: string;
 }
 
 export interface ReviewInputType {
@@ -35,6 +36,7 @@ export interface NewAskType {
   secret: boolean;
   answer: string;
   nickname: string;
+  askUid: string;
 }
 
 export interface AskInputType {
