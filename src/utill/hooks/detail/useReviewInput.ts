@@ -1,3 +1,5 @@
+'use client';
+
 import { ReviewInputType } from '@/types/product-type';
 import { useState, ChangeEvent } from 'react';
 

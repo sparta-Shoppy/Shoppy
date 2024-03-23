@@ -1,3 +1,5 @@
+'use client';
+
 import { AskInputType } from '@/types/product-type';
 import { useState, ChangeEvent } from 'react';
 

@@ -20,7 +20,7 @@ export default function CartItem({ product }: ProductProps) {
 
   const userId = useAppSelector(userState);
 
-  const onClickCheckBox = () => {};
+  // const onClickCheckBox = () => {};
   // const handleMinus = async () => {
   //   if (quantity < 2) return;
   //   try {
@@ -50,7 +50,7 @@ export default function CartItem({ product }: ProductProps) {
     >
       <label htmlFor={productId}>
         <div className=" flex items-center gap-10 ">
-          <input type="checkbox" id={productId} className=" w-4 h-4" onClick={onClickCheckBox} />
+          {/* <input type="checkbox" id={productId} className=" w-4 h-4" onClick={onClickCheckBox} /> */}
           <img src={image} alt={title} className="w-60 h-60" />
           <h3 className=" text-xl">{title}</h3>
         </div>

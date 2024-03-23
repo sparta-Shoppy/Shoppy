@@ -31,9 +31,7 @@ export default function CartPage() {
               장바구니
             </h1>
           </section>
-          <div className="flex flex-row w-full mt-30 mb-5 text-2xl">
-            <button>전체 삭제하기</button>
-          </div>
+          <div className="flex flex-row w-full mt-30 mb-5 text-2xl">{/* <button>전체 삭제하기</button> */}</div>
 
           <section className="flex flex-row justify-between w-full h-full ">
             <article className="flex flex-col items-center border h-full w-3/4 overflow-auto">
