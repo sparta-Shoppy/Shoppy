@@ -15,6 +15,9 @@ import { FaUserMinus } from 'react-icons/fa';
 import { FaUserCog } from 'react-icons/fa';
 import { useAppDispatch, useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { userState } from '@/store/modules/user';
+import { PiAddressBook, PiAddressBookBold } from 'react-icons/pi';
+import { AiOutlineProfile } from 'react-icons/ai';
+import { CgProfile } from 'react-icons/cg';
 
 //userId 사용
 const Header = () => {
@@ -35,7 +38,9 @@ const Header = () => {
         setIsAdmin(user.isAdmins ?? false);
         setIsUser(true);
         //store에 user 정보 저장
-        dispatch(userAction({ userId: user.uid, nickname: user.displayName, adminReal: user.isAdmins }));
+        dispatch(
+          userAction({ userId: user.uid, nickname: user.displayName, email: user.email, adminReal: user.isAdmins })
+        );
       } else {
         setIsAdmin(false);
       }
@@ -47,7 +52,7 @@ const Header = () => {
     signOut(auth);
     deleteAdminCookie();
     window.localStorage.removeItem('user');
-    dispatch(userAction({ userId: '', nickname: '', adminReal: false }));
+    dispatch(userAction({ userId: '', nickname: '', email: '', adminReal: false }));
     router.replace('/');
     setIsUser(false);
   };
@@ -64,7 +69,7 @@ const Header = () => {
         </Link>
         {/*로그인된 상태*/}
         {isUser ? (
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center gap-2">
             <Link href={`/cart/${userId}`} className="text-xl">
               <CartStatus />
             </Link>
@@ -74,6 +79,9 @@ const Header = () => {
                 <FaUserMinus className="text-2xl ml-1 mr-1" />
               </div>
             </button>
+            <Link href={'/profile'}>
+              <CgProfile className="text-5xl hover:text-slate-300" />
+            </Link>
             {/* 관리자 상태 */}{' '}
             {isAdmin && (
               <Link href={'/admin'} className="text-xl">
