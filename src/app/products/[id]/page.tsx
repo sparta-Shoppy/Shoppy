@@ -52,9 +52,14 @@ export default function ProductDetailPage() {
       {nowItem?.map((prev) => {
         return (
           <div className="w-3/5 m-auto h-full pt-24 flex justify-around items-center" key={prev.productId}>
-            <img className="w-1/4 h-1/4" src={prev.image} alt="상품이미지" />
-            <div className="flex flex-col gap-10 text-xl">
-              <div>상품명 : {prev.title}</div>
+            {/* <img className="w-1/4 h-1/4" src={prev.image} alt="상품이미지" /> */}
+            <img className="w-72 h-96" src={prev.image} alt="상품이미지" />
+            {/* <div className="flex flex-col gap-10 text-xl"> */}
+            <div className="flex flex-col gap-10 text-xl w-72 h-96">
+              <div>
+                <div>상품명 : {prev.title}</div>
+                <div className="text-zinc-400 text-lg">{prev.info}</div>
+              </div>
               <div>배송 : {prev.delivery}</div>
               <div>판매자 : {prev.seller}</div>
               <div>판매단위 : {new Intl.NumberFormat('ko-KR').format(prev.price)}</div>
