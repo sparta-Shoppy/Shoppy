@@ -4,22 +4,18 @@ import { deleteAdminCookie } from '@/api/cookie';
 import { app } from '@/api/fiebaseApi';
 import { onUserStateChange } from '@/api/login';
 import { userAction } from '@/store/modules/user';
-
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Join from '../main/Join';
 import Login from '../main/Login';
-
 import CartStatus from '../cart/CartStatus';
-
-import { FaUserMinus } from 'react-icons/fa';
-import { FaUserCog } from 'react-icons/fa';
-
 import { userState } from '@/store/modules/user';
 import { useAppDispatch, useAppSelector } from '@/utill/hooks/redux/useRedux';
 
+import { FaUserMinus } from 'react-icons/fa';
+import { FaUserCog } from 'react-icons/fa';
 //userId 사용
 const Header = () => {
   const userId = useAppSelector(userState);
@@ -38,9 +34,8 @@ const Header = () => {
       if (user) {
         setIsAdmin(user.isAdmins ?? false);
         setIsUser(true);
-
         //store에 user 정보 저장
-        dispatch(userAction({ userId: user.uid, nickname: user.displayName }));
+        dispatch(userAction({ userId: user.uid, nickname: user.displayName, adminReal: user.isAdmins }));
       } else {
         setIsAdmin(false);
       }
@@ -52,12 +47,11 @@ const Header = () => {
     signOut(auth);
     deleteAdminCookie();
     window.localStorage.removeItem('user');
-
+    dispatch(userAction({ userId: '', nickname: '', adminReal: false }));
     router.replace('/');
     setIsUser(false);
   };
 
-  console.log('유저아이디', userId);
   return (
     <>
       <header className=" flex items-center m-auto justify-between fixed z-50 bg-white w-full pr-20 pl-20">

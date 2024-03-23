@@ -3,9 +3,7 @@
 import { FaPlusCircle } from 'react-icons/fa';
 import { FaMinusCircle } from 'react-icons/fa';
 import { ProductType } from '@/types/product-type';
-
 import { useDeleteCartData, useUpdateCartData } from '@/utill/hooks/cart/useCart';
-
 import { userState } from '@/store/modules/user';
 import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 

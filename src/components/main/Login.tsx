@@ -1,7 +1,6 @@
 'use Client';
 import { FormEvent } from 'react';
 import { toast } from 'react-toastify';
-
 import { app, db } from '@/api/fiebaseApi';
 import {
   GithubAuthProvider,
@@ -11,15 +10,11 @@ import {
   signInWithPopup
 } from 'firebase/auth';
 import { collection, doc, setDoc } from 'firebase/firestore';
-
 import { loginModalAction, loginState } from '@/store/modules/isModalToggle';
-
 import { setUserLogin } from '@/types/user-type';
-
 import { FaUserCheck } from 'react-icons/fa';
-import gitIcon from '../../../public/assets/logo.png';
-import { IoLogoGithub } from 'react-icons/io';
 import { FcGoogle } from 'react-icons/fc';
+import { IoLogoGithub } from 'react-icons/io';
 import { SiCoinmarketcap } from 'react-icons/si';
 import { useAppDispatch, useAppSelector } from '@/utill/hooks/redux/useRedux';
 

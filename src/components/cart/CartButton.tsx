@@ -11,7 +11,7 @@ interface CartButtonProps {
 export default function Cartbutton({ item, userId }: CartButtonProps) {
   const { createCartMutate } = useCreateCartData();
 
-  console.log('카트버튼', userId);
+  // console.log('카트버튼', userId);
 
   const onClickCart = () => {
     createCartMutate(
@@ -41,7 +41,7 @@ export default function Cartbutton({ item, userId }: CartButtonProps) {
 
   return (
     <button onClick={onClickCart}>
-      <TiShoppingCart className="text-2xl ml-1 mr-1" />
+      <TiShoppingCart className="text-2xl ml-1 mr-1 hover:text-zinc-400" />
     </button>
   );
 }
