@@ -10,7 +10,7 @@ import { GrCheckbox } from 'react-icons/gr';
 import { FiCheckSquare } from 'react-icons/fi';
 import { HiLockClosed } from 'react-icons/hi2';
 import { isAdminState, nicknameState, userState } from '@/store/modules/user';
-import askInput from '@/utill/hooks/detail/askInput';
+import useAskInput from '@/utill/hooks/detail/useAskInput';
 import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 
 function Ask() {
@@ -27,7 +27,7 @@ function Ask() {
 
   console.log('adminNow', adminNow);
 
-  const { value, onChangeHandler, reset, dataLoad, adminDataLoad } = askInput({
+  const { value, onChangeHandler, reset, dataLoad, adminDataLoad } = useAskInput({
     content: '',
     changeContent: '',
     adminContent: ''
