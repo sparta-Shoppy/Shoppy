@@ -147,7 +147,6 @@ function Review() {
             value={content}
             onChange={onChangeHandler}
             placeholder="내용을 입력해 주세요"
-            maxLength={20}
             required
             className="w-1/4 border rounded-md p-1 ml-2"
           />
@@ -171,7 +170,6 @@ function Review() {
                   type="text"
                   name="changeContent"
                   value={changeContent}
-                  maxLength={20}
                   onChange={onChangeHandler}
                   required
                   className="border p-1 rounded-md"
