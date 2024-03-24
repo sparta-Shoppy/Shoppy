@@ -57,7 +57,6 @@ const Login = () => {
       setDatabase({ uid, displayName, email });
     } catch (error) {
       toast.error('이미 있는 이메일 입니다!');
-      console.log('google error', error);
     }
   };
 
@@ -79,7 +78,6 @@ const Login = () => {
       // navigate('/');
     } catch (error) {
       toast.error('이미 있는 이메일 입니다!');
-      console.log(error);
     }
   };
 

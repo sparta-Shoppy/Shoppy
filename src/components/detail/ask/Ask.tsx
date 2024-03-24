@@ -111,7 +111,6 @@ function Ask() {
           toast.success('수정 완료!');
         } catch (error) {
           toast.error('수정 실패!');
-          console.log('error', error);
         }
       }
     }

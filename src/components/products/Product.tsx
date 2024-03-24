@@ -32,14 +32,12 @@ export default function Product() {
 
       response?.forEach((doc: any) => {
         const products = doc.data();
-        console.log('products', products);
 
         fetchedProducts.push({ ...products, id: doc.id, products });
       });
       return fetchedProducts;
     }
   });
-  console.log('data', data);
 
   useEffect(() => {
     refetch();

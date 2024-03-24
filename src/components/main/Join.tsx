@@ -66,7 +66,7 @@ const Join = () => {
 
       setIsIdCheck(idValidation({ users, email }));
     } catch (error) {
-      console.log('중복확인 기능에서 발생', error);
+      toast.error('중복확인이 안되는 아이디입니다.');
     }
   };
 
