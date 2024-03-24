@@ -1,5 +1,5 @@
 import { NewReviewType } from '@/types/product-type';
-import { collection, getDocs, query, where, addDoc, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from './fiebaseApi';
 
 // 현재 서버 컴포넌트로 사용할 수 없는 이유
