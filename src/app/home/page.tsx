@@ -8,13 +8,11 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 export default function HomePage() {
-  const [selectedTab, setSelectedTab] = useState(true);
-
-  const { data, isLoading, isError, refetch } = useGetMainProducts(selectedTab);
+  const { data, isLoading, isError, refetch } = useGetMainProducts();
 
   useEffect(() => {
     refetch();
-  }, [selectedTab, refetch]);
+  }, [refetch]);
 
   if (isLoading) {
     return (
@@ -41,19 +39,7 @@ export default function HomePage() {
 
       <Tabs />
       <div className="w-4/5 flex justify-end mb-5">
-        <span
-          className={`cursor-pointer mr-2 ${selectedTab ? 'text-cyan-400' : 'text-black hover:text-cyan-400'}`}
-          onClick={() => setSelectedTab(true)}
-        >
-          신상품
-        </span>
-        ||
-        <span
-          className={`cursor-pointer mx-2 ${!selectedTab ? 'text-pink-300' : 'text-black hover:text-pink-300'}`}
-          onClick={() => setSelectedTab(false)}
-        >
-          베스트
-        </span>
+        <span>신상품</span>
       </div>
       <div className="flex justify-center w-4/5 m-auto gap-20 flex-wrap">
         {data?.map((item: any) => {

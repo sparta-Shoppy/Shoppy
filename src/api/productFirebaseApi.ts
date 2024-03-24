@@ -2,12 +2,8 @@ import { ProductType } from '@/types/product-type';
 import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { db } from './fiebaseApi';
 
-export async function getMainProducts(selectedTab: boolean) {
-  const response = await getDocs(
-    selectedTab
-      ? query(collection(db, 'product'), orderBy('createdAt', 'desc'))
-      : query(collection(db, 'product'), orderBy('createdAt', 'asc'))
-  );
+export async function getMainProducts() {
+  const response = await getDocs(query(collection(db, 'product'), orderBy('createdAt', 'desc')));
 
   const fetchedProducts: ProductType[] = [];
   response?.forEach((doc) => {

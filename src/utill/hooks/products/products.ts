@@ -1,10 +1,10 @@
 import { getMainProducts, getProducts } from '@/api/productFirebaseApi';
 import { useQuery } from '@tanstack/react-query';
 
-export function useGetMainProducts(selectedTab: boolean) {
+export function useGetMainProducts() {
   return useQuery({
     queryKey: ['mainProducts'],
-    queryFn: () => getMainProducts(selectedTab)
+    queryFn: () => getMainProducts()
   });
 }
 
