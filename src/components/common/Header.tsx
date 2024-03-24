@@ -46,7 +46,6 @@ const Header = () => {
   const onLogOutClickEventHandler = () => {
     signOut(auth);
     deleteAdminCookie();
-    window.localStorage.removeItem('user');
     dispatch(userAction({ userId: '', nickname: '', email: '', adminReal: false }));
     router.replace('/');
     setIsUser(false);

@@ -31,12 +31,10 @@ export default function ProfilePage() {
 
           {/* user가 작성한 후기 내용 */}
           <div className="flex items-center gap-5 mb-10 ">
-            {/* {heart ? ' text-rose-500' : ' hover:text-rose-500'} */}
             <TiPencil className={`text-6xl  `} />
             <p className="text-3xl">작성한 후기 {writeData?.length}개</p>
           </div>
           <ul className=" bg-white p-6 mb-10 ">
-            {/* key={product.productId} product={product} */}
             {writeData ? (
               writeData?.map((write) => <ProfileItem key={crypto.randomUUID()} props={write} />)
             ) : (
@@ -57,23 +55,4 @@ export default function ProfilePage() {
       </div>
     </>
   );
-}
-
-// like 임시 인터페이스
-export interface likeInterface {
-  category: string;
-  createdAt: Date;
-  delivery: string;
-  id: string;
-  image: string;
-  info: string;
-  likeId: string;
-  price: number;
-  productId: string;
-  products?: [];
-  quantity: number;
-  seller: string;
-  title: string;
-  weight: string;
-  userId: string;
 }

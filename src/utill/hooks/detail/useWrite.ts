@@ -1,5 +1,4 @@
 import { getUserReviewData, getUserAskData } from '@/api/writeApi';
-import { likeInterface } from '@/app/profile/page';
 import { NewReviewType } from '@/types/product-type';
 import { useQuery } from '@tanstack/react-query';
 

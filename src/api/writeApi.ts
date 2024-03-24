@@ -1,7 +1,6 @@
 import { NewReviewType } from '@/types/product-type';
 import { collection, getDocs, query, where, addDoc, deleteDoc, doc } from 'firebase/firestore';
 import { db } from './fiebaseApi';
-import { likeInterface } from '@/app/profile/page';
 
 // 현재 서버 컴포넌트로 사용할 수 없는 이유
 // 구조:클라이언트 측에서는 api 요청을 보내고 ==> api요청을 받은 백엔드 측에서는 ==>  서버에 있는 데이터를 가져와야하지만
