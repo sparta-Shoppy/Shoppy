@@ -11,13 +11,13 @@
 - 배포 링크 : https://shoppy-beta.vercel.app/
   <br><br>
 
-|                                                                                       이준구                                                                                       |                                                              서가희                                                              |                                                              김연재                                                               |                                                              윤미주                                                               |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------------------------- |
-| <p align="center"><img src="https://avatars.githubusercontent.com/u/145527618?s=400&u=1d99b3b82131d12d85ec37193b429a600def959f&v=4" style="width:100px; border-radius: 50%" /></p> | <p align="center"><img src="https://avatars.githubusercontent.com/u/134026105?v=4" style="width:100px; border-radius: 50%"/></p> | <p align="center"><img src="https://avatars.githubusercontent.com/u/121925181?v=4" style="width:100px; border-radius: 50%" /></p> | <p align="center"><img src="https://avatars.githubusercontent.com/u/134301942?v=4" style="width:100px; border-radius: 50%" /></p> | <p align="center"><img src="https://avatars.githubusercontent.com/u/87355061?v=4" style="width:100px; border-radius: 50%" /></p> |
-|                                                                     [@LeeJunGoo](https://github.com/LeeJunGoo)                                                                     |                                             [@seokahee](https://github.com/seokahee)                                             |                                           [@YEONJAE](https://github.com/porosadporosad)                                           |                                           [@anywhereim](https://github.com/anywhereim)                                            | [@illuy](https://github.com/illuy)                                                                                               |
-|                                                                                        팀장                                                                                        |                                                               팀원                                                               |                                                               팀원                                                                |                                                               팀원                                                                | 팀원                                                                                                                             |
-|                                       - 로그인 및 회원가입 기능 <br> - 로그인 상태관리 <br> - 관리자 페이지 접근 제한 <br> - 마이페이지 구현                                       |                                                   - 디테일 페이지 (채널 분석)                                                    |                           - API 호출 <br> - 메인페이지 검색 기능 <br> - 즐겨찾기 기능 <br> - 마이페이지                           |                        - API 호출 <br> - Loading 창 <br> - 메인페이지 인기순위 <br> - 리스트 페이지네이션                         | - 전반적인 html 및 css 뼈대 <br> - 메인페이지 바디슬라이더 영상 modal 기능 <br> - 리스트페이지 목록                              |
-|                                                                              링크 배포 및 README 작성                                                                              |                                                       발표 및 README 작성                                                        |                                                             링크 배포                                                             |                                                             시연 영상                                                             | README 작성                                                                                                                      |
+|                                                                                       이준구                                                                                       |                                                              서가희                                                              |                                                                    김연재                                                                     |                                                              윤미주                                                               |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------------------------- |
+| <p align="center"><img src="https://avatars.githubusercontent.com/u/145527618?s=400&u=1d99b3b82131d12d85ec37193b429a600def959f&v=4" style="width:100px; border-radius: 50%" /></p> | <p align="center"><img src="https://avatars.githubusercontent.com/u/134026105?v=4" style="width:100px; border-radius: 50%"/></p> |       <p align="center"><img src="https://avatars.githubusercontent.com/u/121925181?v=4" style="width:100px; border-radius: 50%" /></p>       | <p align="center"><img src="https://avatars.githubusercontent.com/u/134301942?v=4" style="width:100px; border-radius: 50%" /></p> | <p align="center"><img src="https://avatars.githubusercontent.com/u/87355061?v=4" style="width:100px; border-radius: 50%" /></p> |
+|                                                                     [@LeeJunGoo](https://github.com/LeeJunGoo)                                                                     |                                             [@seokahee](https://github.com/seokahee)                                             |                                                 [@YEONJAE](https://github.com/porosadporosad)                                                 |                                           [@anywhereim](https://github.com/anywhereim)                                            | [@illuy](https://github.com/illuy)                                                                                               |
+|                                                                                        팀장                                                                                        |                                                               팀원                                                               |                                                                     팀원                                                                      |                                                               팀원                                                                | 팀원                                                                                                                             |
+|                                       - 로그인 및 회원가입 기능 <br> - 로그인 상태관리 <br> - 관리자 페이지 접근 제한 <br> - 마이페이지 구현                                       |                                                   - 디테일 페이지 (채널 분석)                                                    | - 상세페이지 (상품id에 해당하는 값 불러오기) <br> - 후기 기능(로그인 시 가능) <br> - 문의 기능(로그인 시 가능, 비밀글 작성) <br> - 마이페이지 |                        - API 호출 <br> - Loading 창 <br> - 메인페이지 인기순위 <br> - 리스트 페이지네이션                         | - 전반적인 html 및 css 뼈대 <br> - 메인페이지 바디슬라이더 영상 modal 기능 <br> - 리스트페이지 목록                              |
+|                                                                              링크 배포 및 README 작성                                                                              |                                                       발표 및 README 작성                                                        |                                                                   링크 배포                                                                   |                                                             시연 영상                                                             | README 작성                                                                                                                      |
 
 <br><br>
 
@@ -103,28 +103,20 @@
 ## 1. 헤더 부분
 
 <ul>
-    <li>main 화면 구성</li>
-    <li>header: logo 클릭 시 home으로 이동 / 로그인 및 회원가입  모달창 구성/ 로그인할 경우 마이페이지 및 장바구니 페이지 구성</li>
-    <li>main - mainslide / search + keyword / bodyslide / best youtube 구성
-      <ul>
-        <li>main slide : swiper slide 라이브러리를 활용한 슬라이드 구성
-          <ul>
-            <li>화면 렌더링 시 헤더의 슬라이더가 자동으로 넘어갑니다.</li>
-            <li>하단의 점 클릭 시 해당 슬라이더로 이동합니다.</li>
-          </ul>
-        </li>
-        <li>body slide : slick slide 라이브러리를 활용한 슬라이드 구성
-          <ul>
-            <li>해시태그 키워드 별 대표 영상을 슬라이더로 조회할 수 있습니다.</li>
-            <li>양 옆의 화살표를 누르면 선택한 방향으로 슬라이더가 이동합니다.</li>
-            <li>영상에 커서를 올리면 크기가 커지고, 클릭 시 모달창으로 영상을 재생합니다.</li>
-          </ul>
-        </li>
-      </ul>
-    </li>
+    <li> logo 클릭 시 home으로 이동</li>
+    <br/>
+    <li> 로그인할 경우  </li>
+    <img src="public/assets/README/header_login.png"/>
+    <br/
+    >
+    <li> 비로그인할 경우  </li>
+    <img src="public/assets/README/header_Non-login.png"/>
+    <li> 관리자일 경우 </li>
+    <img src="public/assets/README/header_admin.png"/>
+      
   </ul>
 
-## 1. 메인페이지
+## 2. 메인페이지
 
 <table>
 <thead>
@@ -145,7 +137,6 @@
 
   <ul>
     <li>main 화면 구성</li>
-    <li>header: logo 클릭 시 home으로 이동 / 로그인 및 회원가입  모달창 구성/ 로그인할 경우 마이페이지 및 장바구니 페이지 구성</li>
     <li>main - mainslide / search + keyword / bodyslide / best youtube 구성
       <ul>
         <li>main slide : swiper slide 라이브러리를 활용한 슬라이드 구성
@@ -253,7 +244,7 @@
   </tr>
   <tr>
     <td>
-      <img src="https://github.com/Sparta-outsourcing-Project/Sparta-outsourcing-Project/blob/feat/main/src/assets/README_img/list.png"/>
+      <img src="public/assets/README/productDetail.png"/>
     </td>
   </tr>
   </tbody>
@@ -283,13 +274,13 @@
 
  <br>
 
-## 3. 디테일 페이지
+## 3. 상품 상세 페이지
 
   <table>
 <thead>
   <tr>
   <th>
-    디테일 페이지
+    상품 상세 페이지
   </th>
     </thead>
   <tbody>
