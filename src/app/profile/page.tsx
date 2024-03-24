@@ -14,22 +14,10 @@ export default function ProfilePage() {
   const userNickname = useAppSelector(nicknameState);
   const userEmail = useAppSelector(emailState);
   const userId = useAppSelector(userState);
-  // pupCd01zjHPesDoY21OqJb6CjIX2
-  // 현재 firebase를 불러오는 과정에서 렌더링이 2번 발생한다.
 
   const { data: writeData, isLoading: writeLoading } = useReadWriteData(userId);
   const { data: askData, isLoading: askLoading } = useReadAskData(userId);
   const { data: likeData, isLoading: LikeLoading } = useReadLikeData(userId);
-  console.log(userId);
-
-  if (writeLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center h-screen">
-        <div>잠시만 기다려 주세요</div>
-        <img src="../../../assets/bean.gif" alt="로딩중" />
-      </div>
-    );
-  }
 
   return (
     <>

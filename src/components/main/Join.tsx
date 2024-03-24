@@ -185,6 +185,7 @@ const validation = ({ password, passwordCheck, nickname, isIdCheck }: userValida
   return true;
 };
 
+//중복확인
 const idValidation = ({ users, email }: { users: any; email: string }) => {
   const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_'{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9]+)*$/;
 
