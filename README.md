@@ -1,4 +1,4 @@
-# <img src="public/assets/logo.png" width ="150">
+![Group 67](https://github.com/sparta-Shoppy/Shoppy/assets/134301942/196e3425-6ed9-4eaa-9002-87e4b47f694c)# <img src="public/assets/logo.png" width ="150">
 
 <br>
 
@@ -31,42 +31,56 @@
 <h3>Environment</h3> 
 <div><img src="https://img.shields.io/badge/visual studio code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"></div>
 
+<h3>Framework</h3>
+<img src="https://img.shields.io/badge/nextjs-000000?style=for-the-badge&logo=nextjs&logoColor=white">
+
 <h3>Development</h3> 
-<div><img src="https://techstack-generator.vercel.app/ts-icon.svg" style="width:70px; border-radius: 50%> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
+<div>
+<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"> 
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
-<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"></div>
+<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+</div>
+
 <h3>Database</h3> 
 <div><img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"> </div>
+
 <h3>Design</h3> 
 <div><img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"> </div>
 
 <h3>Library</h3> 
-<div> <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white"> <img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white"> <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">  </div>
+<div> 
+  <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white">
+  <img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">   
+<img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
+</div>
  
-그 외 : Redux Toolkit, Swiper, Slick, React-icon, Recharts
+그 외 : Redux Toolkit, React-icon
 
 <br><br>
 
 # 와이어프레임
 
 <table>
-<thead>
-  <tr>
-  <th>
-    메인 페이지
-  </th>
-    <th>
-    상품 리스트 페이지
-  </th>
-     <th>
-    상품 상세 페이지
-  </th>
-  <th>
-    장바구니 페이지
-  </th>
-  <th>
-    마이 페이지
-  </th>
+  <thead>
+    <tr>
+      <th>
+        메인 페이지
+      </th>
+      <th>
+        상품 리스트 페이지
+      </th>
+      <th>
+        상품 상세 페이지
+      </th>
+      <th>
+        장바구니 페이지
+      </th>
+      <th>
+        마이 페이지
+      </th>
+       <th>
+        관리자자 페이지
+      </th>
     </thead>
   <tbody>
   </tr>
@@ -86,7 +100,10 @@
        <td>
       <img src="public/assets/README/wireframe_profile.png"/>
     </td>
-    
+    <td>
+      <img src="public/assets/README/wireframe_profile.png"/>
+    </td>
+    <img src="https://github.com/sparta-Shoppy/Shoppy/assets/134301942/0459f4d2-10c6-47ee-80a9-d1861a48e587" />
   </tr>
   </tbody>
 </table>
