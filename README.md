@@ -1,4 +1,4 @@
-![Group 67](https://github.com/sparta-Shoppy/Shoppy/assets/134301942/196e3425-6ed9-4eaa-9002-87e4b47f694c)# <img src="public/assets/logo.png" width ="150">
+# <img src="public/assets/logo.png" width ="150">
 
 <br>
 
