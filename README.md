@@ -8,7 +8,7 @@
 - 프로젝트 기간 : 2024.03.18(월) ~ 03.22(금) (5일간)
 - 프로젝트 소개 : 식자재 및 가공식품 등 생활에 필요한 식품을 구매할 수 있는 쇼핑몰입니다.
 
-- 배포 링크 : shoppy-sage.vercel.app/
+- 배포 링크 : https://shoppy-sage.vercel.app/
   <br><br>
 
 |                                                                                       이준구                                                                                       |                                                              서가희                                                              |                                                              김연재                                                               |                                                              윤미주                                                               |
@@ -115,55 +115,19 @@
 <br>
 
 # 화면 구성 및 기능
+<br><br>
 
-## 1. 공통 헤더 부분
-
-<ul>
-    <li> logo 클릭 시 home으로 이동</li>
-    <br/>
-    <li> 로그인할 경우  </li>
-    <img src="public/assets/README/header/header_login.png"/>
-    <br/
-    >
-    <li> 비로그인할 경우  </li>
-    <img src="public/assets/README/header/header_Non-login.png"/>
-    <li> 관리자일 경우 </li>
-    <img src="public/assets/README/header/header_admin.png"/>
-      
-  </ul>
-<br><br><br>
-
-## 2. 메인페이지
-
-<table>
-<thead>
-  <tr>
-    </thead>
-  <tbody>
-  </tr>
-  <tr>
-    <td>
-      <img src="public/assets/README/mainPage/mainPage.png"/>
-    </td>
-  </tr>
-  </tbody>
-</table>
-
-  <h3> 2-1. 메인  상품 리스트 </h3>
-  </ul>
+## 1. 메인페이지
+  <img src="public/assets/README/mainPage/mainPage.png"/>
+  <h3> 1-1. 메인  상품 리스트 </h3>
       <ul>
         <li>화면 렌더링 시 로딩 페이지 구현 </li>
         <li>tailwind 라이브러리를 활용한 슬라이드 구성</li>
         <li>메인 배너 슬라이더가 자동으로 이동</li>
         <li>상품을 각각의 카테고리 분류하였고 카테고리 선택 시 해당 페이지로 이동</li>
         <li>등록일 기준으로 상품 리스트를 정렬하여 출력</li>
-          <ul>
           </ul>
-        </li>
-        </li>
-      </ul>
-    </li>
-  </ul>
+      
 <br><br>
 
 <table>
@@ -185,12 +149,10 @@
       <td>
        <img src="public/assets/README/loginPage/join.png"/>
       </td>
-      <td>
-      </td>
     </tr>
   </tbody>
 </table>
-   <h3> 2-2. 로그인 / 회원가입 / 접근 제한 </h3>
+   <h3> 1-2. 로그인 / 회원가입 / 접근 제한 </h3>
   <ul>
     <li>
      firebase authentication 및 firestore를 사용한 로그인 및 회원가입 기능 구현
@@ -244,13 +206,11 @@
       <td>
        <img src="public/assets/README/cartPage/cartHeaderMenuState.png" width ="1150"  />
       </td>
-      <td>
-      </td>
     </tr>
   </tbody>
 </table>
 
-<h3> 2-3. 장바구니 버튼 및 장바구니 담긴 상품 개수 표시 </h3>
+<h3> 1-3. 장바구니 버튼 및 장바구니 담긴 상품 개수 표시 </h3>
 <ul>
 <li>장바구니 버튼</li>
 <ul>
@@ -264,7 +224,7 @@
 
 <br><br><br><br>
 
-## 3. 상품 리스트 페이지
+## 2. 상품 리스트 페이지
 
  <table>
 <thead>
@@ -290,7 +250,7 @@
  <br>
 <br><br><br><br>
 
-## 4. 상품 상세 페이지
+## 3. 상품 상세 페이지
 
   <table>
 <thead>
@@ -304,42 +264,57 @@
   </tr>
   </tbody>
 </table>
-<h3> 4-1. 상품 상세 정보 </h3>
+<h3> 3-1. 상품 상세 정보 </h3>
 <ul>
  <li>`useQuery`훅을 사용하여 상품 Id를 기준으로 firebase에 저장된 데이터를 가져와 상품의 정보를 보여준다.</li>  
  </ul>
-<br><br><br><br>
+<br><br>
 
-<h3> 4-2. 후기 및 문의 작성 기능 </h3>
-  <img src="public/assets/README/detailPage/notLogin.png" width=300 height= 131/>
-  <img src="public/assets/README/detailPage/review.png" width=300/>
+
+<h3> 3-2. 후기 및 문의 작성</h3>
+  <table>
+  <tbody>
+  <tr>
+    <td>
+        <img src="public/assets/README/detailPage/notLogin.png" width=500 height= 250/>
+    </td>
+    <td>
+      <img src="public/assets/README/detailPage/review.png" width=500/>
+    </td>
+  </tr>
+  </tbody>
+</table>
+  
   <ul>
   <li>해당 상품에 후기,문의 작성 가능은 로그인된 유저만 사용할 수 있게끔 활성화 시키고 비회원일 경우에는 비활성화 시킨다.</li>
   <li>현재 로그인된 유저와 해당 글을 작성한 유저의 일치 여부를 검사한 후 일치할 경우에만 글 수정 삭제 
   </ul>
 <br>
 
-   <img src="public/assets/README/detailPage/askAnswer.png" width=300/>
-   <img src="public/assets/README/detailPage/askNotAnswer.png" width=295/>
+  <table>
+  <tbody>
+  <tr>
+    <td>
+        <img src="public/assets/README/detailPage/askAnswer.png" width=500 height= 250/>
+    </td>
+    <td>
+      <img src="public/assets/README/detailPage/askNotAnswer.png" width=500/>
+    </td>
+  </tr>
+  </tbody>
+</table>
    
   <li>문의 글에서는 관리자일 경우에만 사용자의 글에 대한 답변 작성버튼 활성화 및 답변 작성 시에는 체크박스로 표시한다.</li>
     <li>후기 및 문의 글 작성 시 "비밀 글 등록" 체크박스를 체크할 경우 작성 유저와 관리자만 열람 가능</li>
 
 <br><br><br><br>
 
-## 5. 장바구니 페이지
+## 4. 장바구니 페이지
 
   <table>
-<thead>
-    </thead>
-  <tbody>
-  </tr>
-  <tr>
     <td>
      <img src="public/assets/README/cartPage/cartPage.png" />
     </td>
-  </tr>
-  </tbody>
 </table>
 <br>
 <ul>
@@ -354,7 +329,7 @@
 
 <br><br>
 
-## 6. 마이페이지
+## 5. 마이페이지
 
   <table>
 <thead>
@@ -376,7 +351,7 @@
 </ul>
 <br><br><br><br>
 
-## 7. 관리자 페이지
+## 6. 관리자 페이지
 
 <br>
 
