@@ -13,15 +13,14 @@
 
 
 
-
-|                                                              이준구                                                               |                                                              서가희                                                              |                                                              김연재                                                               |                                                              윤미주                                                               |                                                        
-| :-------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | 
-|<p align="center"><img src="https://avatars.githubusercontent.com/u/145527618?s=400&u=1d99b3b82131d12d85ec37193b429a600def959f&v=4" style="width:100px; border-radius: 50%" /></p> | <p align="center"><img src="https://avatars.githubusercontent.com/u/134026105?v=4" style="width:100px; border-radius: 50%"/></p> |  <p align="center"><img src="https://avatars.githubusercontent.com/u/121925181?v=4" style="width:100px; border-radius: 50%" /></p> | <p align="center"><img src="https://avatars.githubusercontent.com/u/134301942?v=4" style="width:100px; border-radius: 50%" /></p> | 
-|                                             [@LeeJunGoo](https://github.com/LeeJunGoo)                                            |                                               [@seokahee](https://github.com/seokahee)                                               |                                       [@YEONJAE](https://github.com/porosadporosad)                                         |                                           [@anywhereim](https://github.com/anywhereim)                                            |
-|                                                               팀장                                                                |                                                               팀원                                                               |                                                               팀원                                                                |                                                               팀원                                                                |
-|            - 메인페이지 헤더, 본문 영상 슬라이더 <br> - 로그인 및 회원가입 <br> - 회원정보 수정 <br> - 로그인 상태관리            |                                                   - 디테일 페이지 (채널 분석)                                                     |                           - API 호출 <br> - 메인페이지 검색 기능 <br> - 즐겨찾기 기능 <br> - 마이페이지                           |                        - API 호출 <br> - Loading 창 <br> - 메인페이지 인기순위 <br> - 리스트 페이지네이션                         |               
-|                                                             링크 배포                                                             |                                                       시연 영상                                                         |                                                             발표                                                             |                                                             시연 영상                                                             | 
-
+         
+|                                                              이준구                                                                                                                  |                                                              서가희                                                                                                                 |                                                                           김연재                                                                                                     |                                                              윤미주                                                               |         
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | 
+|<p align="center"><img src="https://avatars.githubusercontent.com/u/145527618?s=400&u=1d99b3b82131d12d85ec37193b429a600def959f&v=4" style="width:100px; border-radius: 50%" /></p>   | <p align="center"><img src="https://avatars.githubusercontent.com/u/134026105?v=4" style="width:100px; border-radius: 50%"/></p>                                                    |  <p align="center"><img src="https://avatars.githubusercontent.com/u/121925181?v=4" style="width:100px; border-radius: 50%" /></p>                                                  | <p align="center"><img src="https://avatars.githubusercontent.com/u/134301942?v=4" style="width:100px; border-radius: 50%" /></p> | 
+|                                             [@LeeJunGoo](https://github.com/LeeJunGoo)                                                                                              |                                                                   [@seokahee](https://github.com/seokahee)                                                                          |                                       [@YEONJAE](https://github.com/porosadporosad)                                                                                                 |                                           [@anywhereim](https://github.com/anywhereim)                                            |
+|                                                               팀장                                                                                                                   |                                                               팀원                                                                                                                  |                                                               팀원                                                                                                                  |                                                               팀원                                                                 |
+|            - 로그인 및 회원가입 기능구성 <br> - 로그인 전역 상태관리 <br> -admin페이지 URL 접근제한 <br> -마이페이지                                                                      |                                                   - 메인 UI 및 상품 리스트 출력 <br> -카테고리별 상품 정렬 <br> -로딩페이지                                                              |                           - 상세페이지 <br> -후기 기능 <br> -문의기능 <br> -관리자 문의 답변                                                                                           |                        - 관리자페이지 <br> -로그인 시 admin 구분 <br> -장바구니 버튼 <br> -장바구니 실시간 개수 <br> - 장바구니페이지   |               
+|                                                             링크 배포/README 작성                                                                                                    |                                                       시연 영상                                                                                                                      |                                                                   발표                                                                                                               |                                                             README 작성                                                            | 
 
 
 
@@ -32,42 +31,56 @@
 <h3>Environment</h3> 
 <div><img src="https://img.shields.io/badge/visual studio code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"></div>
 
+<h3>Framework</h3>
+<img src="https://img.shields.io/badge/nextjs-000000?style=for-the-badge&logo=nextjs&logoColor=white">
+
 <h3>Development</h3> 
-<div><img src="https://techstack-generator.vercel.app/ts-icon.svg" style="width:70px; border-radius: 50%> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
+<div>
+<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"> 
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
-<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"></div>
+<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+</div>
+
 <h3>Database</h3> 
 <div><img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"> </div>
+
 <h3>Design</h3> 
 <div><img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"> </div>
 
 <h3>Library</h3> 
-<div> <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white"> <img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white"> <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">  </div>
+<div> 
+  <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white">
+  <img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">   
+<img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
+</div>
  
-그 외 : Redux Toolkit, Swiper, Slick, React-icon, Recharts
+그 외 : Redux Toolkit, React-icon
 
 <br><br>
 
 # 와이어프레임
 
 <table>
-<thead>
-  <tr>
-  <th>
-    메인 페이지
-  </th>
-    <th>
-    상품 리스트 페이지
-  </th>
-     <th>
-    상품 상세 페이지
-  </th>
-  <th>
-    장바구니 페이지
-  </th>
-  <th>
-    마이 페이지
-  </th>
+  <thead>
+    <tr>
+      <th>
+        메인 페이지
+      </th>
+      <th>
+        상품 리스트 페이지
+      </th>
+      <th>
+        상품 상세 페이지
+      </th>
+      <th>
+        장바구니 페이지
+      </th>
+      <th>
+        마이 페이지
+      </th>
+       <th>
+        관리자자 페이지
+      </th>
     </thead>
   <tbody>
   </tr>
@@ -87,7 +100,9 @@
        <td>
       <img src="public/assets/README/wireframe_profile.png"/>
     </td>
-    
+    <td>
+      <img src="public/assets/README/wireframe_profile.png"/>
+    </td>
   </tr>
   </tbody>
 </table>
@@ -471,85 +486,69 @@
 ```
 📦src
  ┣ 📂api
- ┃ ┣ 📜auth.js
- ┃ ┣ 📜config.js
- ┃ ┣ 📜dataApi.js
- ┃ ┣ 📜detailApi.js
- ┃ ┣ 📜favorites.js
- ┃ ┣ 📜mainSliderDataApi.js
- ┃ ┗ 📜request.js
- ┣ 📂assets
- ┃ ┣ 📂README_img
- ┃ ┃ ┣ 📜detail.png
- ┃ ┃ ┣ 📜list.png
- ┃ ┃ ┣ 📜loding.png
- ┃ ┃ ┣ 📜login.jpg
- ┃ ┃ ┣ 📜main.png
- ┃ ┃ ┣ 📜modal.jpg
- ┃ ┃ ┣ 📜signup.jpg
- ┃ ┃ ┣ 📜wireframe_detail.jpg
- ┃ ┃ ┣ 📜wireframe_list.jpg
- ┃ ┃ ┗ 📜wireframe_main.jpg
- ┃ ┣ 📜coloredStar.png
- ┃ ┣ 📜emptyStar.png
- ┃ ┣ 📜google.png
- ┃ ┣ 📜main_banner01.jpg
- ┃ ┣ 📜main_banner02.jpg
- ┃ ┣ 📜main_banner03.jpg
- ┃ ┣ 📜profile_defaultImage.png
- ┃ ┣ 📜react.svg
- ┃ ┗ 📜utrend_logo.png
+ ┃ ┣ 📜cartFirebaseApi.ts
+ ┃ ┣ 📜cookie.ts
+ ┃ ┣ 📜fiebaseApi.ts
+ ┃ ┗ 📜login.ts
+ ┣ 📂app
+ ┃ ┣ 📂admin
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂cart
+ ┃ ┃ ┗ 📂[userId]
+ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂home
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂products
+ ┃ ┃ ┣ 📂[id]
+ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂profile
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📜globals.css
+ ┃ ┣ 📜layout.tsx
+ ┃ ┣ 📜page.tsx
+ ┃ ┗ 📜provider.tsx
  ┣ 📂components
- ┃ ┣ 📂AuthModal
- ┃ ┃ ┣ 📂styles
- ┃ ┃ ┃ ┣ 📜Login.style.js
- ┃ ┃ ┃ ┗ 📜SignUp.style.js
- ┃ ┃ ┣ 📜Login.jsx
- ┃ ┃ ┗ 📜SignUp.jsx
+ ┃ ┣ 📂cart
+ ┃ ┃ ┣ 📜CartButton.tsx
+ ┃ ┃ ┣ 📜CartItem.tsx
+ ┃ ┃ ┗ 📜CartStatus.tsx
+ ┃ ┣ 📂common
+ ┃ ┃ ┗ 📜Header.tsx
  ┃ ┣ 📂detail
- ┃ ┃ ┣ 📜AdSuggestBtn.jsx
- ┃ ┃ ┣ 📜Detail.jsx
- ┃ ┃ ┣ 📜RecentVideo.jsx
- ┃ ┃ ┗ 📜TwoLevelPieChart.jsx
- ┃ ┣ 📂layout
- ┃ ┃ ┣ 📜Footer.jsx
- ┃ ┃ ┣ 📜Header.jsx
- ┃ ┃ ┗ 📜Loading.jsx
- ┃ ┣ 📂list
- ┃ ┃ ┣ 📜CardList.jsx
- ┃ ┃ ┗ 📜ListFavoriteButton.jsx
+ ┃ ┃ ┣ 📂ask
+ ┃ ┃ ┃ ┗ 📜Ask.tsx
+ ┃ ┃ ┗ 📂review
+ ┃ ┃ ┃ ┗ 📜Review.tsx
  ┃ ┣ 📂main
- ┃ ┃ ┣ 📜Main.jsx
- ┃ ┃ ┗ 📜Thumbnail.jsx
- ┃ ┣ 📂myPage
- ┃ ┃ ┣ 📂styles
- ┃ ┃ ┃ ┗ 📜MyPageStyle.js
- ┃ ┃ ┣ 📜MyPageSection.jsx
- ┃ ┃ ┗ 📜MyProfile.jsx
- ┃ ┗ 📂sliders
- ┃ ┃ ┣ 📜BodySlider.jsx
- ┃ ┃ ┣ 📜HeaderSlider.jsx
- ┃ ┃ ┗ 📜VideoModal.jsx
- ┣ 📂hooks
- ┃ ┣ 📜useChannelDetailInfo.js
- ┃ ┗ 📜useMostPopularChannel.js
- ┣ 📂pages
- ┃ ┣ 📜Error.jsx
- ┃ ┣ 📜Home.jsx
- ┃ ┣ 📜List.jsx
- ┃ ┗ 📜MyPage.jsx
- ┣ 📂redux
+ ┃ ┃ ┣ 📜Join.tsx
+ ┃ ┃ ┣ 📜Login.tsx
+ ┃ ┃ ┣ 📜MainProductItems.tsx
+ ┃ ┃ ┗ 📜SlideShow.tsx
+ ┃ ┗ 📂products
+ ┃ ┃ ┗ 📜ProductItems.tsx
+ ┣ 📂store
  ┃ ┣ 📂config
- ┃ ┃ ┗ 📜configStore.js
+ ┃ ┃ ┗ 📜configStore.ts
  ┃ ┗ 📂modules
- ┃ ┃ ┣ 📜loginSlice.js
- ┃ ┃ ┗ 📜userSlice.js
- ┣ 📂share
- ┃ ┗ 📜Router.jsx
- ┣ 📂style
- ┃ ┗ 📜GlobalStyle.jsx
- ┣ 📜App.jsx
- ┗ 📜main.jsx
+ ┃ ┃ ┣ 📜isModalToggle.ts
+ ┃ ┃ ┗ 📜user.ts
+ ┣ 📂types
+ ┃ ┣ 📜cart-type.ts
+ ┃ ┣ 📜product-type.ts
+ ┃ ┗ 📜user-type.ts
+ ┣ 📂utill
+ ┃ ┗ 📂hooks
+ ┃ ┃ ┣ 📂cart
+ ┃ ┃ ┃ ┗ 📜useCart.ts
+ ┃ ┃ ┣ 📂detail
+ ┃ ┃ ┃ ┣ 📜useAskInput.ts
+ ┃ ┃ ┃ ┗ 📜useReviewInput.ts
+ ┃ ┃ ┣ 📂input
+ ┃ ┃ ┃ ┗ 📜useInput.ts
+ ┃ ┃ ┗ 📂redux
+ ┃ ┃ ┃ ┗ 📜useRedux.ts
+ ┗ 📜middleware.ts
 
 
 ```
