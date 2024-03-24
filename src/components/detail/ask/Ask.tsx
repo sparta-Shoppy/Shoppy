@@ -223,8 +223,8 @@ function Ask() {
           return (
             <div className="m-4" key={prev.askId}>
               <div className="flex gap-1">
-                <span className="text-xl font-bold">{prev.nickname}</span>
-                <span className="text-sm text-gray-400 mt-1.5">{prev.createdAt}</span>
+                <span>{prev.nickname}</span>
+                <span className="text-xs text-gray-400 mt-1.5">{prev.createdAt}</span>
                 {prev.answer === '답변이 아직 없습니다.' ? (
                   <GrCheckbox className="mt-1.5" />
                 ) : (

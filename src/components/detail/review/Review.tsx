@@ -160,7 +160,7 @@ function Review() {
           <div key={prev.reviewId} className="flex flex-col items-start gap-2">
             <div className="flex gap-2 items-center">
               <IoChatbubblesOutline className="text-2xl" />
-              <span className="text-xl">{prev.nickname}</span>
+              <span>{prev.nickname}</span>
             </div>
             <div className="flex items-center gap-3 mb-10">
               {changeNow && nowId === prev.reviewId ? (
@@ -174,9 +174,9 @@ function Review() {
                   className="border p-1 rounded-md"
                 />
               ) : (
-                <div className="text-3xl">{prev.content}</div>
+                <div className="text-xl">{prev.content}</div>
               )}
-              <span className="text-sm text-gray-400">{prev.createdAt}</span>
+              <span className="text-xs text-gray-400">{prev.createdAt}</span>
               {userUid === prev.writerId && !changeNow ? (
                 <div className="ml-16 flex gap-8">
                   <button className="review__button-field" onClick={() => reviewChangeBtn(prev)}>
