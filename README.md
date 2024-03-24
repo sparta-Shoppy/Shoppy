@@ -103,7 +103,6 @@
     <td>
       <img src="public/assets/README/wireframe_profile.png"/>
     </td>
-    <img src="https://github.com/sparta-Shoppy/Shoppy/assets/134301942/0459f4d2-10c6-47ee-80a9-d1861a48e587" />
   </tr>
   </tbody>
 </table>
