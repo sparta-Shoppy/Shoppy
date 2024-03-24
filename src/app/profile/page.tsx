@@ -1,12 +1,10 @@
 'use client';
 
 import Header from '@/components/common/Header';
-import ProfileLikeItem from '@/components/profile/ProfileLikeItem';
 import ProfileItem from '@/components/profile/ProfileWriteItem';
 import { emailState, nicknameState, userState } from '@/store/modules/user';
-import { useReadAskData, useReadLikeData, useReadWriteData } from '@/utill/hooks/detail/useWrite';
+import { useReadAskData, useReadWriteData } from '@/utill/hooks/detail/useWrite';
 import { useAppSelector } from '@/utill/hooks/redux/useRedux';
-import { IoHeartSharp } from 'react-icons/io5';
 import { MdOutlineQuestionAnswer } from 'react-icons/md';
 import { TiPencil } from 'react-icons/ti';
 
@@ -17,7 +15,6 @@ export default function ProfilePage() {
 
   const { data: writeData, isLoading: writeLoading } = useReadWriteData(userId);
   const { data: askData, isLoading: askLoading } = useReadAskData(userId);
-  const { data: likeData, isLoading: LikeLoading } = useReadLikeData(userId);
 
   return (
     <>
@@ -31,22 +28,7 @@ export default function ProfilePage() {
             <p className="text-2xl">{userNickname}</p>
             <p className="text-2xl">{userEmail}</p>
           </div>
-          {/* user가 찜한 데이터 */}
-          <div className="flex items-center gap-5 mb-10">
-            <IoHeartSharp className={`text-6xl  text-rose-500`} />
-            <p className="text-3xl">찜 목록 {likeData?.length}개</p>
-          </div>
-          <ul className="flex bg-white p-4 mb-32">
-            <IoHeartSharp className="w-80 h-40"></IoHeartSharp>
-            {likeData?.map((like) => (
-              <ProfileLikeItem key={crypto.randomUUID()} props={like} />
-            ))}
 
-            <div className=" flex flex-col justify-center">
-              <h3>제목입니다.</h3>
-              <p>시간입니다.</p>
-            </div>
-          </ul>
           {/* user가 작성한 후기 내용 */}
           <div className="flex items-center gap-5 mb-10 ">
             {/* {heart ? ' text-rose-500' : ' hover:text-rose-500'} */}

@@ -34,17 +34,3 @@ export const getUserAskData = async (userId: string): Promise<NewReviewType[]> =
 
   return initialData;
 };
-
-//유저의 찜한 상품
-export const getUserLikeData = async (userId: string): Promise<likeInterface[]> => {
-  const itemDB = query(collection(db, 'liked'), where('userId', '==', userId));
-  const querySnapshot = await getDocs(itemDB);
-
-  const initialData: any = [];
-
-  querySnapshot.forEach((doc) => {
-    initialData.push({ ...doc.data() });
-  });
-
-  return initialData;
-};
