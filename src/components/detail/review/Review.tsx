@@ -177,9 +177,8 @@ function Review() {
                   className="border p-1 rounded-md"
                 />
               ) : (
-                <div className="text-3xl">{prev.content}</div>
+                <div className="text-xl">{prev.content}</div>
               )}
-
               {userUid === prev.writerId && !changeNow ? (
                 <div className="ml-16 flex gap-8">
                   <button className="review__button-field" onClick={() => reviewChangeBtn(prev)}>
