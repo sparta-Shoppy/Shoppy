@@ -1,10 +1,7 @@
 'use client';
-import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
 import ProductItems from '@/components/products/ProductItems';
 import { useGetProducts } from '@/utill/hooks/products/products';
-import { useQuery } from '@tanstack/react-query';
-import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';

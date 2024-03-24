@@ -1,7 +1,6 @@
 'use client';
 
 import Header from '@/components/common/Header';
-
 import { TiShoppingCart } from 'react-icons/ti';
 import CartItem from '@/components/cart/CartItem';
 import { useReadCartData } from '@/utill/hooks/cart/useCart';
