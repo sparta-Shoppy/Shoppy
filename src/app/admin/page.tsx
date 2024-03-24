@@ -27,7 +27,6 @@ export default function Admin() {
     fileReader?.readAsDataURL(file);
     //loadend event 파일을 읽었는지 확인할 수 있음
     fileReader.onloadend = (e: any) => {
-      // console.log(e);
       const { result } = e?.currentTarget;
       setImageUrl(result);
     };
@@ -47,8 +46,6 @@ export default function Admin() {
     const seller = formData.get('seller') as string;
     const price = formData.get('price') as string;
     const weight = formData.get('weight') as string;
-
-    console.log('확인', typeof price);
 
     try {
       let image = '';
@@ -77,7 +74,6 @@ export default function Admin() {
       (e.target as HTMLFormElement).reset();
       setImageUrl('');
     } catch (error: any) {
-      console.log(error);
       toast?.error(error.code);
     }
 
@@ -89,7 +85,7 @@ export default function Admin() {
       <Header />
       {/* <h1 className="items-center text-4xl font-bold"> 제품 등록하기 </h1> */}
 
-      <form onSubmit={handleSubmit} className="flex flex-col m-auto w-1/3 mt-15 mb-20">
+      <form onSubmit={handleSubmit} className="flex flex-col m-auto w-1/3 mt-28 mb-20">
         <div className=" flex flex-colitems-center h-auto mt-10">
           {imageUrl ? (
             <img src={imageUrl} alt="image" className="flex w-96 h-auto items-center mx-auto" />
@@ -174,7 +170,6 @@ export default function Admin() {
           name="seller"
           id="seller"
           required
-          placeholder="판매자를 입력해주세요"
           className="admin__input-field"
         />
         <label htmlFor="price" className="admin__label-field mb-2">

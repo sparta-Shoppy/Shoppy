@@ -6,6 +6,7 @@ interface UserState {
   adminReal: boolean;
   userId: string;
   nickname: string;
+  email: string;
 }
 
 //초기 상태 값
@@ -13,7 +14,8 @@ interface UserState {
 const initialState: UserState = {
   adminReal: false,
   userId: '',
-  nickname: ''
+  nickname: '',
+  email: ''
 };
 
 //slice 설정
@@ -24,6 +26,7 @@ export const UserSlice = createSlice({
     userAction: (state, action: PayloadAction<UserState>) => {
       state.userId = action.payload.userId;
       state.nickname = action.payload.nickname;
+      state.email = action.payload.email;
       state.adminReal = action.payload.adminReal;
     }
   }
@@ -32,5 +35,6 @@ export const UserSlice = createSlice({
 export const { userAction } = UserSlice.actions;
 export const userState = (state: RootState) => state.user.userId;
 export const nicknameState = (state: RootState) => state.user.nickname;
+export const emailState = (state: RootState) => state.user.email;
 export const isAdminState = (state: RootState) => state.user.adminReal;
 export default UserSlice.reducer;

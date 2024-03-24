@@ -3,18 +3,16 @@
 import { deleteAdminCookie } from '@/api/cookie';
 import { app } from '@/api/fiebaseApi';
 import { onUserStateChange } from '@/api/login';
-import { userAction } from '@/store/modules/user';
+import { userAction, userState } from '@/store/modules/user';
+import { useAppDispatch, useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { FaHouseUser, FaUserCog, FaUserMinus } from 'react-icons/fa';
+import CartStatus from '../cart/CartStatus';
 import Join from '../main/Join';
 import Login from '../main/Login';
-import CartStatus from '../cart/CartStatus';
-import { FaUserMinus } from 'react-icons/fa';
-import { FaUserCog } from 'react-icons/fa';
-import { useAppDispatch, useAppSelector } from '@/utill/hooks/redux/useRedux';
-import { userState } from '@/store/modules/user';
 
 //userId 사용
 const Header = () => {
@@ -35,7 +33,9 @@ const Header = () => {
         setIsAdmin(user.isAdmins ?? false);
         setIsUser(true);
         //store에 user 정보 저장
-        dispatch(userAction({ userId: user.uid, nickname: user.displayName, adminReal: user.isAdmins }));
+        dispatch(
+          userAction({ userId: user.uid, nickname: user.displayName, email: user.email, adminReal: user.isAdmins })
+        );
       } else {
         setIsAdmin(false);
       }
@@ -46,8 +46,7 @@ const Header = () => {
   const onLogOutClickEventHandler = () => {
     signOut(auth);
     deleteAdminCookie();
-    window.localStorage.removeItem('user');
-    dispatch(userAction({ userId: '', nickname: '', adminReal: false }));
+    dispatch(userAction({ userId: '', nickname: '', email: '', adminReal: false }));
     router.replace('/');
     setIsUser(false);
   };
@@ -64,9 +63,13 @@ const Header = () => {
         </Link>
         {/*로그인된 상태*/}
         {isUser ? (
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center ">
             <Link href={`/cart/${userId}`} className="text-xl">
               <CartStatus />
+            </Link>
+            <button onClick={onLogOutClickEventHandler} className="ml-4 text-xl"></button>
+            <Link href={'/profile'}>
+              <FaHouseUser className="text-4xl mb-2 mr-4 hover:text-slate-300" />
             </Link>
             <button onClick={onLogOutClickEventHandler} className="ml-4 text-xl">
               <div className="flex flex-row hover:text-slate-300 ">

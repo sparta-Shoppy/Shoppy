@@ -1,5 +1,4 @@
 'use client';
-
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore';
@@ -12,6 +11,7 @@ import { HiLockClosed } from 'react-icons/hi2';
 import { isAdminState, nicknameState, userState } from '@/store/modules/user';
 import useAskInput from '@/utill/hooks/detail/useAskInput';
 import { useAppSelector } from '@/utill/hooks/redux/useRedux';
+import { IoChatbubblesOutline, IoChatbubblesSharp } from 'react-icons/io5';
 
 function Ask() {
   const [nowId, setNowId] = useState<string>('');
@@ -19,22 +19,17 @@ function Ask() {
   const [changeNow, setChangeNow] = useState<boolean>(false);
   const [adminChangeNow, setAdminChangeNow] = useState<boolean>(false);
   const [ask, setAsk] = useState<NewAskType[]>();
-
   const params = useParams();
   const userUid = useAppSelector(userState);
   const adminNow = useAppSelector(isAdminState);
   const nickname = useAppSelector(nicknameState);
-
-  console.log('adminNow', adminNow);
 
   const { value, onChangeHandler, reset, dataLoad, adminDataLoad } = useAskInput({
     content: '',
     changeContent: '',
     adminContent: ''
   });
-
   const { content, changeContent, adminContent } = value;
-
   // 작성
   const askSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,7 +58,6 @@ function Ask() {
       toast.error('후기 등록 실패');
     }
   };
-
   // 삭제
   const askDelete = async (askId: string) => {
     const real = window.confirm('삭제하시겠습니까?');
@@ -82,20 +76,17 @@ function Ask() {
       return;
     }
   };
-
   // 수정완료 불러오기
   const askChangeBtn = (prev: NewAskType) => {
     setChangeNow(true);
     setNowId(prev.askId);
     dataLoad(prev.content);
   };
-
   // 수정취소
   const askChangeCancel = () => {
     setChangeNow(false);
     setNowId('');
   };
-
   // 수정
   const askChange = async (prev: NewAskType) => {
     const askRef = doc(db, 'ask', prev.askId);
@@ -124,7 +115,6 @@ function Ask() {
       }
     }
   };
-
   const adminAnswer = async (prev: NewAskType) => {
     const askRef = doc(db, 'ask', prev.askId);
     if (adminContent === prev.answer) {
@@ -152,86 +142,75 @@ function Ask() {
       }
     }
   };
-
   // 답변 완료버튼 불러오기
   const adminChangeBtn = (prev: NewAskType) => {
     setAdminChangeNow(!adminChangeNow);
     adminDataLoad(prev.answer);
     setNowId(prev.askId);
   };
-
   // 관리자 답변 취소
   const adminContentCancel = () => {
     setAdminChangeNow(!adminChangeNow);
     setNowId('');
   };
-
   // 후기 작성글 불러오기
   useEffect(() => {
     const fetchCommentData = async () => {
       const askDB = query(collection(db, 'ask'), where('productId', '==', params.id), orderBy('createdAt', 'desc'));
       const querySnapshot = await getDocs(askDB);
-
       const initialData: any = [];
-
       querySnapshot.forEach((doc) => {
         initialData.push({ askId: doc.id, ...doc.data() });
       });
-
       setAsk([...initialData]);
     };
-
     fetchCommentData();
   }, [content]);
-
   return (
     <div className="flex flex-col  items-center">
-      <form onSubmit={askSubmit} className="w-2/6 flex flex-col gap-2">
-        <div className="w-full flex items-start gap-5">
-          <input
-            type="text"
-            name="content"
-            value={content}
-            onChange={onChangeHandler}
-            placeholder="내용을 입력해 주세요"
-            maxLength={20}
-            required
-            className="w-4/5 border rounded-md p-1 ml-2"
-          />
-          <button type="submit" className="w-28 p-1 bg-white hover:bg-gray-100 text-gray-800 border rounded">
-            등록
-          </button>
-        </div>
-
-        <div className="w-full flex">
-          <label htmlFor="secretCheck" className="flex gap-2">
+      {userUid ? (
+        <form onSubmit={askSubmit} className="w-2/6 flex flex-col gap-2">
+          <div className="w-full flex items-start gap-5">
             <input
-              id="secretCheck"
-              type="checkbox"
-              checked={askSecret}
-              onChange={(e) => {
-                setAskSecret(e.target.checked);
-              }}
+              type="text"
+              name="content"
+              value={content}
+              onChange={onChangeHandler}
+              placeholder="내용을 입력해 주세요"
+              maxLength={20}
+              required
+              className="w-4/5 border rounded-md p-1 ml-2"
             />
-            비밀 글 등록
-          </label>
-        </div>
-      </form>
-
-      <div>
+            <button type="submit" className="w-28 p-1 bg-white hover:bg-gray-100 text-gray-800 border rounded">
+              등록
+            </button>
+          </div>
+          <div className="w-full flex">
+            <label htmlFor="secretCheck" className="flex gap-2">
+              <input
+                id="secretCheck"
+                type="checkbox"
+                checked={askSecret}
+                onChange={(e) => {
+                  setAskSecret(e.target.checked);
+                }}
+              />
+              비밀 글 등록
+            </label>
+          </div>
+        </form>
+      ) : null}
+      <div className="w-2/5 flex flex-col gap-2 pt-16 p-5">
         {ask?.map((prev) => {
           return (
-            <div className="m-4" key={prev.askId}>
-              <div className="flex gap-1">
-                <span>{prev.nickname}</span>
-                <span className="text-xs text-gray-400 mt-1.5">{prev.createdAt}</span>
-                {prev.answer === '답변이 아직 없습니다.' ? (
-                  <GrCheckbox className="mt-1.5" />
-                ) : (
-                  <FiCheckSquare className="mt-1.5" />
-                )}
+            <div className="flex flex-col items-start gap-2" key={prev.askId}>
+              <div className="flex gap-2 items-center">
+                <IoChatbubblesOutline className="text-2xl" />
+                <span className="text-xl">{prev.nickname}</span>
+                <span className="text-sm text-gray-400">{prev.createdAt}</span>
+                {prev.answer === '답변이 아직 없습니다.' ? <GrCheckbox /> : <FiCheckSquare />}
               </div>
-              <div className="flex justify-between items-center p-2">
+              <div className="flex items-center gap-3 mb-10">
                 {changeNow && nowId === prev.askId ? (
                   <input
                     type="text"
@@ -240,7 +219,7 @@ function Ask() {
                     name="changeContent"
                     value={changeContent}
                     onChange={onChangeHandler}
-                    className="admin__input-field"
+                    className="border p-1 rounded-md"
                   />
                 ) : prev.secret && userUid !== prev.writerId && !adminNow ? (
                   <>
@@ -250,36 +229,34 @@ function Ask() {
                   <div className="text-3xl">{prev.content}</div>
                 )}
                 {userUid === prev.writerId ? (
-                  <div className="flex gap-2">
+                  <>
                     {changeNow && nowId === prev.askId ? (
-                      <>
+                      <div className="ml-16 flex gap-8">
                         <button className="review__button-field" onClick={() => askChange(prev)}>
                           수정완료
                         </button>
                         <button className="review__button-field" onClick={askChangeCancel}>
                           취소
                         </button>
-                      </>
+                      </div>
                     ) : (
-                      <>
+                      <div className="ml-16 flex gap-8">
                         <button className="review__button-field" onClick={() => askChangeBtn(prev)}>
                           수정
                         </button>
                         <button className="review__button-field" onClick={() => askDelete(prev.askId)}>
                           삭제
                         </button>
-                      </>
+                      </div>
                     )}
-                  </div>
-                ) : (
-                  <></>
-                )}
+                  </>
+                ) : null}
               </div>
-              <div className="flex justify-between items-center p-2">
+              <div className="flex items-center gap-3 mb-10">
                 {adminChangeNow && nowId === prev.askId ? (
                   <>
                     <input
-                      className="admin__input-field"
+                      className="border p-1 rounded-md"
                       type="text"
                       required
                       maxLength={20}
@@ -289,12 +266,13 @@ function Ask() {
                     />
                   </>
                 ) : !prev.secret || adminNow || userUid === prev.writerId ? (
-                  <div className="text-3xl">{prev.answer}</div>
-                ) : (
-                  <></>
-                )}
+                  <div className="flex gap-2 items-center">
+                    <IoChatbubblesSharp className="text-2xl" />
+                    <div className="text-3xl">{prev.answer}</div>
+                  </div>
+                ) : null}
                 {adminNow ? (
-                  <div className="flex gap-2">
+                  <div className="ml-16 flex gap-8">
                     {adminChangeNow && nowId === prev.askId ? (
                       <>
                         <button className="review__button-field" onClick={() => adminAnswer(prev)}>
@@ -312,9 +290,7 @@ function Ask() {
                       </>
                     )}
                   </div>
-                ) : (
-                  <></>
-                )}
+                ) : null}
               </div>
             </div>
           );
@@ -323,5 +299,4 @@ function Ask() {
     </div>
   );
 }
-
 export default Ask;

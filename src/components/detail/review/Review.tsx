@@ -1,15 +1,15 @@
 'use client';
 
-import React, { FormEvent, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import { useParams } from 'next/navigation';
-import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore';
-import { db } from '../../../api/fiebaseApi';
-import { NewReviewType } from '@/types/product-type';
-import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { nicknameState, userState } from '@/store/modules/user';
+import { NewReviewType } from '@/types/product-type';
 import UseReviewInput from '@/utill/hooks/detail/useReviewInput';
+import { useAppSelector } from '@/utill/hooks/redux/useRedux';
+import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore';
+import { useParams } from 'next/navigation';
+import { FormEvent, useEffect, useState } from 'react';
 import { IoChatbubblesOutline } from 'react-icons/io5';
+import { toast } from 'react-toastify';
+import { db } from '../../../api/fiebaseApi';
 
 function Review() {
   const [nowId, setNowId] = useState<string>('');
@@ -139,28 +139,31 @@ function Review() {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <form onSubmit={reviewSubmit} className="w-full flex justify-center gap-5">
-        <input
-          type="text"
-          name="content"
-          value={content}
-          onChange={onChangeHandler}
-          placeholder="내용을 입력해 주세요"
-          maxLength={20}
-          required
-          className="w-1/4 border rounded-md p-1 ml-2"
-        />
-        <button type="submit" className="w-28 p-1 bg-white hover:bg-gray-100 text-gray-800 border rounded">
-          등록
-        </button>
-      </form>
+      {userUid ? (
+        <form onSubmit={reviewSubmit} className="w-full flex justify-center gap-5">
+          <input
+            type="text"
+            name="content"
+            value={content}
+            onChange={onChangeHandler}
+            placeholder="내용을 입력해 주세요"
+            maxLength={20}
+            required
+            className="w-1/4 border rounded-md p-1 ml-2"
+          />
+          <button type="submit" className="w-28 p-1 bg-white hover:bg-gray-100 text-gray-800 border rounded">
+            등록
+          </button>
+        </form>
+      ) : null}
 
       <div className="w-2/5 flex flex-col gap-2 pt-16 p-5">
         {review?.map((prev) => (
           <div key={prev.reviewId} className="flex flex-col items-start gap-2">
             <div className="flex gap-2 items-center">
               <IoChatbubblesOutline className="text-2xl" />
-              <span>{prev.nickname}</span>
+              <span className="text-xl">{prev.nickname}</span>
+              <span className="text-sm text-gray-400">{prev.createdAt}</span>
             </div>
             <div className="flex items-center gap-3 mb-10">
               {changeNow && nowId === prev.reviewId ? (
@@ -176,7 +179,6 @@ function Review() {
               ) : (
                 <div className="text-xl">{prev.content}</div>
               )}
-              <span className="text-xs text-gray-400">{prev.createdAt}</span>
               {userUid === prev.writerId && !changeNow ? (
                 <div className="ml-16 flex gap-8">
                   <button className="review__button-field" onClick={() => reviewChangeBtn(prev)}>
@@ -201,54 +203,6 @@ function Review() {
           </div>
         ))}
       </div>
-
-      {/* <div className="w-2/5 flex flex-col gap-2 pt-16 p-5">
-        {review?.map((prev) => (
-          <div key={prev.reviewId} className="flex flex-row items-start gap-2">
-            <IoChatbubblesOutline className="text-3xl p-1" />
-            <span className="text-xl">{prev.nickname}</span>
-            <div className="flex flex-col">
-              <div>
-                <div className="text-3xl">{prev.content}</div>
-              </div>
-              <div className="flex gap-2 items-center">
-                {changeNow && nowId === prev.reviewId ? (
-                  <input
-                    type="text"
-                    name="changeContent"
-                    value={changeContent}
-                    maxLength={20}
-                    onChange={onChangeHandler}
-                    required
-                    className="admin__input-field"
-                  />
-                ) : null}
-                <span className="text-sm text-gray-400">{prev.createdAt}</span>
-              </div>
-            </div>
-            {userUid === prev.writerId && !changeNow ? (
-              <div className="flex gap-2">
-                <button className="review__button-field" onClick={() => reviewChangeBtn(prev)}>
-                  수정
-                </button>
-                <button className="review__button-field" onClick={() => reviewDelete(prev.reviewId)}>
-                  삭제
-                </button>
-              </div>
-            ) : null}
-            {changeNow && nowId === prev.reviewId ? (
-              <div className="flex gap-2">
-                <button className="review__button-field" onClick={() => reviewChange(prev)}>
-                  수정완료
-                </button>
-                <button className="review__button-field" onClick={reviewChangeCancel}>
-                  취소
-                </button>
-              </div>
-            ) : null}
-          </div>
-        ))}
-      </div> */}
     </div>
   );
 }

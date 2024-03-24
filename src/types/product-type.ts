@@ -13,12 +13,12 @@ export interface ProductType {
 }
 
 export interface NewReviewType {
-  reviewId: string;
   writerId: string;
   content: string;
   createdAt: string;
   productId: string;
   nickname: string;
+  reviewId: string;
 }
 
 export interface ReviewInputType {
