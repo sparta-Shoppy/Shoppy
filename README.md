@@ -8,7 +8,7 @@
 - 프로젝트 기간 : 2024.03.18(월) ~ 03.22(금) (5일간)
 - 프로젝트 소개 : 식자재 및 가공식품 등 생활에 필요한 식품을 구매할 수 있는 쇼핑몰입니다.
 
-- 배포 링크 : https://shoppy-ancl5wmmv-leejungoos-projects.vercel.app/
+- 배포 링크 : shoppy-sage.vercel.app/
   <br><br>
 
 |                                                                                       이준구                                                                                       |                                                              서가희                                                              |                                                              김연재                                                               |                                                              윤미주                                                               |
