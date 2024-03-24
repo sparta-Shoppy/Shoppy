@@ -8,21 +8,16 @@
 - 프로젝트 기간 : 2024.03.18(월) ~ 03.22(금) (5일간)
 - 프로젝트 소개 : 식자재 및 가공식품 등 생활에 필요한 식품을 구매할 수 있는 쇼핑몰입니다.
 
-- 배포 링크 : https://shoppy-beta.vercel.app/
+- 배포 링크 : https://shoppy-ancl5wmmv-leejungoos-projects.vercel.app/
   <br><br>
 
-
-
-         
-|                                                              이준구                                                                                                                  |                                                              서가희                                                                                                                 |                                                                           김연재                                                                                                     |                                                              윤미주                                                               |         
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | 
-|<p align="center"><img src="https://avatars.githubusercontent.com/u/145527618?s=400&u=1d99b3b82131d12d85ec37193b429a600def959f&v=4" style="width:100px; border-radius: 50%" /></p>   | <p align="center"><img src="https://avatars.githubusercontent.com/u/134026105?v=4" style="width:100px; border-radius: 50%"/></p>                                                    |  <p align="center"><img src="https://avatars.githubusercontent.com/u/121925181?v=4" style="width:100px; border-radius: 50%" /></p>                                                  | <p align="center"><img src="https://avatars.githubusercontent.com/u/134301942?v=4" style="width:100px; border-radius: 50%" /></p> | 
-|                                             [@LeeJunGoo](https://github.com/LeeJunGoo)                                                                                              |                                                                   [@seokahee](https://github.com/seokahee)                                                                          |                                       [@YEONJAE](https://github.com/porosadporosad)                                                                                                 |                                           [@anywhereim](https://github.com/anywhereim)                                            |
-|                                                               팀장                                                                                                                   |                                                               팀원                                                                                                                  |                                                               팀원                                                                                                                  |                                                               팀원                                                                 |
-|            - 로그인 및 회원가입 기능구성 <br> - 로그인 전역 상태관리 <br> -admin페이지 URL 접근제한 <br> -마이페이지                                                                      |                                                   - 메인 UI 및 상품 리스트 출력 <br> -카테고리별 상품 정렬 <br> -로딩페이지                                                              |                           - 상세페이지 <br> -후기 기능 <br> -문의기능 <br> -관리자 문의 답변                                                                                           |                        - 관리자페이지 <br> -로그인 시 admin 구분 <br> -장바구니 버튼 <br> -장바구니 실시간 개수 <br> - 장바구니페이지   |               
-|                                                             링크 배포/README 작성                                                                                                    |                                                       시연 영상                                                                                                                      |                                                                   발표                                                                                                               |                                                             README 작성                                                            | 
-
-
+|                                                                                       이준구                                                                                       |                                                              서가희                                                              |                                                              김연재                                                               |                                                              윤미주                                                               |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: |
+| <p align="center"><img src="https://avatars.githubusercontent.com/u/145527618?s=400&u=1d99b3b82131d12d85ec37193b429a600def959f&v=4" style="width:100px; border-radius: 50%" /></p> | <p align="center"><img src="https://avatars.githubusercontent.com/u/134026105?v=4" style="width:100px; border-radius: 50%"/></p> | <p align="center"><img src="https://avatars.githubusercontent.com/u/121925181?v=4" style="width:100px; border-radius: 50%" /></p> | <p align="center"><img src="https://avatars.githubusercontent.com/u/134301942?v=4" style="width:100px; border-radius: 50%" /></p> |
+|                                                                     [@LeeJunGoo](https://github.com/LeeJunGoo)                                                                     |                                             [@seokahee](https://github.com/seokahee)                                             |                                           [@YEONJAE](https://github.com/porosadporosad)                                           |                                           [@anywhereim](https://github.com/anywhereim)                                            |
+|                                                                                        팀장                                                                                        |                                                               팀원                                                               |                                                               팀원                                                                |                                                               팀원                                                                |
+|                                     - 로그인 및 회원가입 기능구성 <br> - 로그인 전역 상태관리 <br> -admin페이지 URL 접근제한 <br> -마이페이지                                      |                            - 메인 UI 및 상품 리스트 출력 <br> -카테고리별 상품 정렬 <br> -로딩페이지                             |                                - 상세페이지 <br> -후기 기능 <br> -문의기능 <br> -관리자 문의 답변                                 |          - 관리자페이지 <br> -로그인 시 admin 구분 <br> -장바구니 버튼 <br> -장바구니 실시간 개수 <br> - 장바구니페이지           |
+|                                                                               링크 배포/README 작성                                                                                |                                                            시연 영상                                                             |                                                               발표                                                                |                                                            README 작성                                                            |
 
 <br><br>
 
@@ -79,29 +74,29 @@
         마이 페이지
       </th>
        <th>
-        관리자자 페이지
+        관리자 페이지
       </th>
     </thead>
   <tbody>
   </tr>
   <tr>
     <td>
-      <img src="public/assets/README/wireframe_main.png"/>
+      <img src="public/assets/README/wireframe_main.png"  width ="1000"/>
     </td>
     <td>
-      <img src="public/assets/README/wireframe_list.png"/>
+      <img src="public/assets/README/wireframe_list.png" width ="1000"/>
     </td>
     <td>
-     <img src="public/assets/README/wireframe_detail.png"/>
+     <img src="public/assets/README/wireframe_detail.png" width ="1000"/>
     </td>
        <td>
-       <img src="public/assets/README/wireframe_cart.png"/>
+       <img src="public/assets/README/cartPage/cartPage.png" width ="1000"/>
     </td>
        <td>
-      <img src="public/assets/README/wireframe_profile.png"/>
+      <img src="public/assets/README/wireframe_profile.png" width ="1000"/>
     </td>
     <td>
-      <img src="public/assets/README/wireframe_profile.png"/>
+      <img src="public/assets/README/wireframe_admin.png" width ="1000"/>
     </td>
   </tr>
   </tbody>
@@ -136,15 +131,13 @@
     <img src="public/assets/README/header_admin.png"/>
       
   </ul>
+<br><br><br>
 
 ## 2. 메인페이지
 
 <table>
 <thead>
   <tr>
-  <th>
-    메인 페이지
-  </th>
     </thead>
   <tbody>
   </tr>
@@ -156,26 +149,22 @@
   </tbody>
 </table>
 
-  <ul>
-    <li>main 화면 구성</li>
-    <li>main - mainslide / search + keyword / bodyslide / best youtube 구성
+  <h3> 1-1. 상품 리스트 </h3>
+  </ul>
       <ul>
-        <li>main slide : swiper slide 라이브러리를 활용한 슬라이드 구성
+        <li>화면 렌더링 시 로딩 페이지 구현 </li>
+        <li>tailwind 라이브러리를 활용한 슬라이드 구성</li>
+        <li>메인 배너 슬라이더가 자동으로 이동</li>
+        <li>상품을 각각의 카테고리 분류하였고 카테고리 선택 시 해당 페이지로 이동</li>
+        <li>등록일 기준으로 상품 리스트를 정렬하여 출력</li>
           <ul>
-            <li>화면 렌더링 시 헤더의 슬라이더가 자동으로 넘어갑니다.</li>
-            <li>하단의 점 클릭 시 해당 슬라이더로 이동합니다.</li>
           </ul>
         </li>
-        <li>body slide : slick slide 라이브러리를 활용한 슬라이드 구성
-          <ul>
-            <li>해시태그 키워드 별 대표 영상을 슬라이더로 조회할 수 있습니다.</li>
-            <li>양 옆의 화살표를 누르면 선택한 방향으로 슬라이더가 이동합니다.</li>
-            <li>영상에 커서를 올리면 크기가 커지고, 클릭 시 모달창으로 영상을 재생합니다.</li>
-          </ul>
         </li>
       </ul>
     </li>
   </ul>
+<br><br>
 
 <table>
   <thead>
@@ -234,22 +223,45 @@
       </ul>
     </li>
   </ul>
-<h3> 1-3. search / keyword </h3>
+  <br><br>
 
+<table>
+  <thead>
+    <tr>
+      <th>
+        장바구니 버튼
+      </th>
+      <th>
+        장바구니에 담긴 상품 개수 표시
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+       <img src="public/assets/README/cartPage/cartButton.png "  width ="900"/>
+      </td>
+      <td>
+       <img src="public/assets/README/cartPage/cartHeaderMenuState.png" width ="1150"  />
+      </td>
+      <td>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3> 1-3. 장바구니 버튼 및 장바구니 담긴 상품 개수 표시 </h3>
 <ul>
- <li>메인페이지 검색창에서 텍스트 입력 후 Enter키를 누르거나, 검색아이콘을 클릭해 검색할 수 있습니다.</li>
- <li>텍스트 입력없이(공백 포함) Enter키/검색아이콘 클릭 시 검색어를 입력해달라는 alert창이 뜹니다.</li>
+<li>장바구니 버튼</li>
+<ul>
+<li>사용자 로그인 시 사용자의 고유 아이디를 기준으로 장바구니 버튼 클릭 시 상품의 정보를 담을 수 있도록 설계</li>
+</ul>
+<li>장바구니 담긴 상품 개수 표시</li>
+ <ul>
+<li>텍스트 입력없이(공백 포함) Enter키/검색아이콘 클릭 시 검색어를 입력해달라는 alert창이 뜹니다.</li>
  <li>키워드 클릭시 키워드에있는 단어가 검색되어, 리스트 페이지로 넘어갑니다.</li>
 </ul>
 
-<h3> 1-4. Best Youtuber </h3>
-
-<ul>
- <li>메인 페이지 하단부에 이달의 인기 유튜버 (인기 5순위)의 썸네일 이미지, 채널명, 순위를 볼 수 있습니다.</li>
- <li>인기 순위대로 나열해주는 api경로를 국내로 지정하여 한국 유튜버들 중 인기 순위 5명의 채널 id를 받고,  채널 id를 채널 id api에 전달해 썸네일을 받아오게 하여 구현하였습니다.</li>
- <li>인기 5순위 유튜버 썸네일 이미지를 누르면 해당 유튜브 채널로 이동합니다.</li>
-</ul>
-  
 <br>
 
 ## 2. 리스트 페이지
@@ -265,7 +277,7 @@
   </tr>
   <tr>
     <td>
-      <img src="public/assets/README/productDetail.png"/>
+      <img src="public/assets/README/listPage/listPage.png"/>
     </td>
   </tr>
   </tbody>
