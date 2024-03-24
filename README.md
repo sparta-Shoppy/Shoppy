@@ -486,85 +486,69 @@
 ```
 📦src
  ┣ 📂api
- ┃ ┣ 📜auth.js
- ┃ ┣ 📜config.js
- ┃ ┣ 📜dataApi.js
- ┃ ┣ 📜detailApi.js
- ┃ ┣ 📜favorites.js
- ┃ ┣ 📜mainSliderDataApi.js
- ┃ ┗ 📜request.js
- ┣ 📂assets
- ┃ ┣ 📂README_img
- ┃ ┃ ┣ 📜detail.png
- ┃ ┃ ┣ 📜list.png
- ┃ ┃ ┣ 📜loding.png
- ┃ ┃ ┣ 📜login.jpg
- ┃ ┃ ┣ 📜main.png
- ┃ ┃ ┣ 📜modal.jpg
- ┃ ┃ ┣ 📜signup.jpg
- ┃ ┃ ┣ 📜wireframe_detail.jpg
- ┃ ┃ ┣ 📜wireframe_list.jpg
- ┃ ┃ ┗ 📜wireframe_main.jpg
- ┃ ┣ 📜coloredStar.png
- ┃ ┣ 📜emptyStar.png
- ┃ ┣ 📜google.png
- ┃ ┣ 📜main_banner01.jpg
- ┃ ┣ 📜main_banner02.jpg
- ┃ ┣ 📜main_banner03.jpg
- ┃ ┣ 📜profile_defaultImage.png
- ┃ ┣ 📜react.svg
- ┃ ┗ 📜utrend_logo.png
+ ┃ ┣ 📜cartFirebaseApi.ts
+ ┃ ┣ 📜cookie.ts
+ ┃ ┣ 📜fiebaseApi.ts
+ ┃ ┗ 📜login.ts
+ ┣ 📂app
+ ┃ ┣ 📂admin
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂cart
+ ┃ ┃ ┗ 📂[userId]
+ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂home
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂products
+ ┃ ┃ ┣ 📂[id]
+ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂profile
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📜globals.css
+ ┃ ┣ 📜layout.tsx
+ ┃ ┣ 📜page.tsx
+ ┃ ┗ 📜provider.tsx
  ┣ 📂components
- ┃ ┣ 📂AuthModal
- ┃ ┃ ┣ 📂styles
- ┃ ┃ ┃ ┣ 📜Login.style.js
- ┃ ┃ ┃ ┗ 📜SignUp.style.js
- ┃ ┃ ┣ 📜Login.jsx
- ┃ ┃ ┗ 📜SignUp.jsx
+ ┃ ┣ 📂cart
+ ┃ ┃ ┣ 📜CartButton.tsx
+ ┃ ┃ ┣ 📜CartItem.tsx
+ ┃ ┃ ┗ 📜CartStatus.tsx
+ ┃ ┣ 📂common
+ ┃ ┃ ┗ 📜Header.tsx
  ┃ ┣ 📂detail
- ┃ ┃ ┣ 📜AdSuggestBtn.jsx
- ┃ ┃ ┣ 📜Detail.jsx
- ┃ ┃ ┣ 📜RecentVideo.jsx
- ┃ ┃ ┗ 📜TwoLevelPieChart.jsx
- ┃ ┣ 📂layout
- ┃ ┃ ┣ 📜Footer.jsx
- ┃ ┃ ┣ 📜Header.jsx
- ┃ ┃ ┗ 📜Loading.jsx
- ┃ ┣ 📂list
- ┃ ┃ ┣ 📜CardList.jsx
- ┃ ┃ ┗ 📜ListFavoriteButton.jsx
+ ┃ ┃ ┣ 📂ask
+ ┃ ┃ ┃ ┗ 📜Ask.tsx
+ ┃ ┃ ┗ 📂review
+ ┃ ┃ ┃ ┗ 📜Review.tsx
  ┃ ┣ 📂main
- ┃ ┃ ┣ 📜Main.jsx
- ┃ ┃ ┗ 📜Thumbnail.jsx
- ┃ ┣ 📂myPage
- ┃ ┃ ┣ 📂styles
- ┃ ┃ ┃ ┗ 📜MyPageStyle.js
- ┃ ┃ ┣ 📜MyPageSection.jsx
- ┃ ┃ ┗ 📜MyProfile.jsx
- ┃ ┗ 📂sliders
- ┃ ┃ ┣ 📜BodySlider.jsx
- ┃ ┃ ┣ 📜HeaderSlider.jsx
- ┃ ┃ ┗ 📜VideoModal.jsx
- ┣ 📂hooks
- ┃ ┣ 📜useChannelDetailInfo.js
- ┃ ┗ 📜useMostPopularChannel.js
- ┣ 📂pages
- ┃ ┣ 📜Error.jsx
- ┃ ┣ 📜Home.jsx
- ┃ ┣ 📜List.jsx
- ┃ ┗ 📜MyPage.jsx
- ┣ 📂redux
+ ┃ ┃ ┣ 📜Join.tsx
+ ┃ ┃ ┣ 📜Login.tsx
+ ┃ ┃ ┣ 📜MainProductItems.tsx
+ ┃ ┃ ┗ 📜SlideShow.tsx
+ ┃ ┗ 📂products
+ ┃ ┃ ┗ 📜ProductItems.tsx
+ ┣ 📂store
  ┃ ┣ 📂config
- ┃ ┃ ┗ 📜configStore.js
+ ┃ ┃ ┗ 📜configStore.ts
  ┃ ┗ 📂modules
- ┃ ┃ ┣ 📜loginSlice.js
- ┃ ┃ ┗ 📜userSlice.js
- ┣ 📂share
- ┃ ┗ 📜Router.jsx
- ┣ 📂style
- ┃ ┗ 📜GlobalStyle.jsx
- ┣ 📜App.jsx
- ┗ 📜main.jsx
+ ┃ ┃ ┣ 📜isModalToggle.ts
+ ┃ ┃ ┗ 📜user.ts
+ ┣ 📂types
+ ┃ ┣ 📜cart-type.ts
+ ┃ ┣ 📜product-type.ts
+ ┃ ┗ 📜user-type.ts
+ ┣ 📂utill
+ ┃ ┗ 📂hooks
+ ┃ ┃ ┣ 📂cart
+ ┃ ┃ ┃ ┗ 📜useCart.ts
+ ┃ ┃ ┣ 📂detail
+ ┃ ┃ ┃ ┣ 📜useAskInput.ts
+ ┃ ┃ ┃ ┗ 📜useReviewInput.ts
+ ┃ ┃ ┣ 📂input
+ ┃ ┃ ┃ ┗ 📜useInput.ts
+ ┃ ┃ ┗ 📂redux
+ ┃ ┃ ┃ ┗ 📜useRedux.ts
+ ┗ 📜middleware.ts
 
 
 ```
