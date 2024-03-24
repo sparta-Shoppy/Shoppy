@@ -1,7 +1,9 @@
+'use client';
+
 import { ReviewInputType } from '@/types/product-type';
 import { useState, ChangeEvent } from 'react';
 
-const reviewInput = (initialValue: ReviewInputType) => {
+const UseReviewInput = (initialValue: ReviewInputType) => {
   const [value, setValue] = useState(initialValue);
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,4 +22,4 @@ const reviewInput = (initialValue: ReviewInputType) => {
   return { value, onChangeHandler, reset, dataLoad };
 };
 
-export default reviewInput;
+export default UseReviewInput;
