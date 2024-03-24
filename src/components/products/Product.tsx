@@ -1,49 +1,25 @@
 'use client';
-import { db } from '@/api/fiebaseApi';
 import Header from '@/components/common/Header';
 import ProductItems from '@/components/products/ProductItems';
-import { useQuery } from '@tanstack/react-query';
-import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
+import { useGetProducts } from '@/utill/hooks/products/products';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import Tabs from '../main/Tabs';
 
 export default function Product() {
-  // const [products, setProducts] = useState<ProductType[]>([]);
   const [selectedTab, setSelectedTab] = useState(true);
 
   const params = useSearchParams();
   const category = params.get('category');
-
   // params - / 기준으로 전달
   // useSearchParams - ? 기준으로 전달
 
-  const { isLoading, isError, data, refetch } = useQuery({
-    queryKey: ['productData'],
-    queryFn: async () => {
-      const response = await getDocs(
-        query(
-          collection(db, 'product'),
-          where('category', '==', category),
-          selectedTab ? orderBy('price', 'desc') : orderBy('price', 'asc')
-        )
-      );
-      const fetchedProducts: any = [];
-
-      response?.forEach((doc: any) => {
-        const products = doc.data();
-        console.log('products', products);
-
-        fetchedProducts.push({ ...products, id: doc.id, products });
-      });
-      return fetchedProducts;
-    }
-  });
-  console.log('data', data);
+  const { data, isLoading, isError, refetch } = useGetProducts(selectedTab, category!);
 
   useEffect(() => {
     refetch();
-  }, [selectedTab, refetch]);
+  }, [selectedTab, refetch, category]);
 
   if (isLoading) {
     return (
@@ -61,7 +37,8 @@ export default function Product() {
   return (
     <div>
       <Header />
-      <div className="w-11/12 flex justify-end pt-24">
+      <Tabs />
+      <div className="w-11/12 flex justify-end">
         <span
           className={`cursor-pointer mr-2 ${selectedTab ? 'text-zinc-400' : 'text-black hover:text-zinc-400'}`}
           onClick={() => setSelectedTab(true)}

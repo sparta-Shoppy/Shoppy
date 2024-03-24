@@ -1,7 +1,7 @@
 'use client';
 
 import { db, storage } from '@/api/fiebaseApi';
-import { CATEGORIES, DELIVERYS } from '@/types/product-type';
+import { CATEGORIES, DELIVERYS, ProductType } from '@/types/product-type';
 import { addDoc, collection } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import { useState } from 'react';
