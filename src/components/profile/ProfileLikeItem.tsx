@@ -6,7 +6,6 @@ const ProfileLikeItem = ({ props }: { props: likeInterface }) => {
   const router = useRouter();
   return (
     <li
-      key={crypto.randomUUID()}
       className="border-b-2 border-[#B4B4B8]-500 p-6 cursor-pointer hover:text-zinc-400"
       onClick={() => router.push(`/products/${props.productId}`)}
     >

@@ -12,6 +12,7 @@ import { isAdminState, nicknameState, userState } from '@/store/modules/user';
 import useAskInput from '@/utill/hooks/detail/useAskInput';
 import { useAppSelector } from '@/utill/hooks/redux/useRedux';
 import { IoChatbubblesOutline, IoChatbubblesSharp } from 'react-icons/io5';
+
 function Ask() {
   const [nowId, setNowId] = useState<string>('');
   const [askSecret, setAskSecret] = useState<boolean>(false);
@@ -46,8 +47,7 @@ function Ask() {
       }),
       productId: params.id,
       secret: askSecret,
-      answer: '답변이 아직 없습니다.',
-      askId: crypto.randomUUID()
+      answer: '답변이 아직 없습니다.'
     };
     try {
       await addDoc(collection(db, 'ask'), newAsk);
@@ -59,14 +59,14 @@ function Ask() {
     }
   };
   // 삭제
-  const askDelete = async (askUid: string) => {
+  const askDelete = async (askId: string) => {
     const real = window.confirm('삭제하시겠습니까?');
     if (real) {
       try {
-        const askRef = doc(db, 'ask', askUid);
+        const askRef = doc(db, 'ask', askId);
         await deleteDoc(askRef);
         setAsk((prev) => {
-          return prev?.filter((element) => element.askUid !== askUid);
+          return prev?.filter((element) => element.askId !== askId);
         });
         toast.success('삭제가 되었습니다.');
       } catch (error) {
@@ -79,7 +79,7 @@ function Ask() {
   // 수정완료 불러오기
   const askChangeBtn = (prev: NewAskType) => {
     setChangeNow(true);
-    setNowId(prev.askUid);
+    setNowId(prev.askId);
     dataLoad(prev.content);
   };
   // 수정취소
@@ -89,7 +89,7 @@ function Ask() {
   };
   // 수정
   const askChange = async (prev: NewAskType) => {
-    const askRef = doc(db, 'ask', prev.askUid);
+    const askRef = doc(db, 'ask', prev.askId);
     if (changeContent === prev.content) {
       toast.warning('수정된 게 없어요!');
       return;
@@ -100,7 +100,7 @@ function Ask() {
           await updateDoc(askRef, { ...prev, content: changeContent });
           setAsk((item) => {
             return item?.map((element) => {
-              if (element.askUid === prev.askUid) {
+              if (element.askId === prev.askId) {
                 return { ...element, content: changeContent };
               } else {
                 return element;
@@ -117,7 +117,7 @@ function Ask() {
     }
   };
   const adminAnswer = async (prev: NewAskType) => {
-    const askRef = doc(db, 'ask', prev.askUid);
+    const askRef = doc(db, 'ask', prev.askId);
     if (adminContent === prev.answer) {
       toast.warning('바뀐 게 없어요!');
       return;
@@ -129,7 +129,7 @@ function Ask() {
           setAdminChangeNow(!adminChangeNow);
           setAsk((item) => {
             return item?.map((element) => {
-              if (element.askUid === prev.askUid) {
+              if (element.askId === prev.askId) {
                 return { ...element, answer: adminContent };
               } else {
                 return element;
@@ -147,7 +147,7 @@ function Ask() {
   const adminChangeBtn = (prev: NewAskType) => {
     setAdminChangeNow(!adminChangeNow);
     adminDataLoad(prev.answer);
-    setNowId(prev.askUid);
+    setNowId(prev.askId);
   };
   // 관리자 답변 취소
   const adminContentCancel = () => {
@@ -161,7 +161,7 @@ function Ask() {
       const querySnapshot = await getDocs(askDB);
       const initialData: any = [];
       querySnapshot.forEach((doc) => {
-        initialData.push({ askUid: doc.id, ...doc.data() });
+        initialData.push({ askId: doc.id, ...doc.data() });
       });
       setAsk([...initialData]);
     };
@@ -212,7 +212,7 @@ function Ask() {
                 {prev.answer === '답변이 아직 없습니다.' ? <GrCheckbox /> : <FiCheckSquare />}
               </div>
               <div className="flex items-center gap-3 mb-10">
-                {changeNow && nowId === prev.askUid ? (
+                {changeNow && nowId === prev.askId ? (
                   <input
                     type="text"
                     required
@@ -231,7 +231,7 @@ function Ask() {
                 )}
                 {userUid === prev.writerId ? (
                   <>
-                    {changeNow && nowId === prev.askUid ? (
+                    {changeNow && nowId === prev.askId ? (
                       <div className="ml-16 flex gap-8">
                         <button className="review__button-field" onClick={() => askChange(prev)}>
                           수정완료
@@ -245,7 +245,7 @@ function Ask() {
                         <button className="review__button-field" onClick={() => askChangeBtn(prev)}>
                           수정
                         </button>
-                        <button className="review__button-field" onClick={() => askDelete(prev.askUid)}>
+                        <button className="review__button-field" onClick={() => askDelete(prev.askId)}>
                           삭제
                         </button>
                       </div>
@@ -254,7 +254,7 @@ function Ask() {
                 ) : null}
               </div>
               <div className="flex items-center gap-3 mb-10">
-                {adminChangeNow && nowId === prev.askUid ? (
+                {adminChangeNow && nowId === prev.askId ? (
                   <>
                     <input
                       className="border p-1 rounded-md"
@@ -274,7 +274,7 @@ function Ask() {
                 ) : null}
                 {adminNow ? (
                   <div className="ml-16 flex gap-8">
-                    {adminChangeNow && nowId === prev.askUid ? (
+                    {adminChangeNow && nowId === prev.askId ? (
                       <>
                         <button className="review__button-field" onClick={() => adminAnswer(prev)}>
                           완료

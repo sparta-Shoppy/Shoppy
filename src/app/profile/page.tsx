@@ -14,13 +14,22 @@ export default function ProfilePage() {
   const userNickname = useAppSelector(nicknameState);
   const userEmail = useAppSelector(emailState);
   const userId = useAppSelector(userState);
-
+  // pupCd01zjHPesDoY21OqJb6CjIX2
   // 현재 firebase를 불러오는 과정에서 렌더링이 2번 발생한다.
 
-  const { data: writeData, isLoading: writeLoading, isError: writeError } = useReadWriteData(userId);
+  const { data: writeData, isLoading: writeLoading } = useReadWriteData(userId);
   const { data: askData, isLoading: askLoading } = useReadAskData(userId);
   const { data: likeData, isLoading: LikeLoading } = useReadLikeData(userId);
-  console.log(writeData);
+  console.log(userId);
+
+  if (writeLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <div>잠시만 기다려 주세요</div>
+        <img src="../../../assets/bean.gif" alt="로딩중" />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -59,7 +68,7 @@ export default function ProfilePage() {
           <ul className=" bg-white p-6 mb-10 ">
             {/* key={product.productId} product={product} */}
             {writeData ? (
-              writeData?.map((write) => <ProfileItem key={write.reviewId} props={write} />)
+              writeData?.map((write) => <ProfileItem key={crypto.randomUUID()} props={write} />)
             ) : (
               <div> 작성한 글이 없습니다. </div>
             )}
@@ -71,7 +80,7 @@ export default function ProfilePage() {
             <p className="text-3xl">작성한 문의 {askData?.length}개</p>
           </div>
           <ul className="flex-col bg-white p-6 mb-10">
-            {askData && askData?.map((ask) => <ProfileItem key={ask.askId} props={ask} />)}
+            {askData && askData?.map((ask) => <ProfileItem key={crypto.randomUUID()} props={ask} />)}
             {!askData && <div>작성한 글이 없습니다.</div>}
           </ul>
         </div>

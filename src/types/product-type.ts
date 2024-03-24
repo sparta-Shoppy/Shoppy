@@ -19,7 +19,6 @@ export interface NewReviewType {
   productId: string;
   nickname: string;
   reviewId: string;
-  reviewUid: string;
 }
 
 export interface ReviewInputType {
@@ -36,7 +35,6 @@ export interface NewAskType {
   secret: boolean;
   answer: string;
   nickname: string;
-  askUid: string;
 }
 
 export interface AskInputType {

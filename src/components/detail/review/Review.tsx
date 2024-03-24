@@ -10,7 +10,6 @@ import { FormEvent, useEffect, useState } from 'react';
 import { IoChatbubblesOutline } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 import { db } from '../../../api/fiebaseApi';
-import { itemReviewCreateDate, itemReadReviewData, itemReviewDeleteDate } from '@/utill/hooks/detail/useWrite';
 
 function Review() {
   const [nowId, setNowId] = useState<string>('');
@@ -28,11 +27,6 @@ function Review() {
 
   const { content, changeContent } = value;
 
-  // const { data: review, isLoading, isError, refetch } = itemReadReviewData(params.id);
-
-  // const { createReview } = itemReviewCreateDate();
-  // const { deleteId } = itemReviewDeleteDate();
-
   // 작성
   const reviewSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,26 +42,10 @@ function Review() {
         minute: '2-digit',
         hour12: true
       }),
-      productId: params.id,
-      reviewId: crypto.randomUUID()
+      productId: params.id
     };
     try {
       await addDoc(collection(db, 'review'), newReview);
-      // createReview({
-      //   writerId: userUid,
-      //   nickname,
-      //   content,
-      //   createdAt: new Date().toLocaleString('ko', {
-      //     year: '2-digit',
-      //     month: '2-digit',
-      //     day: '2-digit',
-      //     hour: '2-digit',
-      //     minute: '2-digit',
-      //     hour12: true
-      //   }),
-      //   productId: params.id,
-      //   reviewId: crypto.randomUUID()
-      // });
       toast.success('후기 등록 완료!');
       reset();
     } catch (error) {
@@ -76,16 +54,14 @@ function Review() {
   };
 
   // 삭제
-  const reviewDelete = async (reviewUid: string) => {
+  const reviewDelete = async (reviewId: string) => {
     const real = window.confirm('삭제하시겠습니까?');
     if (real) {
       try {
-        // deleteId(reviewId);
-        // refetch();
-        const reviewRef = doc(db, 'review', reviewUid);
+        const reviewRef = doc(db, 'review', reviewId);
         await deleteDoc(reviewRef);
         setReview((prev) => {
-          return prev?.filter((element) => element.reviewUid !== reviewUid);
+          return prev?.filter((element) => element.reviewId !== reviewId);
         });
         toast.success('삭제가 되었습니다.');
       } catch (error) {
@@ -99,7 +75,7 @@ function Review() {
   // 수정완료 불러오기
   const reviewChangeBtn = (prev: NewReviewType) => {
     setChangeNow(true);
-    setNowId(prev.reviewUid);
+    setNowId(prev.reviewId);
     dataLoad(prev.content);
   };
 
@@ -112,7 +88,7 @@ function Review() {
 
   // 수정
   const reviewChange = async (prev: NewReviewType) => {
-    const reviewRef = doc(db, 'review', prev.reviewUid);
+    const reviewRef = doc(db, 'review', prev.reviewId);
     if (changeContent === prev.content) {
       toast.warning('수정된 게 없어요!');
       return;
@@ -123,7 +99,7 @@ function Review() {
           await updateDoc(reviewRef, { ...prev, content: changeContent });
           setReview((item) => {
             return item?.map((element) => {
-              if (element.reviewUid === prev.reviewUid) {
+              if (element.reviewId === prev.reviewId) {
                 return { ...element, content: changeContent };
               } else {
                 return element;
@@ -152,7 +128,7 @@ function Review() {
       const initialData: any = [];
 
       querySnapshot.forEach((doc) => {
-        initialData.push({ reviewUid: doc.id, ...doc.data() });
+        initialData.push({ reviewId: doc.id, ...doc.data() });
       });
 
       setReview([...initialData]);
@@ -160,16 +136,6 @@ function Review() {
 
     fetchCommentData();
   }, [content]);
-
-  // // 로딩
-  // if (isLoading) {
-  //   return (
-  //     <div className="flex flex-col items-center justify-center">
-  //       <div>잠시만 기다려 주세요</div>
-  //       <img src="../../../assets/bean.gif" alt="로딩중" />
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -200,7 +166,7 @@ function Review() {
               <span className="text-sm text-gray-400">{prev.createdAt}</span>
             </div>
             <div className="flex items-center gap-3 mb-10">
-              {changeNow && nowId === prev.reviewUid ? (
+              {changeNow && nowId === prev.reviewId ? (
                 <input
                   type="text"
                   name="changeContent"
@@ -219,12 +185,12 @@ function Review() {
                   <button className="review__button-field" onClick={() => reviewChangeBtn(prev)}>
                     수정
                   </button>
-                  <button className="review__button-field" onClick={() => reviewDelete(prev.reviewUid)}>
+                  <button className="review__button-field" onClick={() => reviewDelete(prev.reviewId)}>
                     삭제
                   </button>
                 </div>
               ) : null}
-              {changeNow && nowId === prev.reviewUid ? (
+              {changeNow && nowId === prev.reviewId ? (
                 <div className="ml-16 flex gap-8">
                   <button className="review__button-field" onClick={() => reviewChange(prev)}>
                     수정완료
