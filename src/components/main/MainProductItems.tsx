@@ -26,9 +26,9 @@ function MainProductItems({ item }: { item: ProductType }) {
         <img src={item.image} alt="상품" className="w-full h-full object-cover rounded-md" />
       </Link>
       <div className="w-full flex justify-between p-3">
-        <div>
+        <div className="whitespace-nowrap  w-9/12">
           <p className="text-lg">{item.title}</p>
-          <p className="text-lg">{item.info}</p>
+          <p className="text-lg  overflow-hidden overflow-ellipsis w-11/12">{item.info}</p>
           <p>{new Intl.NumberFormat('ko-KR').format(item.price)} 원</p>
         </div>
         <div className="flex justify-between gap-2 items-center pl-5">

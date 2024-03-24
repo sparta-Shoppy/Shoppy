@@ -47,7 +47,7 @@ function Ask() {
       }),
       productId: params.id,
       secret: askSecret,
-      answer: '답변이 아직 없습니다.'
+      answer: '관리자 답변이 아직 없습니다.'
     };
     try {
       await addDoc(collection(db, 'ask'), newAsk);
@@ -177,7 +177,6 @@ function Ask() {
               value={content}
               onChange={onChangeHandler}
               placeholder="내용을 입력해 주세요"
-              maxLength={20}
               required
               className="w-4/5 border rounded-md p-1 ml-2"
             />
@@ -208,14 +207,13 @@ function Ask() {
                 <IoChatbubblesOutline className="text-2xl" />
                 <span className="text-xl">{prev.nickname}</span>
                 <span className="text-sm text-gray-400">{prev.createdAt}</span>
-                {prev.answer === '답변이 아직 없습니다.' ? <GrCheckbox /> : <FiCheckSquare />}
+                {prev.answer === '관리자 답변이 아직 없습니다.' ? <GrCheckbox /> : <FiCheckSquare />}
               </div>
               <div className="flex items-center gap-3 mb-10">
                 {changeNow && nowId === prev.askId ? (
                   <input
                     type="text"
                     required
-                    maxLength={20}
                     name="changeContent"
                     value={changeContent}
                     onChange={onChangeHandler}
@@ -226,7 +224,7 @@ function Ask() {
                     비밀글입니다. <HiLockClosed />
                   </>
                 ) : (
-                  <div className="text-3xl">{prev.content}</div>
+                  <div className="text-xl">{prev.content}</div>
                 )}
                 {userUid === prev.writerId ? (
                   <>
@@ -266,9 +264,9 @@ function Ask() {
                     />
                   </>
                 ) : !prev.secret || adminNow || userUid === prev.writerId ? (
-                  <div className="flex gap-2 items-center">
+                  <div className="flex gap-2 items-center text-zinc-500">
                     <IoChatbubblesSharp className="text-2xl" />
-                    <div className="text-3xl">{prev.answer}</div>
+                    <div className="text-2xl">{prev.answer}</div>
                   </div>
                 ) : null}
                 {adminNow ? (

@@ -1,16 +1,16 @@
 'use client';
 
 import { db, storage } from '@/api/fiebaseApi';
-import { CATEGORIES, DELIVERYS, ProductType } from '@/types/product-type';
+import { CATEGORIES, DELIVERYS } from '@/types/product-type';
 import { addDoc, collection } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
+import Header from '@/components/common/Header';
 import { AiOutlineFileImage } from 'react-icons/ai';
 import { FaImages } from 'react-icons/fa';
-import Header from '@/components/common/Header';
 
 export default function Admin() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
