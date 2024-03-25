@@ -110,7 +110,7 @@
 
 ### 시연 영상
 
-[@시연 영상 링크](https://www.youtube.com/watch?v=qlsFz_7s4Ro)
+[@시연 영상 링크](https://www.youtube.com/watch?v=qmjdzvGL8Vk)
 
 <br>
 
